@@ -1,4 +1,4 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm
+package com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -13,18 +13,20 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputLayout
 import com.tms.lesson01.musicgalleryapplication.success.SuccessLoginActivity
 
-
-class MainActivityView : AppCompatActivity() {
+/**
+ * hw02. 1. SRP - Принцип единственной ответственности. Для обновления UI имеем отдельный класс
+ */
+class LoginActivityView : AppCompatActivity() {
     // Переменные класса
-    private lateinit var viewModel: ViewModelMediator
+    private lateinit var viewModel: LoginViewModel
     private lateinit var frameLayout: FrameLayout
     private lateinit var progressCircular: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        // Инициализируем viewModel, чтобы работать с ViewModel
-        viewModel = ViewModelProvider(this)[ViewModelMediator::class.java]
+        setContentView(R.layout.activity_login)
+        // Инициализируем viewModel, чтобы работать с ViewModel (согласно примеру с сайта)
+        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
         // Оглашаем наши локальные переменные
         val nameField: TextInputLayout = findViewById(R.id.nameField)

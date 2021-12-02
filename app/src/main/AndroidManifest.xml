@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MusicGaleryApplication">
         <activity
-            android:name="com.tms.lesson01.musicgalleryapplication.mvvm.MainActivityView"
+            android:name="com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.LoginActivityView"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
