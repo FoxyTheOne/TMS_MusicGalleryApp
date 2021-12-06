@@ -11,6 +11,6 @@ import com.tms.lesson01.musicgalleryapplication.R
 class MusicActivityView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_music)
+        setContentView(R.layout.layout_music)
     }
 }

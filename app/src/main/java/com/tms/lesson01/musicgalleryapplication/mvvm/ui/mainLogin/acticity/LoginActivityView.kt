@@ -1,4 +1,4 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin
+package com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.acticity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,10 +8,13 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.MutableLiveData
 import com.tms.lesson01.musicgalleryapplication.R
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputLayout
-import com.tms.lesson01.musicgalleryapplication.success.SuccessLoginActivity
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.LoginViewModel
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.success.activity.SuccessLoginActivity
 
 /**
  * hw02. 1. SRP - Принцип единственной ответственности. Для обновления UI имеем отдельный класс
@@ -21,23 +24,44 @@ class LoginActivityView : AppCompatActivity() {
     private lateinit var viewModel: LoginViewModel
     private lateinit var frameLayout: FrameLayout
     private lateinit var progressCircular: ProgressBar
+    private lateinit var nameField: TextInputLayout
+    private lateinit var emailField: TextInputLayout
+    private lateinit var passwordField: TextInputLayout
+    private lateinit var confirmPasswordField: TextInputLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.layout_login)
         // Инициализируем viewModel, чтобы работать с ViewModel (согласно примеру с сайта)
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
         // Оглашаем наши локальные переменные
-        val nameField: TextInputLayout = findViewById(R.id.nameField)
-        val emailField: TextInputLayout = findViewById(R.id.emailField)
-        val passwordField: TextInputLayout = findViewById(R.id.passwordField)
-        val confirmPasswordField: TextInputLayout = findViewById(R.id.confirmPasswordField)
         val buttonSignUp: AppCompatButton = findViewById(R.id.buttonSignUp)
         // Переменные для отображения прогресса
         frameLayout = findViewById(R.id.frameLayout)
         progressCircular = findViewById(R.id.progressCircular)
+        // Переменные для полей ввода
+        nameField = findViewById(R.id.nameField)
+        emailField = findViewById(R.id.emailField)
+        passwordField = findViewById(R.id.passwordField)
+        confirmPasswordField = findViewById(R.id.confirmPasswordField)
 
+        // Восстанавливаем значения при повороте экрана:
+        restoreValues()
+
+        // Сохраняем введенные в поля значения для последнующего восстановления при необходимости:
+        nameField.editText?.addTextChangedListener(){
+            viewModel.nameLiveData.value = it.toString()
+        }
+        emailField.editText?.addTextChangedListener(){
+            viewModel.emailLiveData.value = it.toString()
+        }
+        passwordField.editText?.addTextChangedListener(){
+            viewModel.passwordLiveData.value = it.toString()
+        }
+        confirmPasswordField.editText?.addTextChangedListener(){
+            viewModel.confirmPasswordLiveData.value = it.toString()
+        }
 
         // Определяем действие по клику на кнопку
         buttonSignUp.setOnClickListener {
@@ -72,6 +96,13 @@ class LoginActivityView : AppCompatActivity() {
         viewModel.hideProgressLiveData.observe(this, {
             hideProgress()
         })
+    }
+
+    private fun restoreValues() {
+        nameField.editText?.setText(viewModel.nameLiveData.value ?: "")
+        emailField.editText?.setText(viewModel.emailLiveData.value ?: "")
+        passwordField.editText?.setText(viewModel.passwordLiveData.value ?: "")
+        confirmPasswordField.editText?.setText(viewModel.confirmPasswordLiveData.value ?: "")
     }
 
     private fun showProgress() {

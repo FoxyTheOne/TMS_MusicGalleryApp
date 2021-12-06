@@ -20,6 +20,11 @@ class LoginViewModel: ViewModel() {
     // Переменные, которые будут отвечать за отображение прогресса (кружок). Т.е. события, на которые можно подписаться и слушать
     val showProgressLiveData = MutableLiveData<Unit>()
     val hideProgressLiveData = MutableLiveData<Unit>()
+    // Перемнные для сохранения информации во время пересоздания Activity из-за поворота экрана:
+    val nameLiveData = MutableLiveData<String>()
+    val emailLiveData = MutableLiveData<String>()
+    val passwordLiveData = MutableLiveData<String>()
+    val confirmPasswordLiveData = MutableLiveData<String>()
 
     // LoginViewModel зависим от следующих инициализируемых сущностей. Всё, что он делает, делает благодаря им
     private val networkLoginServiceModel: INetworkLoginService = NetworkLoginServiceModel() // Инициализируем networkLoginModel
