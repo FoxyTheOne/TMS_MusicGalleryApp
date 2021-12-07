@@ -16,4 +16,9 @@ Homework 02.
 2. Change logic of login (using token)
 3. Practice using of varied resources (strings, drawable, dimens and colors)
 
+Homework 03.
+1. Add data saving when screen is rotated
+2. Add screen whith list of countries
+3. Recast app with Fragments instead of Activities
+
 Created by Alina Piatrova
