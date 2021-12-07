@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputLayout
 import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.MainActivity
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.countries.fragment.CountriesFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.LoginViewModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.success.fragment.SuccessFragment
 
@@ -39,8 +40,11 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Сюда скопируем наш код из onCreate в LoginActivityView. Перед findViewById нужно добавить "view.":
+        // Сюда копируем код из onCreate в Activity. Перед findViewById нужно добавить "view."
+        // В методе subscribeOnLiveData() (если такой есть):
+        // Вместо "this" в методе .observe(), как было в Activity, пишем "viewLifecycleOwner"
+        // Там, где мы в Activity передавали context, писали "this". Во фрагменте нужно писать "context"
+        // Однако, context может быть null. Если нужно значение точно не null(подчеркнет красным), пишем "requireContext()"
 
         // Инициализируем viewModel, чтобы работать с ViewModel (согласно примеру с сайта)
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
@@ -93,14 +97,11 @@ class LoginFragment : Fragment() {
      */
     // Подвисываемся, чтобы слышать события из LiveData (в ViewModelMediator). Если какое-то из этих событий случится, будет вызван соответствующий метод, описанный в observe у этого события
     private fun subscribeOnLiveData() {
-        // Вместо this в методе .observe(), как было в Activity, пишем viewLifecycleOwner
-        // Там, где мы в Acticity передавали context, писали this. Во фрагменте нужно писать "context"
-        // Однако, context может быть null. Если нужно значение точно не null(подчеркнет красным), пишем requireContext()
         viewModel.isLoginSuccessLiveData.observe(viewLifecycleOwner, {
 //            val intent = Intent(context, SuccessLoginActivity::class.java)
 //            startActivity(intent)
             // Открываем фрагмент:
-            (activity as MainActivity).openFragment(SuccessFragment())
+            (activity as MainActivity).openFragment(CountriesFragment())
             //(activity as MainActivity) - так мы преобразовали activity в MainActivity. Мы можем так сделать, т.к. у нас будет 1 activity и множество фрагментов, соответственно мы знаем, что MainActivity - точно наша activity
         })
         viewModel.isLoginFailureLiveData.observe(viewLifecycleOwner, {

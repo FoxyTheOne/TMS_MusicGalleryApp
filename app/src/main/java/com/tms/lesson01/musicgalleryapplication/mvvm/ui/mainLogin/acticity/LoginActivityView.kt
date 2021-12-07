@@ -13,6 +13,7 @@ import androidx.lifecycle.MutableLiveData
 import com.tms.lesson01.musicgalleryapplication.R
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputLayout
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.countries.activity.CountriesActivity
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.LoginViewModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.success.activity.SuccessLoginActivity
 
@@ -84,7 +85,7 @@ class LoginActivityView : AppCompatActivity() {
     // Подвисываемся, чтобы слышать события из LiveData (в ViewModelMediator). Если какое-то из этих событий случится, будет вызван соответствующий метод, описанный в observe у этого события
     private fun subscribeOnLiveData() {
         viewModel.isLoginSuccessLiveData.observe(this, {
-            val intent = Intent(this, SuccessLoginActivity::class.java)
+            val intent = Intent(this, CountriesActivity::class.java)
             startActivity(intent)
         })
         viewModel.isLoginFailureLiveData.observe(this, {

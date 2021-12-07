@@ -13,10 +13,9 @@ package com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network
 class NetworkLoginServiceModel : INetworkLoginService {
     override fun onSignUpClicked(name: String, email: String, password: String, confirmPassword: String): String? {
         val nameValid = name.isNotBlank()
-        val emailValid =
-            email.isNotBlank() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        val emailValid = email.isNotBlank() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
         val passwordValid = password.isNotBlank() && password.length > 5
-        val confirmPasswordValid = password.equals(confirmPassword)
+        val confirmPasswordValid = password == confirmPassword // В Kotlin сравнение строк через ==, а не equals. Если нужно сравнить адрес - ===
 
         // Если всё верно, логинимся и возвращается токен. Если не верно - не возвращается
         return if (nameValid && emailValid && passwordValid && confirmPasswordValid) {
