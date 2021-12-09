@@ -14,6 +14,7 @@ import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.MainActivity
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.browser.BrowserFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.countries.CountriesViewModel
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.filepicker.FilePickerFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.success.fragment.SuccessFragment
 
 class CountriesFragment : Fragment() {
@@ -44,6 +45,7 @@ class CountriesFragment : Fragment() {
         // Оглашаем наши локальные переменные
         val openSuccessButton: AppCompatButton = view.findViewById(R.id.button_openSuccess)
         val openURLButton: AppCompatButton = view.findViewById(R.id.button_openBrowserFragment)
+        val openFilePickerButton: AppCompatButton = view.findViewById(R.id.button_openFilePickerFragment)
         countriesListView = view.findViewById(R.id.list_countries)
 
         // Кнопка перехода на success
@@ -53,6 +55,10 @@ class CountriesFragment : Fragment() {
         // Кнопка перехода на BrowserFragment
         openURLButton.setOnClickListener {
             (activity as MainActivity).openFragment(BrowserFragment())
+        }
+        // Кнопка перехода на FilePickerFragment
+        openFilePickerButton.setOnClickListener {
+            (activity as MainActivity).openFragment(FilePickerFragment())
         }
 
         subscribeOnLiveData()

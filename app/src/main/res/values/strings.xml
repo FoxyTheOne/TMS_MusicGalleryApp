@@ -11,8 +11,11 @@
     <string name="countries_buttonFinish">Finish</string>
     <string name="countries_buttonGoToSuccess">Success</string>
     <string name="countries_buttonGoToBrowserFragment">Open URL</string>
+    <string name="countries_buttonGoToFilePickerFragment">Open FilePicker</string>
 
     <string name="browser_buttonViewUrl">View URL</string>
+
+    <string name="filePicker_buttonFilePickerViewFiles">View files</string>
 
     <string name="success_success">Success!</string>
 </resources>

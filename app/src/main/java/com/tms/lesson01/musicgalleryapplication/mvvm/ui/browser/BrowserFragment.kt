@@ -6,13 +6,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.MainActivity
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.success.fragment.SuccessFragment
 
 class BrowserFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -26,10 +24,10 @@ class BrowserFragment: Fragment() {
         sendNavigationEvents()
 
         // Оглашаем наши локальные переменные
-        val openURLButton: AppCompatButton = view.findViewById(R.id.button_view_url)
+        val viewURLButton: AppCompatButton = view.findViewById(R.id.button_viewURL)
 
         // Кнопка перехода на BrowseFragment
-        openURLButton.setOnClickListener {
+        viewURLButton.setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://google.com"))
             startActivity(browserIntent)
         }
