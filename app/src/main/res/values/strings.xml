@@ -1,12 +1,18 @@
 <resources>
     <string name="app_name">MusicGaleryApplication</string>
+
     <string name="login_signUp">Sign Up</string>
     <string name="login_name">Name</string>
     <string name="login_email">Email</string>
     <string name="login_password">Password</string>
     <string name="login_ConfirmPassword">Confirm password</string>
     <string name="login_alreadyHave">Already have an Account? Sign In</string>
+
     <string name="countries_buttonFinish">Finish</string>
     <string name="countries_buttonGoToSuccess">Success</string>
+    <string name="countries_buttonGoToBrowserFragment">Open URL</string>
+
+    <string name="browser_buttonViewUrl">View URL</string>
+
     <string name="success_success">Success!</string>
 </resources>

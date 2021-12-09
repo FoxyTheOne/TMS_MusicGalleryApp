@@ -8,11 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.ViewModelProvider
 import com.tms.lesson01.musicgalleryapplication.R
-import com.tms.lesson01.musicgalleryapplication.mvvm.MainActivity
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.countries.CountriesViewModel
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.LoginViewModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.success.activity.SuccessLoginActivity
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.success.fragment.SuccessFragment
 
 class CountriesActivity: AppCompatActivity() {
     // Переменные класса
@@ -28,7 +25,7 @@ class CountriesActivity: AppCompatActivity() {
         lifecycle.addObserver(viewModel)
 
         // Оглашаем наши локальные переменные
-        val openSuccessButton: AppCompatButton = findViewById(R.id.open_success_button)
+        val openSuccessButton: AppCompatButton = findViewById(R.id.button_openSuccess)
         countriesListView = findViewById(R.id.list_countries)
 
         // Кнопка перехода на success
