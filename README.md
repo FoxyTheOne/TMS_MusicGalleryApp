@@ -21,4 +21,11 @@ Homework 03.
 2. Add screen whith list of countries
 3. Recast app with Fragments instead of Activities
 
+Homework 04.
+1. Open fragments using "replace" instead of "add"
+2. Get data from fragments using subscription by key
+3. Create implicit intent (BrowserFragment)
+4. Add a button to open the gallery + request permission
+5. Localization (file String, folder values-ru) 
+
 Created by Alina Piatrova
