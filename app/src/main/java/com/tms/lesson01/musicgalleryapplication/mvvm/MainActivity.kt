@@ -25,7 +25,9 @@ class MainActivity: AppCompatActivity() {
         listenNavigationEvents()
 
         // Открываем первый фрагмент
-        openFragment(LoginFragment())
+        if (savedInstanceState == null) {
+            openFragment(LoginFragment())
+        }
     }
 
     override fun onBackPressed() {
