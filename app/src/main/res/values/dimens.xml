@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="login_title">24sp</dimen>
-    <dimen name="login_text">16sp</dimen>
-    <dimen name="success_title">32sp</dimen>
     <dimen name="space_underElement">16dp</dimen>
     <dimen name="space_beforeOrAfterElement">16dp</dimen>
+    <dimen name="login_title">24sp</dimen>
+    <dimen name="login_text">16sp</dimen>
+    <dimen name="item_smallImage">128dp</dimen>
+    <dimen name="playlists_titleSize">18sp</dimen>
+    <dimen name="success_title">32sp</dimen>
 </resources>

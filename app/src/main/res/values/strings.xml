@@ -8,6 +8,8 @@
     <string name="login_ConfirmPassword">Confirm password</string>
     <string name="login_alreadyHave">Already have an Account? Sign In</string>
 
+    <string name="playlists_titleYourFavorites">Your favorites</string>
+    <string name="playlists_titleRecommendedPlaylists">Recommended playlists</string>
     <string name="countries_buttonFinish">Finish</string>
     <string name="countries_buttonGoToSuccess">Success</string>
     <string name="countries_buttonGoToBrowserFragment">Open URL</string>

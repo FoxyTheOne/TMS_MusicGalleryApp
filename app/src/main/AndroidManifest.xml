@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tms.lesson01.musicgalleryapplication">
 
+    <!-- Разрешения для выхода в интернет -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Разрешения для использования STORAGE -->
     <permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -21,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".mvvm.ui.countries.activity.CountriesActivity"
+            android:name=".mvvm.ui.playlist.activityOld.CountriesActivity"
             android:exported="true">
         </activity>
         <activity

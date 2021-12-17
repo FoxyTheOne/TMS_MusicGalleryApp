@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/playlist_logo"
+        android:layout_width="@dimen/item_smallImage"
+        android:layout_height="@dimen/item_smallImage"
+        android:layout_gravity="start"
+        tools:ignore="ContentDescription"
+        android:layout_marginTop="@dimen/space_underElement"
+        android:layout_marginLeft="@dimen/space_beforeOrAfterElement"
+        android:layout_marginBottom="0dp"
+        android:paddingBottom="0dp"
+        />
+    <!-- Тег "ContentDescription" используется для функции чтения с экрана android. вы можете добавить строку о том, что такое ваше изображение, или просто подавить/проигнорировать это предупреждение, добавив следующий тег. -->
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/playlist_name"
+        style="@style/playlist_name"
+        android:layout_width="@dimen/item_smallImage"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="@dimen/space_beforeOrAfterElement"
+        android:layout_marginBottom="0dp"
+        android:paddingBottom="0dp"
+        />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

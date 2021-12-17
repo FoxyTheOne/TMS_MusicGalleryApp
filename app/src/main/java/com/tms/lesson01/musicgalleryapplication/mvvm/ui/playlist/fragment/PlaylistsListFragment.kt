@@ -1,29 +1,39 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm.ui.countries.fragment
+package com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.MainActivity
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.browser.BrowserFragment
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.countries.CountriesViewModel
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.PlaylistsListViewModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.filepicker.FilePickerFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.success.fragment.SuccessFragment
 
-class CountriesFragment : Fragment() {
-    // Переменные класса
-    private lateinit var viewModel: CountriesViewModel
-    private lateinit var countriesListView: ListView
+class PlaylistsListFragment : Fragment() {
+    // Константы
+    companion object {
+        private const val TAG = "PlaylistsListFragment"
+    }
 
+    // Переменные класса
+    private lateinit var viewModel: PlaylistsListViewModel
+    private lateinit var yourFavoritesRecyclerView: RecyclerView // 1. Создадим RecyclerView для наших горизонтальных списков
+    private lateinit var recommendedPlaylistsRecyclerView: RecyclerView
+    private var adapter: PlaylistsRecyclerAdapter? = null // 4. Определим для нашего RecyclerView созданный адаптер
+
+    // определяем вид экрана (layout)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.layout_countries, container, false)
+        return inflater.inflate(R.layout.layout_playlists, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,7 +48,7 @@ class CountriesFragment : Fragment() {
         sendNavigationEvents()
 
         // Инициализируем viewModel, чтобы работать с ViewModel (согласно примеру с сайта)
-        viewModel = ViewModelProvider(this)[CountriesViewModel::class.java]
+        viewModel = ViewModelProvider(this)[PlaylistsListViewModel::class.java]
         // Этот активити будет слушать наша view model, поэтому регистрируем слушателя здесь:
         lifecycle.addObserver(viewModel)
 
@@ -46,7 +56,17 @@ class CountriesFragment : Fragment() {
         val openSuccessButton: AppCompatButton = view.findViewById(R.id.button_openSuccess)
         val openURLButton: AppCompatButton = view.findViewById(R.id.button_openBrowserFragment)
         val openFilePickerButton: AppCompatButton = view.findViewById(R.id.button_openFilePickerFragment)
-        countriesListView = view.findViewById(R.id.list_countries)
+        yourFavoritesRecyclerView = view.findViewById(R.id.list_yourFavorites) // 2. Первый RecyclerView
+        recommendedPlaylistsRecyclerView = view.findViewById(R.id.list_recommendedPlaylists) // 2. Второй RecyclerView. Далее создаём адаптер (PlaylistsRecyclerAdapter)
+
+        // Делаем RecyclerView1 горизонтальным
+        yourFavoritesRecyclerView.run {
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        }
+        // Делаем RecyclerView2 горизонтальным
+        recommendedPlaylistsRecyclerView.run {
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        }
 
         // Кнопка перехода на success
         openSuccessButton.setOnClickListener {
@@ -67,9 +87,13 @@ class CountriesFragment : Fragment() {
     // private функции - только для CountriesFragment:
     // Подписка на LiveData
     private fun subscribeOnLiveData() {
-        viewModel.countriesLiveData.observe(viewLifecycleOwner, { countries ->
-            val adapter = ArrayAdapter(requireContext(), R.layout.support_simple_spinner_dropdown_item, countries)
-            countriesListView.adapter = adapter
+        viewModel.yourFavoritesLiveData.observe(viewLifecycleOwner, { playlists ->
+            adapter = PlaylistsRecyclerAdapter(playlists) {playlist -> Log.d(TAG, playlist.toString())} // в конструкторе PlaylistsRecyclerAdapter описываем нашу анонимную функцию
+            yourFavoritesRecyclerView.adapter = adapter
+        })
+        viewModel.recommendedPlaylistsLiveData.observe(viewLifecycleOwner, { playlists ->
+            adapter = PlaylistsRecyclerAdapter(playlists) {playlist -> Log.d(TAG, playlist.toString())}
+            recommendedPlaylistsRecyclerView.adapter = adapter
         })
     }
 

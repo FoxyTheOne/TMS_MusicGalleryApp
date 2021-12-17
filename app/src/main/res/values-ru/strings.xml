@@ -8,6 +8,8 @@
     <string name="login_ConfirmPassword">Подтверждение пароля</string>
     <string name="login_alreadyHave">Уже есть аккаунт? Войти</string>
 
+    <string name="playlists_titleYourFavorites">Избранное</string>
+    <string name="playlists_titleRecommendedPlaylists">Рекомендуемые плейлисты</string>
     <string name="countries_buttonFinish">Завершить</string>
     <string name="countries_buttonGoToSuccess">Успех</string>
     <string name="countries_buttonGoToBrowserFragment">Открыть URL</string>

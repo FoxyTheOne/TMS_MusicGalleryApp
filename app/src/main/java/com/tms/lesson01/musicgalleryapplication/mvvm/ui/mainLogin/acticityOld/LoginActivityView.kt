@@ -1,4 +1,4 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.acticity
+package com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.acticityOld
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,13 +9,11 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
-import androidx.lifecycle.MutableLiveData
 import com.tms.lesson01.musicgalleryapplication.R
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputLayout
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.countries.activity.CountriesActivity
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.activityOld.CountriesActivity
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.LoginViewModel
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.success.activity.SuccessLoginActivity
 
 /**
  * hw02. 1. SRP - Принцип единственной ответственности. Для обновления UI имеем отдельный класс

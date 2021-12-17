@@ -14,6 +14,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // To use VectorDrawableCompat, you need to make two modifications to your project. First, set android.defaultConfig.vectorDrawables.useSupportLibrary = true in your build.gradle file, and second, use app:srcCompat instead of android:src to refer to vector drawables.
+        // Issue id: VectorDrawableCompat
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
@@ -53,6 +57,5 @@ dependencies {
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
-
 
 }

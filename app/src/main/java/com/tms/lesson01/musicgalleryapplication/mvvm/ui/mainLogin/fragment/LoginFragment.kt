@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -17,9 +16,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputLayout
 import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.MainActivity
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.countries.fragment.CountriesFragment
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.fragment.PlaylistsListFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.LoginViewModel
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.success.fragment.SuccessFragment
 
 /**
  * hw02. 1. SRP - Принцип единственной ответственности. Для обновления UI имеем отдельный класс
@@ -106,7 +104,7 @@ class LoginFragment : Fragment() {
 //            val intent = Intent(context, SuccessLoginActivity::class.java)
 //            startActivity(intent)
             // Открываем фрагмент:
-            (activity as MainActivity).openFragment(CountriesFragment())
+            (activity as MainActivity).openFragment(PlaylistsListFragment())
             //(activity as MainActivity) - так мы преобразовали activity в MainActivity. Мы можем так сделать, т.к. у нас будет 1 activity и множество фрагментов, соответственно мы знаем, что MainActivity - точно наша activity
         })
         viewModel.isLoginFailureLiveData.observe(viewLifecycleOwner, {
