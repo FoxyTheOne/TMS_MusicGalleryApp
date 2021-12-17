@@ -28,4 +28,10 @@ Homework 04.
 4. Add a button to open the gallery + request permission
 5. Localization (file String, folder values-ru) 
 
+Homework 04.
+1. An introduction to Figma
+2. Use RecyclerView for creating horizontal list of playlists
+3. Perform a click on a playlist
+4. Redesign application
+
 Created by Alina Piatrova
