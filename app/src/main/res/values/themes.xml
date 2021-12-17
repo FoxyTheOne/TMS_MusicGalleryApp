@@ -27,8 +27,17 @@
     <style name="playlist_name" parent="@style/playlists_title">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">13sp</item>
-        <item name="fontStyle">normal</item>
         <item name="fontWeight">700</item>
-        <item name="lineHeight">22sp</item>
+    </style>
+
+    <style name="login_title" parent="@style/playlists_title">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">24sp</item>
+        <item name="fontWeight">500</item>
+    </style>
+
+    <style name="login_bottom" parent="@style/playlists_title">
+        <item name="android:textSize">16sp</item>
+        <item name="fontWeight">500</item>
     </style>
 </resources>

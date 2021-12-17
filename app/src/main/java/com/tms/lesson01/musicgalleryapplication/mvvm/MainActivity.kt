@@ -27,7 +27,7 @@ class MainActivity: AppCompatActivity() {
 
         // Открываем первый фрагмент
         if (savedInstanceState == null) {
-            openFragment(PlaylistsListFragment())
+            openFragment(LoginFragment())
         }
     }
 
