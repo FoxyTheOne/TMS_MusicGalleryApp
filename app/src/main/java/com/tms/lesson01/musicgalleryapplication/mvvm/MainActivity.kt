@@ -21,6 +21,9 @@ class MainActivity: AppCompatActivity() {
         const val NAVIGATION_EVENT_DATA_KEY = "navigation_event_data_key" // создали ключ, по которому будем класть данны в Map (в обертку данных bundle)
     }
 
+    // 1.1 Define ActionBar object
+    var actionBar: ActionBar? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,8 +32,8 @@ class MainActivity: AppCompatActivity() {
         listenNavigationEvents()
 
         // Изменяем цвет ActionBar:
-        // 1. Define ActionBar object
-        val actionBar: ActionBar? = supportActionBar
+        // 1.2 Define ActionBar object
+        actionBar = supportActionBar
         // 2. Define ColorDrawable object and parse color, using parseColor method
         // with color hash code as its parameter
         val colorDrawable: ColorDrawable = ColorDrawable(Color.parseColor("#1A222F"))
@@ -40,6 +43,8 @@ class MainActivity: AppCompatActivity() {
         // Открываем первый фрагмент
         if (savedInstanceState == null) {
             openFragment(LoginFragment()) // Открываем первый фрагмент. Чистить стек не нужно, он ещё пустой
+            // 4. Скрываем ActionBar для первого фрагмента:
+            actionBar?.hide()
         }
     }
 
@@ -71,6 +76,8 @@ class MainActivity: AppCompatActivity() {
             .addToBackStack(null)
             // Исполнить транзакцию:
             .commit()
+        // 5. Показываем ActionBar для остальных фрагментов:
+        actionBar?.show()
     }
 
     private fun clearBackStack() = supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)

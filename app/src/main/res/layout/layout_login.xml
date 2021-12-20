@@ -11,7 +11,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".mvvm.ui.mainLogin.acticityOld.LoginActivityView">
+    tools:context=".mvvm.ui.mainLogin.acticityOld.LoginActivityView" >
 
     <FrameLayout
         android:id="@+id/upperComponent"
