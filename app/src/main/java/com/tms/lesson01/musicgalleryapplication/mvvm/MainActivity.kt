@@ -1,7 +1,10 @@
 package com.tms.lesson01.musicgalleryapplication.mvvm
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -24,6 +27,15 @@ class MainActivity: AppCompatActivity() {
 
         // сразу осуществляем подписку на получение данных из фрагмента по ключу NAVIGATION_EVENT
         listenNavigationEvents()
+
+        // Изменяем цвет ActionBar:
+        // 1. Define ActionBar object
+        val actionBar: ActionBar? = supportActionBar
+        // 2. Define ColorDrawable object and parse color, using parseColor method
+        // with color hash code as its parameter
+        val colorDrawable: ColorDrawable = ColorDrawable(Color.parseColor("#1A222F"))
+        // 3. Set BackgroundDrawable
+        actionBar?.setBackgroundDrawable(colorDrawable)
 
         // Открываем первый фрагмент
         if (savedInstanceState == null) {
