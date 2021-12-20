@@ -104,7 +104,7 @@ class LoginFragment : Fragment() {
 //            val intent = Intent(context, SuccessLoginActivity::class.java)
 //            startActivity(intent)
             // Открываем фрагмент:
-            (activity as MainActivity).openFragment(PlaylistsListFragment())
+            (activity as MainActivity).openFragment(PlaylistsListFragment(), doClearBackStack = true) // Очищаем стек после Login screen
             //(activity as MainActivity) - так мы преобразовали activity в MainActivity. Мы можем так сделать, т.к. у нас будет 1 activity и множество фрагментов, соответственно мы знаем, что MainActivity - точно наша activity
         })
         viewModel.isLoginFailureLiveData.observe(viewLifecycleOwner, {

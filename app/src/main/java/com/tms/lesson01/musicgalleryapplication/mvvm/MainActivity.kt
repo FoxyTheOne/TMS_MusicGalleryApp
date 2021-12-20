@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.fragment.LoginFragment
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.fragment.PlaylistsListFragment
 
 /**
  * hw03. Переводим наше приложение на фрагменты. Создаём общий Activity и его layout (activity_main)
@@ -27,7 +27,7 @@ class MainActivity: AppCompatActivity() {
 
         // Открываем первый фрагмент
         if (savedInstanceState == null) {
-            openFragment(LoginFragment())
+            openFragment(LoginFragment()) // Открываем первый фрагмент. Чистить стек не нужно, он ещё пустой
         }
     }
 
@@ -41,9 +41,18 @@ class MainActivity: AppCompatActivity() {
         }
     }
 
-    fun openFragment(fragment: Fragment) {
+    fun openFragment(fragment: Fragment, doClearBackStack: Boolean = false) { // Задаём параметр по умолчанию - если не передать true для очистки стека, по умолчанию будет false
+        if (doClearBackStack){ // Если передали true, чистим стек
+            clearBackStack()
+        }
         // Открываем фрагмент из Activity:
         supportFragmentManager.beginTransaction()
+            .setCustomAnimations( // Анимации по умолчанию для всех фрагментов
+                R.anim.slide_in, // Как будет входить новый элемент
+                R.anim.fade_out, // Как будет пропадать предыдущий
+                R.anim.fade_in_while_back_clicked, // Как будет появл предыд фрагмент при клике на back
+                R.anim.slide_out_while_back_clicked // Как во время back будет пропадать тот фрагмент, к-рый был наверху
+            )
             // Добавляем LoginFragment в main_fragment_container, с тегом LoginFragment. Тег не обязателен. Тег можно использовать при поиске в стеке в дальнейшем
             .replace(R.id.main_fragment_container, fragment, fragment.toString())
             // Добавляем в BackStack, чтобы оставался в стеке фрагментов и при клике "назад" этот фрагмент открылся, как предыдущий
@@ -51,6 +60,8 @@ class MainActivity: AppCompatActivity() {
             // Исполнить транзакцию:
             .commit()
     }
+
+    private fun clearBackStack() = supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
 
     // private функции - только для MainActivity:
     // Подписка на получение данных из фрагмента (слушаем всё по ключу NAVIGATION_EVENT, т.е подписываемся на него)

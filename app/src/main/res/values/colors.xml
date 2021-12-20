@@ -12,4 +12,5 @@
 
     <color name="background">#1A222F</color>
     <color name="white_transparent_60">#99FFFFFF</color>
+    <color name="white_transparent_20">#33FFFFFF</color>
 </resources>
