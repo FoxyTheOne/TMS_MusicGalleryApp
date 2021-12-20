@@ -34,4 +34,8 @@ Homework 05.
 3. Perform a click on a playlist
 4. Redesign application
 
+Homework 06.
+1. Add clearBackStack while passing Login screen
+2. Add animations while mooving across application fragments
+
 Created by Alina Piatrova
