@@ -36,6 +36,6 @@ Homework 05.
 
 Homework 06.
 1. Add clearBackStack while passing Login screen
-2. Add animations while mooving across application fragments
+2. Add animations while moving across application fragments
 
 Created by Alina Piatrova
