@@ -1,26 +1,32 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin
+package com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainSignUp
 
 import android.os.Handler
 import android.os.Looper
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.IUserStorage
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.INetworkLoginService
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.LocalStorageModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.appSharedPreference.IAppSharedPreferences
-import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.INetworkLoginService
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.NetworkLoginServiceModel
 
-class LoginViewModel: ViewModel() {
+/**
+ * hw02. 1. SRP - Принцип единственной ответственности. Для обеспечения UI данными (достать и доставить данные, не обрабатывать!) имеем отдельный класс
+ * hw02. 5. DIP - Принцип инверсии зависимости. Зависимости внутри системы строятся на основе абстракций (private val localStorageModel: IUserStorage = LocalStorageModel())
+ */
+class SignUpViewModel: ViewModel() {
 
     // Переменные для передачи сообщения
-    val isLoginSuccessLiveData = MutableLiveData<Unit>()
-    val isLoginFailureLiveData = MutableLiveData<Unit>()
+    val isSignUpSuccessLiveData = MutableLiveData<Unit>()
+    val isSignUpFailureLiveData = MutableLiveData<Unit>()
     // Переменные, которые будут отвечать за отображение прогресса (кружок). Т.е. события, на которые можно подписаться и слушать
     val showProgressLiveData = MutableLiveData<Unit>()
     val hideProgressLiveData = MutableLiveData<Unit>()
     // Перемнные для сохранения информации во время пересоздания Activity из-за поворота экрана:
+    val nameLiveData = MutableLiveData<String>()
     val emailLiveData = MutableLiveData<String>()
     val passwordLiveData = MutableLiveData<String>()
+    val confirmPasswordLiveData = MutableLiveData<String>()
     val checkBoxRememberLoginAndPasswordLiveData = MutableLiveData<Boolean>()
 
     // LoginViewModel зависим от следующих инициализируемых сущностей. Всё, что он делает, делает благодаря им
@@ -34,18 +40,18 @@ class LoginViewModel: ViewModel() {
         this.preferences = preferences
     }
 
-    // Каждый раз, когда мы кликаеи, будет исполняться этот метод. Здесь мы сохраняем статус check box
+    // Каждый раз, когда мы кликаем, будет исполняться этот метод. Здесь мы сохраняем статус check box
     fun setRememberLoginAndPasswordSelectedOrNot(isSelected: Boolean) {
         preferences?.setRememberLoginAndPasswordSelectedOrNot(isSelected)
     }
 
     // Ф-ция, вызываемая по клику на кнопку в MainActivityView
-    fun onLoginClicked(emailText: String, passwordText: String) {
+    fun onSignUpClicked(nameText: String, emailText: String, passwordText: String, confirmPasswordText: String) {
         showProgressLiveData.postValue(Unit) // Сообщаем нашему view (LoginActivityView), что нужно показать прогресс
 
         // Функция с задержкой, для тестового проекта. В реальном проекте задержка (Handler) не нужна
         Handler(Looper.getMainLooper()).postDelayed({
-            val successToken = networkLoginServiceModel.onLoginClicked(emailText, passwordText)
+            val successToken = networkLoginServiceModel.onSignUpClicked(nameText, emailText, passwordText, confirmPasswordText)
 
             hideProgressLiveData.postValue(Unit) // Сообщаем нашему view (LoginActivityView), что нужно спрятать прогресс
             if (successToken != null) {
@@ -53,9 +59,9 @@ class LoginViewModel: ViewModel() {
 //                Пока уберем эту строку
                 saveToken(successToken)
                 saveLoginData(emailText, passwordText)
-                isLoginSuccessLiveData.postValue(Unit) // Если у нас есть токен, значит вход успешный
+                isSignUpSuccessLiveData.postValue(Unit) // Если у нас есть токен, значит вход успешный
             } else {
-                isLoginFailureLiveData.postValue(Unit)
+                isSignUpFailureLiveData.postValue(Unit)
             }
         }, 3000)
     }
@@ -63,23 +69,8 @@ class LoginViewModel: ViewModel() {
     fun getStoredData() {
         preferences?.let {
             if (it.isRememberLoginAndPasswordSelected()) {
-                emailLiveData.postValue(it.getEmail())
-                passwordLiveData.postValue(it.getPassword())
-                // Т.е. вытягиваем сохраненные значения из local storage и кладем их в LiveData
                 checkBoxRememberLoginAndPasswordLiveData.postValue(true) // кладем true
             }
-        }
-    }
-
-    fun setUpdatedEmail(email: String) {
-        if (email != emailLiveData.value) {
-            emailLiveData.value = email
-        }
-    }
-
-    fun setUpdatedPassword(password: String) {
-        if (password != passwordLiveData.value) {
-            passwordLiveData.value = password
         }
     }
 
@@ -97,4 +88,5 @@ class LoginViewModel: ViewModel() {
             }
         }
     }
+
 }

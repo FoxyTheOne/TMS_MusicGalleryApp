@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="@string/countries_buttonGoToSuccess"
+            android:text="@string/playlists_buttonGoToSuccess"
 
             app:layout_constraintTop_toBottomOf="@+id/list_recommendedPlaylists"
             app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +88,7 @@
             android:id="@+id/button_openBrowserFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/countries_buttonGoToBrowserFragment"
+            android:text="@string/playlists_buttonGoToBrowserFragment"
 
             app:layout_constraintTop_toBottomOf="@+id/button_openSuccess"
             app:layout_constraintStart_toStartOf="parent"
@@ -101,9 +101,22 @@
             android:id="@+id/button_openFilePickerFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/countries_buttonGoToFilePickerFragment"
+            android:text="@string/playlists_buttonGoToFilePickerFragment"
 
             app:layout_constraintTop_toBottomOf="@+id/button_openBrowserFragment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/button_logOut"
+
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_logOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/playlists_LogOut"
+
+            app:layout_constraintTop_toBottomOf="@+id/button_openFilePickerFragment"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
 

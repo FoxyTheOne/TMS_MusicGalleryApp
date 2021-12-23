@@ -1,4 +1,4 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.acticityOld
+package com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainSignUp.acticityOld
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -13,14 +13,14 @@ import com.tms.lesson01.musicgalleryapplication.R
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputLayout
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.activityOld.CountriesActivity
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.LoginViewModel
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainSignUp.SignUpViewModel
 
 /**
  * hw02. 1. SRP - Принцип единственной ответственности. Для обновления UI имеем отдельный класс
  */
 class LoginActivityView : AppCompatActivity() {
     // Переменные класса
-    private lateinit var viewModel: LoginViewModel
+    private lateinit var viewModel: SignUpViewModel
     private lateinit var frameLayout: FrameLayout
     private lateinit var progressCircular: ProgressBar
     private lateinit var nameField: TextInputLayout
@@ -30,9 +30,9 @@ class LoginActivityView : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.layout_login)
+        setContentView(R.layout.layout_sign_up)
         // Инициализируем viewModel, чтобы работать с ViewModel (согласно примеру с сайта)
-        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+        viewModel = ViewModelProvider(this)[SignUpViewModel::class.java]
 
         // Оглашаем наши локальные переменные
         val buttonSignUp: AppCompatButton = findViewById(R.id.buttonSignUp)
@@ -82,11 +82,11 @@ class LoginActivityView : AppCompatActivity() {
      */
     // Подвисываемся, чтобы слышать события из LiveData (в ViewModelMediator). Если какое-то из этих событий случится, будет вызван соответствующий метод, описанный в observe у этого события
     private fun subscribeOnLiveData() {
-        viewModel.isLoginSuccessLiveData.observe(this, {
+        viewModel.isSignUpSuccessLiveData.observe(this, {
             val intent = Intent(this, CountriesActivity::class.java)
             startActivity(intent)
         })
-        viewModel.isLoginFailureLiveData.observe(this, {
+        viewModel.isSignUpFailureLiveData.observe(this, {
             Toast.makeText(this, "Something wrong with your data. Please, try again!", Toast.LENGTH_LONG).show()
         })
         viewModel.showProgressLiveData.observe(this, {

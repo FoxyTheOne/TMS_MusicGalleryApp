@@ -19,7 +19,19 @@ class NetworkLoginServiceModel : INetworkLoginService {
 
         // Если всё верно, логинимся и возвращается токен. Если не верно - не возвращается
         return if (nameValid && emailValid && passwordValid && confirmPasswordValid) {
-            doLogin(name, email, password, confirmPassword)
+            doSignUp(name, email, password, confirmPassword)
+        } else {
+            null
+        }
+    }
+
+    override fun onLoginClicked(email: String, password: String): String? {
+        val emailValid = email.isNotBlank() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        val passwordValid = password.isNotBlank() && password.length > 5
+
+        // Если всё верно, логинимся и возвращается токен. Если не верно - не возвращается
+        return if (emailValid && passwordValid) {
+            doLogin(email, password)
         } else {
             null
         }
@@ -30,7 +42,11 @@ class NetworkLoginServiceModel : INetworkLoginService {
     }
 
     // Если пользователь успешно зарегистрировался, он получает token. Token - это ключ к другим запросам. Чтобы использовать его в дальнейшем, его нужно закэшировать.
-    private fun doLogin(name: String, email: String, password: String, confirmPassword: String): String {
+    private fun doSignUp(name: String, email: String, password: String, confirmPassword: String): String {
+        return "successToken"
+    }
+
+    private fun doLogin(email: String, password: String): String? {
         return "successToken"
     }
 }

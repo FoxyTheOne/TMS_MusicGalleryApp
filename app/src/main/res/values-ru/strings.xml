@@ -1,19 +1,25 @@
 <resources>
     <string name="app_name">Музыкальная галерея</string>
 
-    <string name="login_signUp">Регистрация</string>
-    <string name="login_name">Имя</string>
-    <string name="login_email">Email</string>
-    <string name="login_password">Пароль</string>
-    <string name="login_ConfirmPassword">Подтверждение пароля</string>
-    <string name="login_alreadyHave">Уже есть аккаунт? Войти</string>
+    <string name="signUp_signUp">Регистрация</string>
+    <string name="signUp_name">Имя</string>
+    <string name="signUp_email">Email</string>
+    <string name="signUp_password">Пароль</string>
+    <string name="signUp_ConfirmPassword">Подтверждение пароля</string>
+    <string name="signUp_CheckBox">Запомнить email и пароль</string>
+    <string name="signUp_alreadyHave">Уже есть аккаунт? Войти</string>
+
+    <string name="login_signIn">Войти</string>
+    <string name="login_forgot">Забыли пароль? Нажми сюда</string>
+    <string name="login_need">Нужен аккаунт? Зарегистрироваться</string>
 
     <string name="playlists_titleYourFavorites">Избранное</string>
     <string name="playlists_titleRecommendedPlaylists">Рекомендуемые плейлисты</string>
     <string name="countries_buttonFinish">Завершить</string>
-    <string name="countries_buttonGoToSuccess">Успех</string>
-    <string name="countries_buttonGoToBrowserFragment">Открыть URL</string>
-    <string name="countries_buttonGoToFilePickerFragment">Открыть FilePicker</string>
+    <string name="playlists_buttonGoToSuccess">Успех</string>
+    <string name="playlists_buttonGoToBrowserFragment">Открыть URL</string>
+    <string name="playlists_buttonGoToFilePickerFragment">Открыть FilePicker</string>
+    <string name="playlists_LogOut">Выйти</string>
 
     <string name="browser_buttonViewUrl">Посмотреть URL</string>
 

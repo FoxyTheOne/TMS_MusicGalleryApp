@@ -4,8 +4,14 @@ import androidx.lifecycle.*
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.INetworkMusicService
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.NetworkMusicServiceModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.customObject.Playlist
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.appSharedPreference.IAppSharedPreferences
 
 class PlaylistsListViewModel: ViewModel(), LifecycleEventObserver {
+    // Наш экземпляр класса Model для обращения к ней. Тип переменной - наш интерфейс. NetworkMusicServiceModel() будет возвращать нам альбомы
+    private val musicModel: INetworkMusicService = NetworkMusicServiceModel()
+    // Объект preferences для обращения к SharedPreferences
+    private var preferences: IAppSharedPreferences? = null
+
 //    // Создаём LiveData, которое слушает Activity:
 //    val countriesLiveData = MutableLiveData<List<String>>()
 //    // Наш экземпляр класса Model для обращения к ней. Тип переменной - наш интерфейс:
@@ -14,8 +20,8 @@ class PlaylistsListViewModel: ViewModel(), LifecycleEventObserver {
     // 4. Создаём LiveData, которое будет слушать наш Activity, чтобы подтягивать к себе список плейлистов (List<>):
     val yourFavoritesLiveData = MutableLiveData<List<Playlist>>()
     val recommendedPlaylistsLiveData = MutableLiveData<List<Playlist>>()
-    // Наш экземпляр класса Model для обращения к ней. Тип переменной - наш интерфейс. NetworkMusicServiceModel() будет возвращать нам альбомы
-    private val musicModel: INetworkMusicService = NetworkMusicServiceModel()
+    // LiveData для выхода из приложения
+    val logOutLiveData = MutableLiveData<Unit>()
 
     // В этом классе мы хотим слушать события, поэтому наследуемся от LifecycleEventObserver и override метод onStateChanged
     override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
@@ -45,6 +51,15 @@ class PlaylistsListViewModel: ViewModel(), LifecycleEventObserver {
                 println("ON_ANY")
             }
         }
+    }
+
+    fun setSharedPreferences(preferences: IAppSharedPreferences) {
+        this.preferences = preferences
+    }
+
+    fun logOut() {
+        preferences?.saveToken("")
+        logOutLiveData.value = Unit // поставили флажок
     }
 
 //    private fun getCountries() {

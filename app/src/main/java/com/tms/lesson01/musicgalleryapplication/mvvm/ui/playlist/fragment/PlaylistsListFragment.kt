@@ -14,9 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.MainActivity
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.appSharedPreference.AppSharedPreferences
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.browser.BrowserFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.PlaylistsListViewModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.filepicker.FilePickerFragment
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.LoginFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.success.fragment.SuccessFragment
 
 class PlaylistsListFragment : Fragment() {
@@ -26,6 +28,10 @@ class PlaylistsListFragment : Fragment() {
     }
 
     // Переменные класса
+    private lateinit var openSuccessButton: AppCompatButton
+    private lateinit var openURLButton: AppCompatButton
+    private lateinit var openFilePickerButton: AppCompatButton
+    private lateinit var buttonLogOut: AppCompatButton
     private lateinit var viewModel: PlaylistsListViewModel
     private lateinit var yourFavoritesRecyclerView: RecyclerView // 1. Создадим RecyclerView для наших горизонтальных списков
     private lateinit var recommendedPlaylistsRecyclerView: RecyclerView
@@ -51,11 +57,13 @@ class PlaylistsListFragment : Fragment() {
         viewModel = ViewModelProvider(this)[PlaylistsListViewModel::class.java]
         // Этот активити будет слушать наша view model, поэтому регистрируем слушателя здесь:
         lifecycle.addObserver(viewModel)
+        viewModel.setSharedPreferences(AppSharedPreferences.getInstance(requireContext())) // Вызываем наш статический метод для экземпляра класса AppSharedPreferences
 
         // Оглашаем наши локальные переменные
-        val openSuccessButton: AppCompatButton = view.findViewById(R.id.button_openSuccess)
-        val openURLButton: AppCompatButton = view.findViewById(R.id.button_openBrowserFragment)
-        val openFilePickerButton: AppCompatButton = view.findViewById(R.id.button_openFilePickerFragment)
+        openSuccessButton = view.findViewById(R.id.button_openSuccess)
+        openURLButton = view.findViewById(R.id.button_openBrowserFragment)
+        openFilePickerButton = view.findViewById(R.id.button_openFilePickerFragment)
+        buttonLogOut = view.findViewById(R.id.button_logOut)
         yourFavoritesRecyclerView = view.findViewById(R.id.list_yourFavorites) // 2. Первый RecyclerView
         recommendedPlaylistsRecyclerView = view.findViewById(R.id.list_recommendedPlaylists) // 2. Второй RecyclerView. Далее создаём адаптер (PlaylistsRecyclerAdapter)
 
@@ -68,6 +76,11 @@ class PlaylistsListFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
 
+        initListeners()
+        subscribeOnLiveData()
+    }
+
+    private fun initListeners() {
         // Кнопка перехода на success
         openSuccessButton.setOnClickListener {
             (activity as MainActivity).openFragment(SuccessFragment())
@@ -80,8 +93,9 @@ class PlaylistsListFragment : Fragment() {
         openFilePickerButton.setOnClickListener {
             (activity as MainActivity).openFragment(FilePickerFragment())
         }
-
-        subscribeOnLiveData()
+        buttonLogOut.setOnClickListener {
+            viewModel.logOut()
+        }
     }
 
     // private функции - только для CountriesFragment:
@@ -94,6 +108,10 @@ class PlaylistsListFragment : Fragment() {
         viewModel.recommendedPlaylistsLiveData.observe(viewLifecycleOwner, { playlists ->
             adapter = PlaylistsRecyclerAdapter(playlists) {playlist -> Log.d(TAG, playlist.toString())}
             recommendedPlaylistsRecyclerView.adapter = adapter
+        })
+        // Если услышим logOutLiveData, значит надо выйти из приложения (открыть логин экран и почистить стек)
+        viewModel.logOutLiveData.observe(viewLifecycleOwner,{
+            (activity as MainActivity).openFragment(LoginFragment(), true)
         })
     }
 

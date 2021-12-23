@@ -1,7 +1,5 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.fragment
+package com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
@@ -19,23 +17,20 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputLayout
 import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.MainActivity
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.appSharedPreference.AppSharedPreferences
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.fragment.PlaylistsListFragment
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.LoginViewModel
 
-/**
- * hw02. 1. SRP - Принцип единственной ответственности. Для обновления UI имеем отдельный класс
- *
- * hw03. Переводим наше приложение на фрагменты.
- */
-class LoginFragment : Fragment() {
+class LoginFragment: Fragment() {
     // Переменные класса
     private lateinit var viewModel: LoginViewModel
     private lateinit var frameLayout: FrameLayout
     private lateinit var progressCircular: ProgressBar
-    private lateinit var nameField: TextInputLayout
+
     private lateinit var emailField: TextInputLayout
     private lateinit var passwordField: TextInputLayout
-    private lateinit var confirmPasswordField: TextInputLayout
+
+    private lateinit var buttonLogin: AppCompatButton
+    private lateinit var checkBoxRememberLoginAndPassword: AppCompatCheckBox
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.layout_login, container, false)
@@ -43,58 +38,57 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Сюда копируем код из onCreate в Activity. Перед findViewById нужно добавить "view."
-        // В методе subscribeOnLiveData() (если такой есть):
-        // Вместо "this" в методе .observe(), как было в Activity, пишем "viewLifecycleOwner"
-        // Там, где мы в Activity передавали context, писали "this". Во фрагменте нужно писать "context"
-        // Однако, context может быть null. Если нужно значение точно не null(подчеркнет красным), пишем "requireContext()"
 
         // Сразу начинаем отправлять данные по ключу NAVIGATION_EVENT
         sendNavigationEvents()
 
         // Инициализируем viewModel, чтобы работать с ViewModel (согласно примеру с сайта)
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+        // Вызовем наш метод, к-рый будет отправлять нам SharedPreferences из фрагмента
+        viewModel.setSharedPreferences(AppSharedPreferences.getInstance(requireContext())) // Вызываем наш статический метод для экземпляра класса AppSharedPreferences
+        viewModel.getStoredData()
 
         // Оглашаем наши локальные переменные
-        val buttonSignUp: AppCompatButton = view.findViewById(R.id.buttonSignUp)
+        // Кнопки
+        buttonLogin = view.findViewById(R.id.buttonLogin)
+        checkBoxRememberLoginAndPassword = view.findViewById(R.id.checkBox_remember)
         // Переменные для отображения прогресса
         frameLayout = view.findViewById(R.id.frameLayout)
         progressCircular = view.findViewById(R.id.progressCircular)
         // Переменные для полей ввода
-        nameField = view.findViewById(R.id.nameField)
         emailField = view.findViewById(R.id.emailField)
         passwordField = view.findViewById(R.id.passwordField)
-        confirmPasswordField = view.findViewById(R.id.confirmPasswordField)
 
-        // Восстанавливаем значения при повороте экрана:
-        restoreValues()
+//        // Восстанавливаем значения при повороте экрана:
+//        restoreValues()
 
-        // Сохраняем введенные в поля значения для последнующего восстановления при необходимости:
-        nameField.editText?.addTextChangedListener(){
-            viewModel.nameLiveData.value = it.toString()
-        }
-        emailField.editText?.addTextChangedListener(){
-            viewModel.emailLiveData.value = it.toString()
-        }
-        passwordField.editText?.addTextChangedListener(){
-            viewModel.passwordLiveData.value = it.toString()
-        }
-        confirmPasswordField.editText?.addTextChangedListener(){
-            viewModel.confirmPasswordLiveData.value = it.toString()
-        }
-
-        // Определяем действие по клику на кнопку
-        buttonSignUp.setOnClickListener {
-            val nameText = nameField.editText?.text.toString()
-            val emailText = emailField.editText?.text.toString()
-            val passwordText = passwordField.editText?.text.toString()
-            val confirmPasswordText = confirmPasswordField.editText?.text.toString()
-
-            viewModel.onSignUpClicked(nameText, emailText, passwordText, confirmPasswordText)
-        }
-
+        // Метод для всех наших listeners
+        initListeners()
         // Вызываем метод, чтобы подписаться на события
         subscribeOnLiveData()
+    }
+
+    private fun initListeners() {
+        // Сохраняем введенные в поля значения для последнующего восстановления при необходимости:
+        emailField.editText?.addTextChangedListener(){
+//            viewModel.emailLiveData.value = it.toString()
+            viewModel.setUpdatedEmail(it.toString())
+        }
+        passwordField.editText?.addTextChangedListener(){
+//            viewModel.passwordLiveData.value = it.toString()
+            viewModel.setUpdatedPassword(it.toString())
+        }
+        // Определяем действие по клику на кнопку:
+        buttonLogin.setOnClickListener {
+            val emailText = emailField.editText?.text.toString()
+            val passwordText = passwordField.editText?.text.toString()
+
+            viewModel.onLoginClicked(emailText, passwordText)
+        }
+        checkBoxRememberLoginAndPassword.setOnCheckedChangeListener{ _, selected ->
+//            println("CHECK_BOX_SELECTED = $selected") - проверяли, работает ли check box
+            viewModel.setRememberLoginAndPasswordSelectedOrNot(selected) // Передаём наш isSelected (при нажатии на кнопку) в наш listener
+        }
     }
 
     /**
@@ -119,14 +113,27 @@ class LoginFragment : Fragment() {
         viewModel.hideProgressLiveData.observe(viewLifecycleOwner, {
             hideProgress()
         })
+        // Слушаем check box
+        viewModel.checkBoxRememberLoginAndPasswordLiveData.observe(viewLifecycleOwner, { isSelected ->
+            checkBoxRememberLoginAndPassword.isChecked = isSelected
+        })
+        // Слушаем email и password
+        viewModel.emailLiveData.observe(viewLifecycleOwner, { email ->
+            emailField.editText?.setText(email)
+            emailField.editText?.setSelection(email.length)
+        })
+        viewModel.passwordLiveData.observe(viewLifecycleOwner, { password ->
+            passwordField.editText?.setText(password)
+            passwordField.editText?.setSelection(password.length)
+        })
     }
 
-    private fun restoreValues() {
-        nameField.editText?.setText(viewModel.nameLiveData.value ?: "")
-        emailField.editText?.setText(viewModel.emailLiveData.value ?: "")
-        passwordField.editText?.setText(viewModel.passwordLiveData.value ?: "")
-        confirmPasswordField.editText?.setText(viewModel.confirmPasswordLiveData.value ?: "")
-    }
+//    private fun restoreValues() {
+//        nameField.editText?.setText(viewModel.nameLiveData.value ?: "")
+//        emailField.editText?.setText(viewModel.emailLiveData.value ?: "")
+//        passwordField.editText?.setText(viewModel.passwordLiveData.value ?: "")
+//        confirmPasswordField.editText?.setText(viewModel.confirmPasswordLiveData.value ?: "")
+//    }
 
     private fun showProgress() {
         frameLayout.isVisible = true

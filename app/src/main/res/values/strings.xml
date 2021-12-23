@@ -1,19 +1,25 @@
 <resources>
     <string name="app_name">MusicGaleryApplication</string>
 
-    <string name="login_signUp">Sign Up</string>
-    <string name="login_name">Name</string>
-    <string name="login_email">Email</string>
-    <string name="login_password">Password</string>
-    <string name="login_ConfirmPassword">Confirm password</string>
-    <string name="login_alreadyHave">Already have an Account? Sign In</string>
+    <string name="signUp_signUp">Sign up</string>
+    <string name="signUp_name">Name</string>
+    <string name="signUp_email">Email</string>
+    <string name="signUp_password">Password</string>
+    <string name="signUp_ConfirmPassword">Confirm password</string>
+    <string name="signUp_CheckBox">Remember email and password</string>
+    <string name="signUp_alreadyHave">Already have an Account? Sign In</string>
+
+    <string name="login_signIn">Sign in</string>
+    <string name="login_forgot">Forgot password? Click Here</string>
+    <string name="login_need">Need an Account? Sign up</string>
 
     <string name="playlists_titleYourFavorites">Your favorites</string>
     <string name="playlists_titleRecommendedPlaylists">Recommended playlists</string>
     <string name="countries_buttonFinish">Finish</string>
-    <string name="countries_buttonGoToSuccess">Success</string>
-    <string name="countries_buttonGoToBrowserFragment">Open URL</string>
-    <string name="countries_buttonGoToFilePickerFragment">Open FilePicker</string>
+    <string name="playlists_buttonGoToSuccess">Success</string>
+    <string name="playlists_buttonGoToBrowserFragment">Open URL</string>
+    <string name="playlists_buttonGoToFilePickerFragment">Open FilePicker</string>
+    <string name="playlists_LogOut">Log out</string>
 
     <string name="browser_buttonViewUrl">View URL</string>
 
