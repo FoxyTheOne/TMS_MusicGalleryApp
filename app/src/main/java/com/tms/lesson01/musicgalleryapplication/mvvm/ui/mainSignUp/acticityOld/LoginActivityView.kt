@@ -45,8 +45,8 @@ class LoginActivityView : AppCompatActivity() {
         passwordField = findViewById(R.id.passwordField)
         confirmPasswordField = findViewById(R.id.confirmPasswordField)
 
-        // Восстанавливаем значения при повороте экрана:
-        restoreValues()
+//        // Восстанавливаем значения при повороте экрана:
+//        restoreValues()
 
         // Сохраняем введенные в поля значения для последнующего восстановления при необходимости:
         nameField.editText?.addTextChangedListener(){
@@ -97,12 +97,12 @@ class LoginActivityView : AppCompatActivity() {
         })
     }
 
-    private fun restoreValues() {
-        nameField.editText?.setText(viewModel.nameLiveData.value ?: "")
-        emailField.editText?.setText(viewModel.emailLiveData.value ?: "")
-        passwordField.editText?.setText(viewModel.passwordLiveData.value ?: "")
-        confirmPasswordField.editText?.setText(viewModel.confirmPasswordLiveData.value ?: "")
-    }
+//    private fun restoreValues() {
+//        nameField.editText?.setText(viewModel.nameLiveData.value ?: "")
+//        emailField.editText?.setText(viewModel.emailLiveData.value ?: "")
+//        passwordField.editText?.setText(viewModel.passwordLiveData.value ?: "")
+//        confirmPasswordField.editText?.setText(viewModel.confirmPasswordLiveData.value ?: "")
+//    }
 
     private fun showProgress() {
         frameLayout.isVisible = true
