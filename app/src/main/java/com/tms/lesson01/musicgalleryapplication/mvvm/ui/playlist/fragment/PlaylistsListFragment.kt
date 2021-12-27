@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.MainActivity
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.appSharedPreference.AppSharedPreferences
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.AppDatabase
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.browser.BrowserFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.PlaylistsListViewModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.filepicker.FilePickerFragment
@@ -57,6 +58,7 @@ class PlaylistsListFragment : Fragment() {
         // Этот активити будет слушать наша view model, поэтому регистрируем слушателя здесь:
         lifecycle.addObserver(viewModel)
         viewModel.setSharedPreferences(AppSharedPreferences.getInstance(requireContext())) // Вызываем наш статический метод для экземпляра класса AppSharedPreferences
+        viewModel.setPlaylistDao(AppDatabase.getInstance(requireContext()).getPlaylistDao()) // Вызываем наш статический метод для экземпляра класса AppDatabase и затем обращаемся к Dao
 
         // Оглашаем наши локальные переменные
         openSuccessButton = view.findViewById(R.id.button_openSuccess)

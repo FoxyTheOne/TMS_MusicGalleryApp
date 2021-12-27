@@ -8,7 +8,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tms.lesson01.musicgalleryapplication.R
-import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.customObject.Playlist
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.customObject.Playlist
 
 // Для реакции по клику на элемент списка, передадим в конструктор анонимную функцию. Затем отдаём эту лямбду каждому ViewHolder, чтобы слушать, на что кликнул пользователь
 class PlaylistsRecyclerAdapter(private val playlists: List<Playlist>, private val selectedItem: (Playlist) -> Unit):
