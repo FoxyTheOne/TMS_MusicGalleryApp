@@ -38,4 +38,11 @@ Homework 06.
 1. Add clearBackStack while passing Login screen
 2. Add animations while moving across application fragments
 
+Homework 07.
+1. Implement the logic of saving token (if login was successful), as well as deleting the token when clicking the "exit" button
+2. Implement the logic of saving login and password when clicking on the check box and restoring them in the fields on Sign in screen
+
+Homework 08.
+1. Try Room DataBase
+
 Created by Alina Piatrova
