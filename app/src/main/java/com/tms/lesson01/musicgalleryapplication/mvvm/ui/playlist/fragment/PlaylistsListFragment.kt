@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +17,7 @@ import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.appS
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.browser.BrowserFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.PlaylistsListViewModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.filepicker.FilePickerFragment
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.LoginFragment
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.fragment.LoginFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.success.fragment.SuccessFragment
 
 class PlaylistsListFragment : Fragment() {

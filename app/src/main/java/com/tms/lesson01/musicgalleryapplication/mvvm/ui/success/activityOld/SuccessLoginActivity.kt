@@ -1,4 +1,4 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm.ui.success.activity
+package com.tms.lesson01.musicgalleryapplication.mvvm.ui.success.activityOld
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

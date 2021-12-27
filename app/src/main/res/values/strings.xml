@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MusicGaleryApplication</string>
+    <string name="app_name">Music Time</string>
 
     <string name="signUp_signUp">Sign up</string>
     <string name="signUp_name">Name</string>
@@ -10,8 +10,13 @@
     <string name="signUp_alreadyHave">Already have an Account? Sign In</string>
 
     <string name="login_signIn">Sign in</string>
-    <string name="login_forgot">Forgot password? Click Here</string>
-    <string name="login_need">Need an Account? Sign up</string>
+    <string name="login_forgotPassword">Forgot password?</string>
+    <string name="login_clickHere">Click Here</string>
+    <string name="login_needAnAccount">Need an Account?</string>
+    <string name="login_signUp">Sign up</string>
+
+    <string name="content_description_email">Email</string>
+    <string name="content_description_password">Password</string>
 
     <string name="playlists_titleYourFavorites">Your favorites</string>
     <string name="playlists_titleRecommendedPlaylists">Recommended playlists</string>

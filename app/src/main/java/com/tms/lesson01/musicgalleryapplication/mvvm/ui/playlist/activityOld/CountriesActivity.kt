@@ -2,14 +2,13 @@ package com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.activityOld
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.ViewModelProvider
 import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.PlaylistsListViewModel
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.success.activity.SuccessLoginActivity
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.success.activityOld.SuccessLoginActivity
 
 class CountriesActivity: AppCompatActivity() {
     // Переменные класса

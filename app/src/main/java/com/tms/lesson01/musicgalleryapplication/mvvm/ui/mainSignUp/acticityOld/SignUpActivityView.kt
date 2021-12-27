@@ -18,7 +18,7 @@ import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainSignUp.SignUpViewMod
 /**
  * hw02. 1. SRP - Принцип единственной ответственности. Для обновления UI имеем отдельный класс
  */
-class LoginActivityView : AppCompatActivity() {
+class SignUpActivityView : AppCompatActivity() {
     // Переменные класса
     private lateinit var viewModel: SignUpViewModel
     private lateinit var frameLayout: FrameLayout

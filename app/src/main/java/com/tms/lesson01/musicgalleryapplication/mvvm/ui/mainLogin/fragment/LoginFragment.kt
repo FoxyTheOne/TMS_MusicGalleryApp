@@ -1,4 +1,4 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin
+package com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,6 +18,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.MainActivity
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.appSharedPreference.AppSharedPreferences
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.LoginViewModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.fragment.PlaylistsListFragment
 
 class LoginFragment: Fragment() {

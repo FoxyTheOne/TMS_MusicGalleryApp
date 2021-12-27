@@ -29,7 +29,7 @@
             android:exported="true">
         </activity>
         <activity
-            android:name=".mvvm.ui.success.activity.SuccessLoginActivity"
+            android:name=".mvvm.ui.success.activityOld.SuccessLoginActivity"
             android:exported="true">
         </activity>
     </application>

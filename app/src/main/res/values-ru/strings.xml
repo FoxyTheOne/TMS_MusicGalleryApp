@@ -10,8 +10,13 @@
     <string name="signUp_alreadyHave">Уже есть аккаунт? Войти</string>
 
     <string name="login_signIn">Войти</string>
-    <string name="login_forgot">Забыли пароль? Нажми сюда</string>
-    <string name="login_need">Нужен аккаунт? Зарегистрироваться</string>
+    <string name="login_forgotPassword">Забыли пароль?</string>
+    <string name="login_clickHere">Нажми сюда</string>
+    <string name="login_needAnAccount">Нужен аккаунт?</string>
+    <string name="login_signUp">Зарегистрироваться</string>
+
+    <string name="content_description_email">Email</string>
+    <string name="content_description_password">Пароль</string>
 
     <string name="playlists_titleYourFavorites">Избранное</string>
     <string name="playlists_titleRecommendedPlaylists">Рекомендуемые плейлисты</string>

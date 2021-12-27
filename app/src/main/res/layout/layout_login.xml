@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background"
-        tools:context=".mvvm.ui.mainSignUp.acticityOld.LoginActivityView" >
+        tools:context=".mvvm.ui.mainSignUp.acticityOld.SignUpActivityView" >
 
         <FrameLayout
             android:id="@+id/upperComponent"
@@ -42,15 +42,15 @@
                 android:layout_gravity="left|bottom" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/yourPhoto"
-                app:srcCompat="@drawable/ic_component_1"
-                android:layout_width="124dp"
-                android:layout_height="124dp"
+                android:id="@+id/appImage"
+                app:srcCompat="@drawable/group"
+                android:layout_width="143dp"
+                android:layout_height="101dp"
                 android:layout_gravity="center" />
 
         </FrameLayout>
 
-        <TextView
+       <TextView
             android:id="@+id/upperText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,6 +70,8 @@
             android:hint="@string/signUp_email"
             android:layout_width="match_parent"
             android:layout_height="@dimen/textInput_height"
+            android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
+            android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
 
             app:layout_constraintTop_toBottomOf="@+id/upperText"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -78,12 +80,14 @@
 
             app:layout_constraintVertical_chainStyle="packed"
             app:errorEnabled="true"
-            android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
-            android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:textColorHint="@color/white_transparent_60">
+            style="@style/MyInputLayoutStyle"
+            android:textColorHint="@color/white_transparent_60"
+            app:startIconDrawable="@drawable/email"
+            app:startIconContentDescription="@string/content_description_email"
+            app:startIconTint="@color/gray_startIcon_TextInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailField_editText"
                 android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -96,6 +100,8 @@
             app:endIconMode="password_toggle"
             android:layout_width="match_parent"
             android:layout_height="@dimen/textInput_height"
+            android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
+            android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
 
             app:layout_constraintTop_toBottomOf="@+id/emailField"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -103,10 +109,11 @@
             app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
 
             app:layout_constraintVertical_chainStyle="packed"
-            android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
-            android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:textColorHint="@color/white_transparent_60">
+            style="@style/MyInputLayoutStyle"
+            android:textColorHint="@color/white_transparent_60"
+            app:startIconDrawable="@drawable/password"
+            app:startIconContentDescription="@string/content_description_password"
+            app:startIconTint="@color/gray_startIcon_TextInputLayout" >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:textColor="@color/white"
@@ -146,45 +153,77 @@
             app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/lowerText"
+            app:layout_constraintBottom_toTopOf="@+id/bottomComponent"
 
             app:layout_constraintVertical_chainStyle="packed"
             android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
             android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
             />
 
-        <TextView
-            android:id="@+id/lowerText"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/bottomComponent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login_forgot"
-            style="@style/login_bottom"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
 
             app:layout_constraintTop_toBottomOf="@+id/checkBox_remember"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/lowerText2"
+            app:layout_constraintBottom_toTopOf="@+id/bottomComponent2"
 
-            app:layout_constraintVertical_chainStyle="packed"
-            android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
-            />
+            app:layout_constraintVertical_chainStyle="packed">
 
-        <TextView
-            android:id="@+id/lowerText2"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/bottomComponent_lowerText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_forgotPassword"
+                style="@style/login_bottom"
+                android:paddingEnd="@dimen/space_small"/>
+
+            <TextView
+                android:id="@+id/bottomComponent_lowerText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_clickHere"
+                style="@style/login_bottom" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bottomComponent2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login_need"
-            style="@style/login_bottom"
+            android:orientation="horizontal"
+            android:gravity="center"
 
-            app:layout_constraintTop_toBottomOf="@+id/lowerText"
+            app:layout_constraintTop_toBottomOf="@+id/bottomComponent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
 
-            app:layout_constraintVertical_chainStyle="packed"
-            android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
-            />
+            app:layout_constraintVertical_chainStyle="packed">
 
+            <TextView
+                android:id="@+id/bottomComponent2_lowerText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_needAnAccount"
+                style="@style/login_bottom"
+                android:paddingEnd="@dimen/space_small"/>
+
+            <TextView
+                android:id="@+id/bottomComponent2_lowerText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_signUp"
+                style="@style/login_bottom" />
+
+        </LinearLayout>
+
+        <!-- layout для ProgressBar -->
         <FrameLayout
             android:id="@+id/frameLayout"
             android:layout_width="match_parent"
