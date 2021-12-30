@@ -70,6 +70,8 @@
         android:hint="@string/signUp_name"
         android:layout_width="match_parent"
         android:layout_height="@dimen/textInput_height"
+        android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
+        android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
 
         app:layout_constraintTop_toBottomOf="@+id/upperText"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -77,10 +79,12 @@
         app:layout_constraintBottom_toTopOf="@+id/emailField"
 
         app:layout_constraintVertical_chainStyle="packed"
-        android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
-        android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:textColorHint="@color/white_transparent_60"        >
+        style="@style/MyInputLayoutStyle"
+        android:textColorHint="@color/white_transparent_60"
+        app:boxStrokeColor="@color/box_stroke_color_default"
+        app:startIconDrawable="@drawable/user"
+        app:startIconContentDescription="@string/content_description_userName"
+        app:startIconTint="@color/gray_startIcon_TextInputLayout" >
 
         <com.google.android.material.textfield.TextInputEditText
             android:textColor="@color/white"
@@ -94,6 +98,8 @@
         android:hint="@string/signUp_email"
         android:layout_width="match_parent"
         android:layout_height="@dimen/textInput_height"
+        android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
+        android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
 
         app:layout_constraintTop_toBottomOf="@+id/nameField"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -102,10 +108,12 @@
 
         app:layout_constraintVertical_chainStyle="packed"
         app:errorEnabled="true"
-        android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
-        android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:textColorHint="@color/white_transparent_60">
+        style="@style/MyInputLayoutStyle"
+        android:textColorHint="@color/white_transparent_60"
+        app:boxStrokeColor="@color/box_stroke_color_default"
+        app:startIconDrawable="@drawable/email"
+        app:startIconContentDescription="@string/content_description_email"
+        app:startIconTint="@color/gray_startIcon_TextInputLayout" >
 
         <com.google.android.material.textfield.TextInputEditText
             android:textColor="@color/white"
@@ -120,6 +128,8 @@
         app:endIconMode="password_toggle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/textInput_height"
+        android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
+        android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
 
         app:layout_constraintTop_toBottomOf="@+id/emailField"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -127,10 +137,13 @@
         app:layout_constraintBottom_toTopOf="@+id/confirmPasswordField"
 
         app:layout_constraintVertical_chainStyle="packed"
-        android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
-        android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:textColorHint="@color/white_transparent_60">
+        style="@style/MyInputLayoutStyle"
+        android:textColorHint="@color/white_transparent_60"
+        app:boxStrokeColor="@color/box_stroke_color_default"
+        app:startIconDrawable="@drawable/password"
+        app:startIconContentDescription="@string/content_description_password"
+        app:startIconTint="@color/gray_startIcon_TextInputLayout"
+        app:endIconTint="@color/gray_startIcon_TextInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:textColor="@color/white"
@@ -145,6 +158,8 @@
         app:endIconMode="password_toggle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/textInput_height"
+        android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
+        android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
 
         app:layout_constraintTop_toBottomOf="@+id/passwordField"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -153,10 +168,13 @@
 
         app:layout_constraintVertical_chainStyle="packed"
         app:errorEnabled="true"
-        android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
-        android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:textColorHint="@color/white_transparent_60">
+        style="@style/MyInputLayoutStyle"
+        android:textColorHint="@color/white_transparent_60"
+        app:boxStrokeColor="@color/box_stroke_color_default"
+        app:startIconDrawable="@drawable/password"
+        app:startIconContentDescription="@string/content_description_confirm_password"
+        app:startIconTint="@color/gray_startIcon_TextInputLayout"
+        app:endIconTint="@color/gray_startIcon_TextInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:textColor="@color/white"

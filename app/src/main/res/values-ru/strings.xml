@@ -17,6 +17,8 @@
 
     <string name="content_description_email">Email</string>
     <string name="content_description_password">Пароль</string>
+    <string name="content_description_confirm_password">Подтверждение пароля</string>
+    <string name="content_description_userName">Имя пользователя</string>
 
     <string name="playlists_titleYourFavorites">Избранное</string>
     <string name="playlists_titleRecommendedPlaylists">Рекомендуемые плейлисты</string>

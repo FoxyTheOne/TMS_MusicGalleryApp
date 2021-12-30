@@ -9,6 +9,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatCheckBox
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
@@ -72,12 +73,63 @@ class LoginFragment: Fragment() {
     private fun initListeners() {
         // Сохраняем введенные в поля значения для последнующего восстановления при необходимости:
         emailField.editText?.addTextChangedListener(){
+            it?.let {
 //            viewModel.emailLiveData.value = it.toString()
             viewModel.setUpdatedEmail(it.toString())
+            // Изменение цвета границы поля ввода при вводе символов в это поле:
+                if (it.isBlank()) {
+                    ContextCompat.getColorStateList(
+                        requireContext(),
+                        R.color.box_stroke_color_default
+                    )?.let { colorList ->
+                        emailField.setBoxStrokeColorStateList(colorList)
+                    }
+                } else {
+                    ContextCompat.getColorStateList(
+                        requireContext(),
+                        R.color.box_stroke_color_with_text
+                    )?.let { colorList ->
+                        emailField.setBoxStrokeColorStateList(colorList)
+                        emailField.hintTextColor = colorList
+                    }
+                    ContextCompat.getColorStateList(
+                        requireContext(),
+                        R.color.icon_in_box_with_text
+                    )?.let { colorList ->
+                        emailField.setStartIconTintList(colorList)
+                    }
+                }
+            }
         }
         passwordField.editText?.addTextChangedListener(){
 //            viewModel.passwordLiveData.value = it.toString()
             viewModel.setUpdatedPassword(it.toString())
+            // Изменение цвета границы поля ввода при вводе символов в это поле:
+            it?.let {
+                if (it.isBlank()) {
+                    ContextCompat.getColorStateList(
+                        requireContext(),
+                        R.color.box_stroke_color_default
+                    )?.let { colorList ->
+                        passwordField.setBoxStrokeColorStateList(colorList)
+                    }
+                } else {
+                    ContextCompat.getColorStateList(
+                        requireContext(),
+                        R.color.box_stroke_color_with_text
+                    )?.let { colorList ->
+                        passwordField.setBoxStrokeColorStateList(colorList)
+                        passwordField.hintTextColor = colorList
+                    }
+                    ContextCompat.getColorStateList(
+                        requireContext(),
+                        R.color.icon_in_box_with_text
+                    )?.let { colorList ->
+                        passwordField.setStartIconTintList(colorList)
+                        passwordField.setEndIconTintList(colorList)
+                    }
+                }
+            }
         }
         // Определяем действие по клику на кнопку:
         buttonLogin.setOnClickListener {

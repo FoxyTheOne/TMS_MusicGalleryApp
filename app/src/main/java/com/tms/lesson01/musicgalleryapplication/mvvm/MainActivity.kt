@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager
 import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.appSharedPreference.AppSharedPreferences
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.fragment.LoginFragment
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainSignUp.fragment.SignUpFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.fragment.PlaylistsListFragment
 
 /**

@@ -82,6 +82,7 @@
             app:errorEnabled="true"
             style="@style/MyInputLayoutStyle"
             android:textColorHint="@color/white_transparent_60"
+            app:boxStrokeColor="@color/box_stroke_color_default"
             app:startIconDrawable="@drawable/email"
             app:startIconContentDescription="@string/content_description_email"
             app:startIconTint="@color/gray_startIcon_TextInputLayout">
@@ -111,9 +112,11 @@
             app:layout_constraintVertical_chainStyle="packed"
             style="@style/MyInputLayoutStyle"
             android:textColorHint="@color/white_transparent_60"
+            app:boxStrokeColor="@color/box_stroke_color_default"
             app:startIconDrawable="@drawable/password"
             app:startIconContentDescription="@string/content_description_password"
-            app:startIconTint="@color/gray_startIcon_TextInputLayout" >
+            app:startIconTint="@color/gray_startIcon_TextInputLayout"
+            app:endIconTint="@color/gray_startIcon_TextInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:textColor="@color/white"
