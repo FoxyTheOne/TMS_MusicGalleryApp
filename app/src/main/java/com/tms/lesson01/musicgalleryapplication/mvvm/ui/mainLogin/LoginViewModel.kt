@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.IUserStorage
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.LocalStorageModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.appSharedPreference.IAppSharedPreferences
-import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.INetworkLoginService
-import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.NetworkLoginServiceModel
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.login.INetworkLoginService
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.login.NetworkLoginServiceModel
 
 class LoginViewModel: ViewModel() {
 

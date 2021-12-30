@@ -15,6 +15,8 @@ import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.MainActivity
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.appSharedPreference.AppSharedPreferences
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.AppDatabase
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.playlistLastFM.lastFM.ILastFMNetwork
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.playlistLastFM.lastFM.LastFMNetwork
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.browser.BrowserFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.PlaylistsListViewModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.filepicker.FilePickerFragment
@@ -35,6 +37,7 @@ class PlaylistsListFragment : Fragment() {
     private lateinit var viewModel: PlaylistsListViewModel
     private lateinit var yourFavoritesRecyclerView: RecyclerView // 1. Создадим RecyclerView для наших горизонтальных списков
     private lateinit var recommendedPlaylistsRecyclerView: RecyclerView
+    private lateinit var artistRecyclerView: RecyclerView
     private var adapterYourFavouritesPlaylist: YourFavouritesPlaylistRecyclerAdapter? = null // 4. Определим для нашего RecyclerView созданный адаптер
     private var adapterRecommendedPlaylist: RecommendedPlaylistRecyclerAdapter? = null // 4. Определим для нашего RecyclerView созданный адаптер
 
@@ -61,14 +64,18 @@ class PlaylistsListFragment : Fragment() {
         viewModel.setSharedPreferences(AppSharedPreferences.getInstance(requireContext())) // Вызываем наш статический метод для экземпляра класса AppSharedPreferences
         viewModel.setYourFavouritesPlaylistDao(AppDatabase.getInstance(requireContext()).getYourFavouritesPlaylistDao()) // Вызываем наш статический метод для экземпляра класса AppDatabase и затем обращаемся к Dao
         viewModel.setRecommendedPlaylistDao(AppDatabase.getInstance(requireContext()).getRecommendedPlaylistDao()) // Вызываем наш статический метод для экземпляра класса AppDatabase и затем обращаемся к Dao
+        // lastFM
+        val lastFMNetwork = LastFMNetwork.getInstance() as ILastFMNetwork
+        viewModel.setArtistService(lastFMNetwork.getArtistService())
 
         // Оглашаем наши локальные переменные
         openSuccessButton = view.findViewById(R.id.button_openSuccess)
         openURLButton = view.findViewById(R.id.button_openBrowserFragment)
         openFilePickerButton = view.findViewById(R.id.button_openFilePickerFragment)
         buttonLogOut = view.findViewById(R.id.button_logOut)
-        yourFavoritesRecyclerView = view.findViewById(R.id.list_yourFavorites) // 2. Первый RecyclerView
-        recommendedPlaylistsRecyclerView = view.findViewById(R.id.list_recommendedPlaylists) // 2. Второй RecyclerView. Далее создаём адаптер (PlaylistsRecyclerAdapter)
+        yourFavoritesRecyclerView = view.findViewById(R.id.list_yourFavorites) // 2. Первый RecyclerView. Далее создаём адаптер (YourFavouritesPlaylistRecyclerAdapter)
+        recommendedPlaylistsRecyclerView = view.findViewById(R.id.list_recommendedPlaylists) // 2. Второй RecyclerView. Далее создаём адаптер (RecommendedPlaylistRecyclerAdapter)
+        artistRecyclerView = view.findViewById(R.id.list_topArtists) // 2. Третий RecyclerView. Далее создаём адаптер (TopArtistRecyclerAdapter)
 
         // Делаем RecyclerView1 горизонтальным
         yourFavoritesRecyclerView.run {
@@ -78,6 +85,11 @@ class PlaylistsListFragment : Fragment() {
         recommendedPlaylistsRecyclerView.run {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
+        // Делаем RecyclerView3 горизонтальным
+        artistRecyclerView.run {
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        }
+        artistRecyclerView.addItemDecoration(TopArtistRecyclerItemDecoration(16))
 
         initListeners()
         subscribeOnLiveData()
@@ -115,6 +127,9 @@ class PlaylistsListFragment : Fragment() {
         // Если услышим logOutLiveData, значит надо выйти из приложения (открыть логин экран и почистить стек)
         viewModel.logOutLiveData.observe(viewLifecycleOwner,{
             (activity as MainActivity).openFragment(LoginFragment(), true)
+        })
+        viewModel.artistsLiveData.observe(viewLifecycleOwner, { artists ->
+            artistRecyclerView.adapter = TopArtistRecyclerAdapter(artists) { artist -> Log.d(TAG, artist.toString()) }
         })
     }
 

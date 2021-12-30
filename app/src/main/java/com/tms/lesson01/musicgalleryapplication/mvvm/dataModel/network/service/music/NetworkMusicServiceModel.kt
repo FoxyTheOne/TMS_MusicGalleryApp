@@ -1,8 +1,9 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network
+package com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.music
 
 import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.customObject.RecommendedPlaylist
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.customObject.YourFavouritesPlaylist
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.music.INetworkMusicService
 
 /**
  * hw02. 1. SRP - Принцип единственной ответственности. Для работы с запросами на сервер о музыке имеем отдельный класс. Обработка данных и возвращение результата

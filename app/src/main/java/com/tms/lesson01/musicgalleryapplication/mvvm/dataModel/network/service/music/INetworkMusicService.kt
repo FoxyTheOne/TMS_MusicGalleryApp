@@ -1,4 +1,4 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network
+package com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.music
 
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.customObject.RecommendedPlaylist
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.customObject.YourFavouritesPlaylist

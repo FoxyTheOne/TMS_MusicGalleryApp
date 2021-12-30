@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.customObject.RecommendedPlaylist
-import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.customObject.YourFavouritesPlaylist
 
 // Для реакции по клику на элемент списка, передадим в конструктор анонимную функцию. Затем отдаём эту лямбду каждому ViewHolder, чтобы слушать, на что кликнул пользователь
 class RecommendedPlaylistRecyclerAdapter(private val recommendedPlaylists: List<RecommendedPlaylist>, private val selectedItem: (RecommendedPlaylist) -> Unit):
@@ -17,14 +16,14 @@ class RecommendedPlaylistRecyclerAdapter(private val recommendedPlaylists: List<
 
     // Создаём элемент списка
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecommendedPlaylistViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_playlist_item, parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_playlists_playlist_item, parent,false)
         return RecommendedPlaylistViewHolder(view, selectedItem)
     }
 
     // Сюда залетает элемент списка, к-рый был создан в onCreateViewHolder() и здесь мы его наполняем
     // Однако, лучше просто вызвать метод из вложенного класа, где и осуществить непосредственно наполнение, описание clickListener и проч.
     override fun onBindViewHolder(holder: RecommendedPlaylistViewHolder, position: Int) {
-        holder.setPlaylist(recommendedPlaylists[position])
+        holder.setRecommendedPlaylist(recommendedPlaylists[position])
     }
 
     // Возвращает количество элементов списка
@@ -43,7 +42,7 @@ class RecommendedPlaylistRecyclerAdapter(private val recommendedPlaylists: List<
             }
         }
 
-        fun setPlaylist(recommendedPlaylist: RecommendedPlaylist) {
+        fun setRecommendedPlaylist(recommendedPlaylist: RecommendedPlaylist) {
             this.recommendedPlaylist = recommendedPlaylist
 
             val imageView = view.findViewById<AppCompatImageView>(R.id.playlist_logo)

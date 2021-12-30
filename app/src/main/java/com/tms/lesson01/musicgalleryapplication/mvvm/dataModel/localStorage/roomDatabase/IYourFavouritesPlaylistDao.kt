@@ -14,7 +14,7 @@ interface IYourFavouritesPlaylistDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertYourFavouritesPlaylist(yourFavouritesPlaylist: YourFavouritesPlaylist)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertYourFavouritesPlaylists(vararg yourFavouritesPlaylist: YourFavouritesPlaylist)
 
     // Удаляем 1 альбом

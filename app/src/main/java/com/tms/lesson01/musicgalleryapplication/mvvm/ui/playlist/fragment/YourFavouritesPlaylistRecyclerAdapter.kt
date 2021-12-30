@@ -16,14 +16,14 @@ class YourFavouritesPlaylistRecyclerAdapter(private val yourFavouritesPlaylists:
 
     // Создаём элемент списка
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): YourFavouritesPlaylistViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_playlist_item, parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_playlists_playlist_item, parent,false)
         return YourFavouritesPlaylistViewHolder(view, selectedItem)
     }
 
     // Сюда залетает элемент списка, к-рый был создан в onCreateViewHolder() и здесь мы его наполняем
     // Однако, лучше просто вызвать метод из вложенного класа, где и осуществить непосредственно наполнение, описание clickListener и проч.
     override fun onBindViewHolder(holder: YourFavouritesPlaylistViewHolder, position: Int) {
-        holder.setPlaylist(yourFavouritesPlaylists[position])
+        holder.setYourFavouritesPlaylist(yourFavouritesPlaylists[position])
     }
 
     // Возвращает количество элементов списка
@@ -42,7 +42,7 @@ class YourFavouritesPlaylistRecyclerAdapter(private val yourFavouritesPlaylists:
             }
         }
 
-        fun setPlaylist(yourFavouritesPlaylist: YourFavouritesPlaylist) {
+        fun setYourFavouritesPlaylist(yourFavouritesPlaylist: YourFavouritesPlaylist) {
             this.yourFavouritesPlaylist = yourFavouritesPlaylist
 
             val imageView = view.findViewById<AppCompatImageView>(R.id.playlist_logo)

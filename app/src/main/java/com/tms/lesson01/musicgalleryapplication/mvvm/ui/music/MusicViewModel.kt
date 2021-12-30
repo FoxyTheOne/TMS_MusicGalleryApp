@@ -2,9 +2,9 @@ package com.tms.lesson01.musicgalleryapplication.mvvm.ui.music
 
 import androidx.lifecycle.ViewModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.IMusicStorage
-import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.INetworkMusicService
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.music.INetworkMusicService
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.LocalStorageModel
-import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.NetworkMusicServiceModel
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.music.NetworkMusicServiceModel
 
 /**
  * hw02. 1. SRP - Принцип единственной ответственности. Для обеспечения UI данными (достать и доставить данные, не обрабатывать!) имеем отдельный класс

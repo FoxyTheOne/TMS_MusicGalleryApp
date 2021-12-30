@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/space_beforeOrAfterElement"
             android:layout_marginTop="24dp"
+            android:layout_marginBottom="@dimen/space_underElement"
             android:text="@string/playlists_titleYourFavorites"
 
             app:layout_constraintTop_toTopOf="parent"
@@ -48,6 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/space_beforeOrAfterElement"
             android:layout_marginTop="32dp"
+            android:layout_marginBottom="@dimen/space_underElement"
             android:text="@string/playlists_titleRecommendedPlaylists"
 
             app:layout_constraintTop_toBottomOf="@+id/list_yourFavorites"
@@ -66,6 +68,36 @@
             app:layout_constraintTop_toBottomOf="@+id/title_recommendedPlaylists"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/title_topArtists"
+
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title_topArtists"
+            style="@style/playlists_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_beforeOrAfterElement"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="@dimen/space_underElement"
+            android:text="@string/playlists_titleTopArtists"
+
+            app:layout_constraintTop_toBottomOf="@+id/list_recommendedPlaylists"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/list_topArtists"
+
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_topArtists"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+
+            app:layout_constraintTop_toBottomOf="@+id/title_topArtists"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/button_openSuccess"
 
             app:layout_constraintVertical_chainStyle="packed" />
@@ -77,7 +109,7 @@
             android:layout_marginTop="32dp"
             android:text="@string/playlists_buttonGoToSuccess"
 
-            app:layout_constraintTop_toBottomOf="@+id/list_recommendedPlaylists"
+            app:layout_constraintTop_toBottomOf="@+id/list_topArtists"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/button_openBrowserFragment"

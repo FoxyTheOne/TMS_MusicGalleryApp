@@ -5,10 +5,10 @@ import android.os.Looper
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.IUserStorage
-import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.INetworkLoginService
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.login.INetworkLoginService
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.LocalStorageModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.appSharedPreference.IAppSharedPreferences
-import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.NetworkLoginServiceModel
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.login.NetworkLoginServiceModel
 
 /**
  * hw02. 1. SRP - Принцип единственной ответственности. Для обеспечения UI данными (достать и доставить данные, не обрабатывать!) имеем отдельный класс

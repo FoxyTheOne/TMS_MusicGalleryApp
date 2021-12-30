@@ -1,14 +1,16 @@
 package com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist
 
+import Artist
 import android.util.Log
 import androidx.lifecycle.*
-import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.INetworkMusicService
-import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.NetworkMusicServiceModel
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.music.INetworkMusicService
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.music.NetworkMusicServiceModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.customObject.YourFavouritesPlaylist
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.appSharedPreference.IAppSharedPreferences
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.IRecommendedPlaylistDao
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.IYourFavouritesPlaylistDao
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.customObject.RecommendedPlaylist
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.playlistLastFM.artistAPIService.IArtistAPIService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -23,9 +25,11 @@ class PlaylistsListViewModel: ViewModel(), LifecycleEventObserver {
     private val musicModel: INetworkMusicService = NetworkMusicServiceModel()
     // Объект preferences для обращения к SharedPreferences
     private var preferences: IAppSharedPreferences? = null
-    // Объект preferences для обращения к Dao
+    // Объекты для обращения к Dao
     private var yourFavouritesPlaylistDao: IYourFavouritesPlaylistDao? = null
     private var recommendedPlaylistDao: IRecommendedPlaylistDao? = null
+    // Объекты для обращения к сервисам
+    private var artistService: IArtistAPIService? = null
 
 //    // Создаём LiveData, которое слушает Activity:
 //    val countriesLiveData = MutableLiveData<List<String>>()
@@ -35,6 +39,7 @@ class PlaylistsListViewModel: ViewModel(), LifecycleEventObserver {
     // 4. Создаём LiveData, которое будет слушать наш Activity, чтобы подтягивать к себе список плейлистов (List<>):
     val yourFavoritesLiveData = MutableLiveData<List<YourFavouritesPlaylist>>()
     val recommendedPlaylistsLiveData = MutableLiveData<List<RecommendedPlaylist>>()
+    val artistsLiveData = MutableLiveData<List<Artist>>()
     // LiveData для выхода из приложения
     val logOutLiveData = MutableLiveData<Unit>()
 
@@ -46,6 +51,7 @@ class PlaylistsListViewModel: ViewModel(), LifecycleEventObserver {
                 println("ON_CREATE")
                 getYourFavorites() // метод для вывода на экран наш список при создании activity
                 getRecommendedPlaylists()
+                getArtists()
             }
             Lifecycle.Event.ON_START -> {
                 println("ON_START")
@@ -77,6 +83,9 @@ class PlaylistsListViewModel: ViewModel(), LifecycleEventObserver {
     fun setRecommendedPlaylistDao(recommendedPlaylistDao: IRecommendedPlaylistDao) {
         this.recommendedPlaylistDao = recommendedPlaylistDao
     }
+    fun setArtistService(service: IArtistAPIService) {
+        this.artistService = service
+    }
 
     fun logOut() {
         preferences?.saveToken("")
@@ -102,14 +111,14 @@ class PlaylistsListViewModel: ViewModel(), LifecycleEventObserver {
                 Log.e(TAG, e.message ?: "")
             }
         }
+        println("ON_CREATE getYourFavorites")
     }
 
     // Получать плейлисты будем в корутине
     private fun getRecommendedPlaylists() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val recommendedPlaylistsList =
-                    musicModel.getRecommendedPlaylists() // Получаем список плейлистов2
+                val recommendedPlaylistsList = musicModel.getRecommendedPlaylists() // Получаем список плейлистов2
 
                 // Здесь закешируем наши плейлисты
                 recommendedPlaylistDao?.insertRecommendedPlaylists(*recommendedPlaylistsList.toTypedArray())
@@ -119,5 +128,21 @@ class PlaylistsListViewModel: ViewModel(), LifecycleEventObserver {
                 Log.e(TAG, e.message ?: "")
             }
         }
+        println("ON_CREATE getRecommendedPlaylists")
+    }
+
+    private fun getArtists() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val artistsList = artistService?.getTopArtists()?.artists?.artist ?: listOf()// Получаем список плейлистов2. Если он null - вернуть пустой список
+
+                // TODO Здесь закешируем наши плейлисты
+
+                artistsLiveData.postValue(artistsList) // Передаём список в LiveData, чтобы передать в activity
+            } catch (e: Exception) {
+                Log.e(TAG, e.message ?: "")
+            }
+        }
+        println("ON_CREATE getArtists")
     }
 }

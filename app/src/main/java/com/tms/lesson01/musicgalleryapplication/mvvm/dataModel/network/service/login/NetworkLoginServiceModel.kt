@@ -1,4 +1,4 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network
+package com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.login
 
 /**
  * hw01. В Модели написать метод для проверки name: просто проверить что он не пустой

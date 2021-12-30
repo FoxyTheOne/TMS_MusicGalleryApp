@@ -1,4 +1,4 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network
+package com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.login
 
 /**
  * hw02. 3. ISP - Принцип разделения интерфейса. Разделяем интерфейсы на более мелкие, специфические

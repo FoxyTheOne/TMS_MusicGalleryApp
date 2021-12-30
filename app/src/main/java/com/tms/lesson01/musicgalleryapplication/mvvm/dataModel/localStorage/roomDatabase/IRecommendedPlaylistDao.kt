@@ -15,7 +15,7 @@ interface IRecommendedPlaylistDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertRecommendedPlaylist(recommendedPlaylist: RecommendedPlaylist)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertRecommendedPlaylists(vararg recommendedPlaylist: RecommendedPlaylist)
 
     // Удаляем 1 альбом

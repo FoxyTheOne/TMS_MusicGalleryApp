@@ -20,6 +20,7 @@
 
     <string name="playlists_titleYourFavorites">Избранное</string>
     <string name="playlists_titleRecommendedPlaylists">Рекомендуемые плейлисты</string>
+    <string name="playlists_titleTopArtists">Топ исполнителей</string>
     <string name="countries_buttonFinish">Завершить</string>
     <string name="playlists_buttonGoToSuccess">Успех</string>
     <string name="playlists_buttonGoToBrowserFragment">Открыть URL</string>

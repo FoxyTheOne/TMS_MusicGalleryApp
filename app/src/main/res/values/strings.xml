@@ -20,6 +20,7 @@
 
     <string name="playlists_titleYourFavorites">Your favorites</string>
     <string name="playlists_titleRecommendedPlaylists">Recommended playlists</string>
+    <string name="playlists_titleTopArtists">Top artists</string>
     <string name="countries_buttonFinish">Finish</string>
     <string name="playlists_buttonGoToSuccess">Success</string>
     <string name="playlists_buttonGoToBrowserFragment">Open URL</string>
