@@ -7,7 +7,8 @@
     <string name="signUp_password">Пароль</string>
     <string name="signUp_ConfirmPassword">Подтверждение пароля</string>
     <string name="signUp_CheckBox">Запомнить email и пароль</string>
-    <string name="signUp_alreadyHave">Уже есть аккаунт? Войти</string>
+    <string name="signUp_alreadyHave">Уже есть аккаунт?</string>
+    <string name="signUp_signIn">Войти</string>
 
     <string name="login_signIn">Войти</string>
     <string name="login_forgotPassword">Забыли пароль?</string>

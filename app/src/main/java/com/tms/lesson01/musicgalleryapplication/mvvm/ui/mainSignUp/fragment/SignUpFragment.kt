@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatCheckBox
@@ -19,6 +20,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.MainActivity
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.appSharedPreference.AppSharedPreferences
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.fragment.LoginFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.fragment.PlaylistsListFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainSignUp.SignUpViewModel
 
@@ -37,6 +39,7 @@ class SignUpFragment : Fragment() {
     private lateinit var passwordField: TextInputLayout
     private lateinit var confirmPasswordField: TextInputLayout
     private lateinit var buttonSignUp: AppCompatButton
+    private lateinit var textGoToSignIn: TextView
     private lateinit var checkBoxRememberLoginAndPassword: AppCompatCheckBox
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -63,6 +66,7 @@ class SignUpFragment : Fragment() {
         // Оглашаем наши локальные переменные
         // Кнопки
         buttonSignUp = view.findViewById(R.id.buttonSignUp)
+        textGoToSignIn = view.findViewById(R.id.bottomComponent_lowerText2)
         checkBoxRememberLoginAndPassword = view.findViewById(R.id.checkBox_remember)
         // Переменные для отображения прогресса
         frameLayout = view.findViewById(R.id.frameLayout)
@@ -206,6 +210,10 @@ class SignUpFragment : Fragment() {
             val confirmPasswordText = confirmPasswordField.editText?.text.toString()
 
             viewModel.onSignUpClicked(nameText, emailText, passwordText, confirmPasswordText)
+        }
+        textGoToSignIn.setOnClickListener {
+            (activity as MainActivity).openFragment(LoginFragment())
+            (activity as MainActivity).actionBar?.hide()
         }
         checkBoxRememberLoginAndPassword.setOnCheckedChangeListener{ _, selected ->
 //            println("CHECK_BOX_SELECTED = $selected")

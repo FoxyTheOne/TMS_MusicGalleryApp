@@ -7,7 +7,8 @@
     <string name="signUp_password">Password</string>
     <string name="signUp_ConfirmPassword">Confirm password</string>
     <string name="signUp_CheckBox">Remember email and password</string>
-    <string name="signUp_alreadyHave">Already have an Account? Sign In</string>
+    <string name="signUp_alreadyHave">Already have an Account?</string>
+    <string name="signUp_signIn">Sign In</string>
 
     <string name="login_signIn">Sign in</string>
     <string name="login_forgotPassword">Forgot password?</string>

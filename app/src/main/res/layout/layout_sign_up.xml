@@ -214,19 +214,19 @@
         app:layout_constraintTop_toBottomOf="@+id/buttonSignUp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/lowerText"
+        app:layout_constraintBottom_toTopOf="@+id/bottomComponent"
 
         app:layout_constraintVertical_chainStyle="packed"
         android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
         android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
         />
 
-    <TextView
-        android:id="@+id/lowerText"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/bottomComponent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/signUp_alreadyHave"
-        style="@style/login_bottom"
+        android:orientation="horizontal"
+        android:gravity="center"
 
         app:layout_constraintTop_toBottomOf="@+id/checkBox_remember"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -234,8 +234,24 @@
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:layout_constraintVertical_chainStyle="packed"
-        android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
-        />
+        android:layout_marginBottom="@dimen/space_beforeOrAfterElement">
+
+        <TextView
+            android:id="@+id/bottomComponent_lowerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/signUp_alreadyHave"
+            style="@style/login_bottom"
+            android:paddingEnd="@dimen/space_small"/>
+
+        <TextView
+            android:id="@+id/bottomComponent_lowerText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/signUp_signIn"
+            style="@style/login_bottom_orange" />
+
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/frameLayout"

@@ -39,7 +39,6 @@
         <item name="boxBackgroundColor">@color/black_transparent_50</item>
     </style>
 
-
     <style name="playlists_title" parent="@style/TextAppearance.AppCompat">
         <item name="android:textColor">@color/white_transparent_60</item>
         <item name="fontFamily">@font/comfortaa_variable_font_wght</item>
@@ -65,4 +64,10 @@
         <item name="android:textSize">16sp</item>
         <item name="fontWeight">500</item>
     </style>
+
+    <style name="login_bottom_orange" parent="@style/playlists_title">
+        <item name="android:textColor">@color/bright_orange</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
 </resources>

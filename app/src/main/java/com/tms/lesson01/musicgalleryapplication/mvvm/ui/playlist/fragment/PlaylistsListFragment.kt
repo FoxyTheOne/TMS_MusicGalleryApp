@@ -127,6 +127,7 @@ class PlaylistsListFragment : Fragment() {
         // Если услышим logOutLiveData, значит надо выйти из приложения (открыть логин экран и почистить стек)
         viewModel.logOutLiveData.observe(viewLifecycleOwner,{
             (activity as MainActivity).openFragment(LoginFragment(), true)
+            (activity as MainActivity).actionBar?.hide()
         })
         viewModel.artistsLiveData.observe(viewLifecycleOwner, { artists ->
             artistRecyclerView.adapter = TopArtistRecyclerAdapter(artists) { artist -> Log.d(TAG, artist.toString()) }
