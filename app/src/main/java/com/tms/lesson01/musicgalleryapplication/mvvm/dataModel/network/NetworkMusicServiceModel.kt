@@ -1,7 +1,8 @@
 package com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network
 
 import com.tms.lesson01.musicgalleryapplication.R
-import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.customObject.Playlist
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.customObject.RecommendedPlaylist
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.customObject.YourFavouritesPlaylist
 
 /**
  * hw02. 1. SRP - Принцип единственной ответственности. Для работы с запросами на сервер о музыке имеем отдельный класс. Обработка данных и возвращение результата
@@ -16,18 +17,18 @@ class NetworkMusicServiceModel : INetworkMusicService {
 
         // int resourceId = R.mipmap.ic_launcher;
 
-        Playlist("Wake up Songs", R.drawable.wake_up_songs),
-        Playlist("Classic", R.drawable.classic),
-        Playlist("Guitar solo songs", R.drawable.guitar_solo_songs1)
+        YourFavouritesPlaylist("Wake up Songs", R.drawable.wake_up_songs),
+        YourFavouritesPlaylist("Classic", R.drawable.classic),
+        YourFavouritesPlaylist("Guitar solo songs", R.drawable.guitar_solo_songs1)
 
 //        Playlist("Wake up Songs", "https://lastfm.freetls.fastly.net/i/u/174s/21f77cd622ec3ab6e29f13b4a48c9e9d.png"),
 //        Playlist("Classic", "https://lastfm.freetls.fastly.net/i/u/174s/21f77cd622ec3ab6e29f13b4a48c9e9d.png"),
 //        Playlist("Guitar solo songs", "https://lastfm.freetls.fastly.net/i/u/174s/21f77cd622ec3ab6e29f13b4a48c9e9d.png")
     )
     private val recommendedPlaylists = listOf(
-        Playlist("Indie rock", R.drawable.indie_rock),
-        Playlist("Acoustics", R.drawable.acoustics),
-        Playlist("Drum & Bass", R.drawable.drum_n_bass1)
+        RecommendedPlaylist("Indie rock", R.drawable.indie_rock),
+        RecommendedPlaylist("Acoustics", R.drawable.acoustics),
+        RecommendedPlaylist("Drum & Bass", R.drawable.drum_n_bass1)
 
 //        Playlist("Indie rock", "https://lastfm.freetls.fastly.net/i/u/174s/21f77cd622ec3ab6e29f13b4a48c9e9d.png"),
 //        Playlist("Acoustics", "https://lastfm.freetls.fastly.net/i/u/174s/21f77cd622ec3ab6e29f13b4a48c9e9d.png"),
@@ -38,9 +39,9 @@ class NetworkMusicServiceModel : INetworkMusicService {
         TODO("Not yet implemented")
     }
 
-    override fun getYourFavorites(): List<Playlist> = yourFavorites
+    override fun getYourFavorites(): List<YourFavouritesPlaylist> = yourFavorites
 
-    override fun getRecommendedPlaylists(): List<Playlist> = recommendedPlaylists
+    override fun getRecommendedPlaylists(): List<RecommendedPlaylist> = recommendedPlaylists
 
     override fun updateFavouriteMusic(data: Any) {
 //        TODO("Not yet implemented")

@@ -3,24 +3,27 @@ package com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roo
 import android.content.Context
 
 /**
- * 4. Класс, который бедт возвращать тот или иной Dao.
+ * 4. Класс, который бедт возвращать тот или иной Dao. Синглтон.
  * Т.е. не конкретно базу данных. Это та прослойка, которая будет возвращать только Dao и только в те места, где нам это нужно.
  * Внутри этого класса: 1) создаётся база данных, 2) этот класс регулирует доступ к Dao уровням, но не к базе данных.
  */
-class AppDatabase private constructor() : IPlaylistDatabase {
+class AppDatabase private constructor() : IYourFavouritesPlaylistDatabase, IRecommendedPlaylistDatabase {
     companion object {
         private var instance: AppDatabase? = null
         // Наш интерфейс Dao, для взаимодействия с базой данных
-        private var playlistDao: IPlaylistDao? = null
+        private var yourFavouritesPlaylistDao: IYourFavouritesPlaylistDao? = null
+        private var recommendedPlaylistDao: IRecommendedPlaylistDao? = null
 
         fun getInstance(context: Context): AppDatabase {
             if (instance == null) {
                 instance = AppDatabase()
-                playlistDao = AppDatabaseAbstract.buildDatabase(context).getPlaylistDao()
+                yourFavouritesPlaylistDao = AppDatabaseAbstract.buildDatabase(context).getYourFavouritesPlaylistDao()
+                recommendedPlaylistDao = AppDatabaseAbstract.buildDatabase(context).getRecommendedPlaylistDao()
             }
             return instance!!
         }
     }
 
-    override fun getPlaylistDao(): IPlaylistDao = playlistDao!!
+    override fun getYourFavouritesPlaylistDao(): IYourFavouritesPlaylistDao = yourFavouritesPlaylistDao!!
+    override fun getRecommendedPlaylistDao(): IRecommendedPlaylistDao = recommendedPlaylistDao!!
 }

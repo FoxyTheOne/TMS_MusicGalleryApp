@@ -35,7 +35,8 @@ class PlaylistsListFragment : Fragment() {
     private lateinit var viewModel: PlaylistsListViewModel
     private lateinit var yourFavoritesRecyclerView: RecyclerView // 1. Создадим RecyclerView для наших горизонтальных списков
     private lateinit var recommendedPlaylistsRecyclerView: RecyclerView
-    private var adapter: PlaylistsRecyclerAdapter? = null // 4. Определим для нашего RecyclerView созданный адаптер
+    private var adapterYourFavouritesPlaylist: YourFavouritesPlaylistRecyclerAdapter? = null // 4. Определим для нашего RecyclerView созданный адаптер
+    private var adapterRecommendedPlaylist: RecommendedPlaylistRecyclerAdapter? = null // 4. Определим для нашего RecyclerView созданный адаптер
 
     // определяем вид экрана (layout)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -58,7 +59,8 @@ class PlaylistsListFragment : Fragment() {
         // Этот активити будет слушать наша view model, поэтому регистрируем слушателя здесь:
         lifecycle.addObserver(viewModel)
         viewModel.setSharedPreferences(AppSharedPreferences.getInstance(requireContext())) // Вызываем наш статический метод для экземпляра класса AppSharedPreferences
-        viewModel.setPlaylistDao(AppDatabase.getInstance(requireContext()).getPlaylistDao()) // Вызываем наш статический метод для экземпляра класса AppDatabase и затем обращаемся к Dao
+        viewModel.setYourFavouritesPlaylistDao(AppDatabase.getInstance(requireContext()).getYourFavouritesPlaylistDao()) // Вызываем наш статический метод для экземпляра класса AppDatabase и затем обращаемся к Dao
+        viewModel.setRecommendedPlaylistDao(AppDatabase.getInstance(requireContext()).getRecommendedPlaylistDao()) // Вызываем наш статический метод для экземпляра класса AppDatabase и затем обращаемся к Dao
 
         // Оглашаем наши локальные переменные
         openSuccessButton = view.findViewById(R.id.button_openSuccess)
@@ -103,12 +105,12 @@ class PlaylistsListFragment : Fragment() {
     // Подписка на LiveData
     private fun subscribeOnLiveData() {
         viewModel.yourFavoritesLiveData.observe(viewLifecycleOwner, { playlists ->
-            adapter = PlaylistsRecyclerAdapter(playlists) {playlist -> Log.d(TAG, playlist.toString())} // в конструкторе PlaylistsRecyclerAdapter описываем нашу анонимную функцию
-            yourFavoritesRecyclerView.adapter = adapter
+            adapterYourFavouritesPlaylist = YourFavouritesPlaylistRecyclerAdapter(playlists) { playlist -> Log.d(TAG, playlist.toString())} // в конструкторе PlaylistsRecyclerAdapter описываем нашу анонимную функцию
+            yourFavoritesRecyclerView.adapter = adapterYourFavouritesPlaylist
         })
         viewModel.recommendedPlaylistsLiveData.observe(viewLifecycleOwner, { playlists ->
-            adapter = PlaylistsRecyclerAdapter(playlists) {playlist -> Log.d(TAG, playlist.toString())}
-            recommendedPlaylistsRecyclerView.adapter = adapter
+            adapterRecommendedPlaylist = RecommendedPlaylistRecyclerAdapter(playlists) { playlist -> Log.d(TAG, playlist.toString())}
+            recommendedPlaylistsRecyclerView.adapter = adapterRecommendedPlaylist
         })
         // Если услышим logOutLiveData, значит надо выйти из приложения (открыть логин экран и почистить стек)
         viewModel.logOutLiveData.observe(viewLifecycleOwner,{
