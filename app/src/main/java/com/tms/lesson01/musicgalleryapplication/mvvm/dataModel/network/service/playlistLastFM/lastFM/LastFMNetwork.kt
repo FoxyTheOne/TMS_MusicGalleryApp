@@ -1,6 +1,8 @@
 package com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.playlistLastFM.lastFM
 
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.playlistLastFM.artistAPIService.IArtistAPIService
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -17,6 +19,8 @@ class LastFMNetwork private constructor() : ILastFMNetwork {
     private lateinit var artistService: IArtistAPIService
 
     companion object {
+        private const val BASE_URL = "https://ws.audioscrobbler.com/"
+
         private var instance: LastFMNetwork? = null
 
         fun getInstance(): LastFMNetwork {
@@ -36,9 +40,23 @@ class LastFMNetwork private constructor() : ILastFMNetwork {
 
     // Создаём ретрофит сервис на основе ранее созданного сервиса
     private fun initService() {
+        // Инициализируем Interceptor
+        val bodyInterceptor = HttpLoggingInterceptor()
+        val headersInterceptor = HttpLoggingInterceptor()
+        // Определяем уровень, что будет выводить Interceptor (что мы отправляем и что получаем)
+        bodyInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        headersInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS)
+
+        // Билдер для Interceptor
+        val client = OkHttpClient.Builder()
+            .addInterceptor(bodyInterceptor)
+            .addInterceptor(headersInterceptor)
+            .build()
+
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://ws.audioscrobbler.com/")
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create()) // С помощью чего мы будем преобразовывать json в объекты
+            .client(client)
             .build()
 
         // Чтобы инициализировать интерфейс, обращаться к нему и вызывать определенные методы, мы должны обратиться к созданному ретрофиту, вызвать метод create
