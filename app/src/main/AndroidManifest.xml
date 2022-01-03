@@ -32,6 +32,8 @@
             android:name=".mvvm.ui.success.activityOld.SuccessLoginActivity"
             android:exported="true">
         </activity>
+
+        <receiver android:name=".mvvm.ui.draftForPractise.alarm.AlarmFragment$AlarmBroadcast" />
     </application>
 
 </manifest>

@@ -35,4 +35,6 @@
     <string name="filePicker_buttonFilePickerViewFiles">View files</string>
 
     <string name="success_success">Success!</string>
+
+    <string name="alarm_openTimePicker">Open time picker</string>
 </resources>

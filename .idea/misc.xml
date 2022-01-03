@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidHomework/hw03MusicTime/hw03MusicGaleryApplication/app/src/main/res/layout/activity_main.xml" value="0.17300724637681159" />
+        <entry key="..\:/AndroidHomework/hw03MusicTime/hw03MusicGaleryApplication/app/src/main/res/layout/layout_browser.xml" value="0.17300724637681159" />
+        <entry key="..\:/AndroidHomework/hw03MusicTime/hw03MusicGaleryApplication/app/src/main/res/layout/layout_draft_alarm.xml" value="0.17300724637681159" />
         <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.37552083333333336" />
         <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/drawable/ic_launcher_background.xml" value="0.37552083333333336" />
         <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/drawable/layout_artist_item_background.xml" value="0.37552083333333336" />

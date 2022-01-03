@@ -35,4 +35,6 @@
     <string name="filePicker_buttonFilePickerViewFiles">Посмотреть файлы</string>
 
     <string name="success_success">Поздравляем!</string>
+
+    <string name="alarm_openTimePicker">Выбрать время</string>
 </resources>
