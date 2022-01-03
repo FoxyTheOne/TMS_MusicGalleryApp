@@ -87,11 +87,11 @@ class AlarmFragment: Fragment() {
         alarmManager?.setExact(AlarmManager.RTC_WAKEUP, time, pendingIntent)
         // Теперь, когда у нас есть pendingIntent, мы можем обратиться к инициализированному ранее alarmManager и зарегистрировать наш будильник(событие)
     }
+}
 
-    class AlarmBroadcast: BroadcastReceiver() {
-        // Полученное событие залетит сюда
-        override fun onReceive(context: Context?, intent: Intent?) {
-            Toast.makeText(context, "Alarm received", Toast.LENGTH_LONG).show()
-        }
+class AlarmBroadcast: BroadcastReceiver() {
+    // Полученное событие залетит сюда
+    override fun onReceive(context: Context?, intent: Intent?) {
+        Toast.makeText(context, "Alarm received", Toast.LENGTH_LONG).show()
     }
 }
