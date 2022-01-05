@@ -45,4 +45,12 @@ Homework 07.
 Homework 08.
 1. Try Room DataBase
 
+Homework 09.
+1. Convert JSON from last.fm to objects in my project (getTopArtists)
+2. Create Recycler View with Top Performers
+3. Make a request to the server to fill the Recycler View
+
+Homework 10.
+1. Make an Alarm fragment with Time picker
+
 Created by Alina Piatrova
