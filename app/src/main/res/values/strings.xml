@@ -41,6 +41,8 @@
     <string name="notification_description">Description for test notification</string>
     <string name="notification_name2">Notification title2</string>
     <string name="notification_description2">Description for test notification2</string>
+    <string name="foregroundNotification_name">Foreground notification title</string>
+    <string name="foregroundNotification_description">Foreground description for test notification</string>
 
 
     <string name="success_success">Success!</string>

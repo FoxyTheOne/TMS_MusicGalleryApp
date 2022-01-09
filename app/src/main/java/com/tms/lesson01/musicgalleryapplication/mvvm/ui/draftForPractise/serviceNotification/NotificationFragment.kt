@@ -20,6 +20,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.MainActivity
+import com.tms.lesson01.musicgalleryapplication.mvvm.service.ProgressForegroundService
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.success.fragment.SuccessFragment
 
 class NotificationFragment: Fragment() {
@@ -41,12 +42,15 @@ class NotificationFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // NOTIFICATIONS - 3. вызываем методы createChannels() и затем createNotifications()
+        // NOTIFICATIONS -> 3. вызываем методы createChannels() и затем createNotifications()
         // Добавляем проверку, т.к. создавать NotificationChannel можно только начиная с API 26
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createChannels()
         }
         createNotifications()
+
+        // FOREGROUND_SERVICE -> 6. Запустим наш Foreground Service из NotificationFragment
+        requireContext().startService(Intent(requireContext(), ProgressForegroundService::class.java))
     }
 
     // NOTIFICATIONS -> 1. Для начала, создадим Channel

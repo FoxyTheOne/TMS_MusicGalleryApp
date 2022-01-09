@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- Разрешения для использования STORAGE -->
     <permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 1. Разрешения для Foreground Service -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -33,7 +35,10 @@
             android:exported="true">
         </activity>
 
+        <!-- Декларируем Broadcast -->
         <receiver android:name=".mvvm.ui.draftForPractise.alarm.AlarmBroadcast" />
+        <!-- 2. Декларируем Foreground Service -->
+        <service android:name=".mvvm.service.ProgressForegroundService" />
     </application>
 
 </manifest>

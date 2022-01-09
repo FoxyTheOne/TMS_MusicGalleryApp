@@ -41,6 +41,8 @@
     <string name="notification_description">Описание тестового уведомления</string>
     <string name="notification_name2">Название уведомления2</string>
     <string name="notification_description2">Описание тестового уведомления2</string>
+    <string name="foregroundNotification_name">Название foreground уведомления</string>
+    <string name="foregroundNotification_description">Описание тестового foreground уведомления</string>
 
     <string name="success_success">Поздравляем!</string>
 
