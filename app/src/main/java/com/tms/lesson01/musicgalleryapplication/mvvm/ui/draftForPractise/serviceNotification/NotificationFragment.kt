@@ -4,22 +4,24 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_CANCEL_CURRENT
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.os.Build
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.content.ServiceConnection
+import android.os.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.MainActivity
+import com.tms.lesson01.musicgalleryapplication.mvvm.service.AppBoundService
+import com.tms.lesson01.musicgalleryapplication.mvvm.service.IAppBinder
 import com.tms.lesson01.musicgalleryapplication.mvvm.service.ProgressForegroundService
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.success.fragment.SuccessFragment
 
@@ -29,6 +31,28 @@ class NotificationFragment: Fragment() {
         // К каждой группе NOTIFICATION мы создаём свой CHANNEL_ID
         private const val CHANNEL_ID = "notification_channel_id"
         private const val CHANNEL_ID_2 = "notification_channel_id2"
+    }
+
+    // BOUND_SERVICE -> 8. Создадим наш Service connection (второй параметр при запуске сервиса с помощью Intent)
+    // 8.1. Создадим переменную, чтобы инициализировать её при создании Service connection
+    private var iAppBinder: IAppBinder? = null
+
+    // 8.2. Создадим экземпляр Service connection
+    private val connection = object : ServiceConnection {
+        // Когда мы забандимся к нашему сервису, вызовется метод onServiceConnected() и мы получим экземпляр binder: IBinder?
+        override fun onServiceConnected(componentName: ComponentName?, binder: IBinder?) {
+            // Проверяем binder на null. Если он не null, приводим к типу нашего байндера и вызываем наш метод, который вернет интерфейс сервиса IAppBinder и мы сможем вызывать его методы
+            binder?.let {
+                iAppBinder = (it as AppBoundService.AppBoundServiceBinder).getAppBoundService()
+                // В этом месте мы можем заново привязаться, если переводили Bound service в Foreground при закрытии приложения (вызвав наш метод из интерфейса):
+                // iAppBinder?.goToBound()
+            }
+        }
+
+        // этот метод будет вызван, если связь с сервисом была прервана неожиданно
+        override fun onServiceDisconnected(name: ComponentName?) {
+            TODO("Not yet implemented")
+        }
     }
 
     override fun onCreateView(
@@ -42,6 +66,11 @@ class NotificationFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // BOUND_SERVICE -> 9. Найдем нашу кнопочку и повесим на неё .setOnClickListener
+        view.findViewById<AppCompatButton>(R.id.button_showToast).setOnClickListener {
+            iAppBinder?.showToast()
+        }
+
         // NOTIFICATIONS -> 3. вызываем методы createChannels() и затем createNotifications()
         // Добавляем проверку, т.к. создавать NotificationChannel можно только начиная с API 26
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -49,8 +78,24 @@ class NotificationFragment: Fragment() {
         }
         createNotifications()
 
-        // FOREGROUND_SERVICE -> 6. Запустим наш Foreground Service из NotificationFragment
-        requireContext().startService(Intent(requireContext(), ProgressForegroundService::class.java))
+//        // FOREGROUND_SERVICE -> 6. Запустим наш Foreground Service из NotificationFragment
+//        requireContext().startService(Intent(requireContext(), ProgressForegroundService::class.java))
+    }
+
+    // BOUND_SERVICE -> 7. Подпишемся на сервис в нашем фрагменте NotificationFragment
+    // Если мы подписываемся на Bound Service в каком-то методе жизненного цикла, мы обязательно должны просчитать точку входа и точку выхода (н-р, если мы входим в методе onStart, то в методе onStop должны отписаться)
+    override fun onStart() {
+        super.onStart()
+        // 7.1. Запускаем сервис с помощью Intent:
+        requireContext().bindService(Intent(requireContext(), AppBoundService::class.java), connection, Context.BIND_AUTO_CREATE)
+        // BIND_AUTO_CREATE - каждый раз, когда мы бандимся, если сервис не был создан, он будет создаваться автоматически
+        // Второй параметр - Service connection. Это объект, внутри которого мы будем получать наш AppServiceBinder (байндер). Здесь не достаточно просто создать экземпляр класса
+    }
+
+    override fun onStop() {
+        super.onStop()
+        // 7.2. Заканчиваем соединение. Сюда также передаём наш Service connection. Создадим его (см. выше)
+        requireContext().unbindService(connection)
     }
 
     // NOTIFICATIONS -> 1. Для начала, создадим Channel

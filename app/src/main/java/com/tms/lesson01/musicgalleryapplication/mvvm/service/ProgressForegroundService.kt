@@ -16,6 +16,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
+/**
+ * Создадим Foreground Service
+ * FOREGROUND_SERVICE -> 1. Для начала, задекларируем Foreground Service в Manifest. А так же добавим туда разрешение для Foreground Service
+ */
 class ProgressForegroundService: Service() {
     companion object {
         private const val TAG = "ProgressForeground"
@@ -64,7 +68,6 @@ class ProgressForegroundService: Service() {
         serviceJob.cancel()
     }
 
-    // FOREGROUND_SERVICE -> 1. Для начала, задекларируем Foreground Service в Manifest. А так же добавим туда разрешение для Foreground Service
     // FOREGROUND_SERVICE -> 2. Создадим Channel
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createChannels() {

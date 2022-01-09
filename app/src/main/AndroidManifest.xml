@@ -39,6 +39,8 @@
         <receiver android:name=".mvvm.ui.draftForPractise.alarm.AlarmBroadcast" />
         <!-- 2. Декларируем Foreground Service -->
         <service android:name=".mvvm.service.ProgressForegroundService" />
+        <!-- 2. Декларируем Bound Service -->
+        <service android:name=".mvvm.service.AppBoundService" />
     </application>
 
 </manifest>
