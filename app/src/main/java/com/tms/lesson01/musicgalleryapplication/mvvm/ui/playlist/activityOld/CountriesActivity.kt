@@ -8,7 +8,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.ViewModelProvider
 import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.PlaylistsListViewModel
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.success.activityOld.SuccessLoginActivity
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.success.activityOld.SuccessLoginActivity
 
 class CountriesActivity: AppCompatActivity() {
     // Переменные класса

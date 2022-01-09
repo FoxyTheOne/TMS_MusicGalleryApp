@@ -138,6 +138,32 @@
             app:layout_constraintTop_toBottomOf="@+id/button_openBrowserFragment"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/button_openTimePickerFragment"
+
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_openTimePickerFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/playlists_buttonGoToTimePickerFragment"
+
+            app:layout_constraintTop_toBottomOf="@+id/button_openFilePickerFragment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/button_openNotificationFragment"
+
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_openNotificationFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/playlists_buttonGoToNotificationFragment"
+
+            app:layout_constraintTop_toBottomOf="@+id/button_openTimePickerFragment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/button_logOut"
 
             app:layout_constraintVertical_chainStyle="packed" />
@@ -148,7 +174,7 @@
             android:layout_height="wrap_content"
             android:text="@string/playlists_LogOut"
 
-            app:layout_constraintTop_toBottomOf="@+id/button_openFilePickerFragment"
+            app:layout_constraintTop_toBottomOf="@+id/button_openNotificationFragment"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
 

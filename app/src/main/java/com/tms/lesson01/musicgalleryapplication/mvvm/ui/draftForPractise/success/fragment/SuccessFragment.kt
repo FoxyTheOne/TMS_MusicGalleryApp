@@ -1,4 +1,4 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm.ui.success.fragment
+package com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.success.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,7 +15,7 @@ import com.tms.lesson01.musicgalleryapplication.mvvm.MainActivity
  */
 class SuccessFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.layout_success_login, container, false)
+        return inflater.inflate(R.layout.layout_draft_success_login, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

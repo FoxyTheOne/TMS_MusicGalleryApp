@@ -7,6 +7,7 @@
         <entry key="..\:/AndroidHomework/hw03MusicTime/hw03MusicGaleryApplication/app/src/main/res/layout/layout_browser.xml" value="0.17300724637681159" />
         <entry key="..\:/AndroidHomework/hw03MusicTime/hw03MusicGaleryApplication/app/src/main/res/layout/layout_draft_alarm.xml" value="0.17300724637681159" />
         <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.37552083333333336" />
+        <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/drawable/ic_component_1.xml" value="0.37552083333333336" />
         <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/drawable/ic_launcher_background.xml" value="0.37552083333333336" />
         <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/drawable/layout_artist_item_background.xml" value="0.37552083333333336" />
         <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/drawable/layout_playlist_item_background.xml" value="0.37552083333333336" />
@@ -19,6 +20,11 @@
         <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/layout/layout_artist_item.xml" value="0.359375" />
         <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/layout/layout_browser.xml" value="0.3269927536231884" />
         <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/layout/layout_countries.xml" value="0.33" />
+        <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/layout/layout_draft_alarm.xml" value="0.16666666666666666" />
+        <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/layout/layout_draft_browser.xml" value="0.359375" />
+        <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/layout/layout_draft_file_picker.xml" value="0.359375" />
+        <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/layout/layout_draft_notification.xml" value="0.359375" />
+        <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/layout/layout_draft_notification_custom.xml" value="0.359375" />
         <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/layout/layout_file_picker.xml" value="0.3269927536231884" />
         <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/layout/layout_login.xml" value="0.3378623188405797" />
         <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/layout/layout_music.xml" value="0.3269927536231884" />

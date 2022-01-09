@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:weightSum="100"
+    android:layout_width="match_parent"
+    android:minHeight="@dimen/notification_minHeight"
+
+    android:background="@color/bright_orange"
+    android:orientation="horizontal"
+
+    android:layout_height="120dp" >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="70"
+        android:layout_height="@dimen/notification_minHeight"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_beforeOrAfterElement"
+            android:layout_marginTop="@dimen/space_beforeOrAfterElement">
+
+            <ImageView
+                android:id="@+id/notification_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/ic_play_icon" />
+
+            <TextView
+                android:id="@+id/notification_title"
+                style="@style/playlist_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_beforeOrAfterElement"
+                android:ellipsize="end"
+                android:maxLines="2" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/notification_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_beforeOrAfterElement"
+            android:layout_marginTop="@dimen/space_beforeOrAfterElement"
+            android:ellipsize="end"
+            android:maxLines="3" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/notification_image"
+        android:layout_width="0dp"
+        android:layout_weight="30"
+        android:layout_height="@dimen/notification_minHeight"
+        android:scaleType="fitXY" />
+
+</LinearLayout>

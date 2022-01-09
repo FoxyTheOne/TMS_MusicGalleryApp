@@ -28,11 +28,20 @@
     <string name="playlists_buttonGoToSuccess">Success</string>
     <string name="playlists_buttonGoToBrowserFragment">Open URL</string>
     <string name="playlists_buttonGoToFilePickerFragment">Open FilePicker</string>
+    <string name="playlists_buttonGoToTimePickerFragment">Open TimePicker</string>
+    <string name="playlists_buttonGoToNotificationFragment">See notifications</string>
     <string name="playlists_LogOut">Log out</string>
 
     <string name="browser_buttonViewUrl">View URL</string>
 
     <string name="filePicker_buttonFilePickerViewFiles">View files</string>
+
+    <string name="notification_buttonViewNotifications">View notifications</string>
+    <string name="notification_name">Notification title</string>
+    <string name="notification_description">Description for test notification</string>
+    <string name="notification_name2">Notification title2</string>
+    <string name="notification_description2">Description for test notification2</string>
+
 
     <string name="success_success">Success!</string>
 

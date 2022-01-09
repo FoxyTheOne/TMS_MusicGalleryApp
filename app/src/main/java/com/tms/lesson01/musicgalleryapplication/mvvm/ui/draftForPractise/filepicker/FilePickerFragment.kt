@@ -1,4 +1,4 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm.ui.filepicker
+package com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.filepicker
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -18,7 +18,7 @@ import droidninja.filepicker.FilePickerBuilder
 
 class FilePickerFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.layout_file_picker, container, false)
+        return inflater.inflate(R.layout.layout_draft_file_picker, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

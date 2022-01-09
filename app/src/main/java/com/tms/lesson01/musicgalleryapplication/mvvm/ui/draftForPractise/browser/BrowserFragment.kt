@@ -1,4 +1,4 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm.ui.browser
+package com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.browser
 
 import android.content.Intent
 import android.net.Uri
@@ -14,7 +14,7 @@ import com.tms.lesson01.musicgalleryapplication.mvvm.MainActivity
 
 class BrowserFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.layout_browser, container, false)
+        return inflater.inflate(R.layout.layout_draft_browser, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

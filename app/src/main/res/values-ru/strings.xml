@@ -28,11 +28,19 @@
     <string name="playlists_buttonGoToSuccess">Успех</string>
     <string name="playlists_buttonGoToBrowserFragment">Открыть URL</string>
     <string name="playlists_buttonGoToFilePickerFragment">Открыть FilePicker</string>
+    <string name="playlists_buttonGoToTimePickerFragment">Открыть TimePicker</string>
+    <string name="playlists_buttonGoToNotificationFragment">Посмотреть уведомления</string>
     <string name="playlists_LogOut">Выйти</string>
 
     <string name="browser_buttonViewUrl">Посмотреть URL</string>
 
     <string name="filePicker_buttonFilePickerViewFiles">Посмотреть файлы</string>
+
+    <string name="notification_buttonViewNotifications">Посмотреть уведомления</string>
+    <string name="notification_name">Название уведомления</string>
+    <string name="notification_description">Описание тестового уведомления</string>
+    <string name="notification_name2">Название уведомления2</string>
+    <string name="notification_description2">Описание тестового уведомления2</string>
 
     <string name="success_success">Поздравляем!</string>
 

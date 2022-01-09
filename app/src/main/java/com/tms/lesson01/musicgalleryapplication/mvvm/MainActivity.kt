@@ -51,7 +51,7 @@ class MainActivity: AppCompatActivity() {
                 // 4. Скрываем ActionBar для первого фрагмента:
                 actionBar?.hide()
             } else {
-                openFragment(AlarmFragment())
+                openFragment(PlaylistsListFragment())
             }
         }
     }

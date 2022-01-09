@@ -1,4 +1,4 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm.ui.success.activityOld
+package com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.success.activityOld
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +10,6 @@ import com.tms.lesson01.musicgalleryapplication.R
 class SuccessLoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.layout_success_login)
+        setContentView(R.layout.layout_draft_success_login)
     }
 }

@@ -17,11 +17,13 @@ import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.appS
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.AppDatabase
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.playlistLastFM.lastFM.ILastFMNetwork
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.playlistLastFM.lastFM.LastFMNetwork
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.browser.BrowserFragment
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.browser.BrowserFragment
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.alarm.AlarmFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.PlaylistsListViewModel
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.filepicker.FilePickerFragment
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.filepicker.FilePickerFragment
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.serviceNotification.NotificationFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.fragment.LoginFragment
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.success.fragment.SuccessFragment
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.success.fragment.SuccessFragment
 
 class PlaylistsListFragment : Fragment() {
     // Константы
@@ -33,6 +35,8 @@ class PlaylistsListFragment : Fragment() {
     private lateinit var openSuccessButton: AppCompatButton
     private lateinit var openURLButton: AppCompatButton
     private lateinit var openFilePickerButton: AppCompatButton
+    private lateinit var openTimePickerButton: AppCompatButton
+    private lateinit var openNotificationFragment: AppCompatButton
     private lateinit var buttonLogOut: AppCompatButton
     private lateinit var viewModel: PlaylistsListViewModel
     private lateinit var yourFavoritesRecyclerView: RecyclerView // 1. Создадим RecyclerView для наших горизонтальных списков
@@ -72,6 +76,8 @@ class PlaylistsListFragment : Fragment() {
         openSuccessButton = view.findViewById(R.id.button_openSuccess)
         openURLButton = view.findViewById(R.id.button_openBrowserFragment)
         openFilePickerButton = view.findViewById(R.id.button_openFilePickerFragment)
+        openTimePickerButton = view.findViewById(R.id.button_openTimePickerFragment)
+        openNotificationFragment = view.findViewById(R.id.button_openNotificationFragment)
         buttonLogOut = view.findViewById(R.id.button_logOut)
         yourFavoritesRecyclerView = view.findViewById(R.id.list_yourFavorites) // 2. Первый RecyclerView. Далее создаём адаптер (YourFavouritesPlaylistRecyclerAdapter)
         recommendedPlaylistsRecyclerView = view.findViewById(R.id.list_recommendedPlaylists) // 2. Второй RecyclerView. Далее создаём адаптер (RecommendedPlaylistRecyclerAdapter)
@@ -107,6 +113,14 @@ class PlaylistsListFragment : Fragment() {
         // Кнопка перехода на FilePickerFragment
         openFilePickerButton.setOnClickListener {
             (activity as MainActivity).openFragment(FilePickerFragment())
+        }
+        // Кнопка перехода на TimePickerFragment
+        openTimePickerButton.setOnClickListener {
+            (activity as MainActivity).openFragment(AlarmFragment())
+        }
+        // Кнопка перехода на NotificationFragment
+        openNotificationFragment.setOnClickListener {
+            (activity as MainActivity).openFragment(NotificationFragment())
         }
         buttonLogOut.setOnClickListener {
             viewModel.logOut()

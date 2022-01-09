@@ -29,7 +29,7 @@
             android:exported="true">
         </activity>
         <activity
-            android:name=".mvvm.ui.success.activityOld.SuccessLoginActivity"
+            android:name="com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.success.activityOld.SuccessLoginActivity"
             android:exported="true">
         </activity>
 
