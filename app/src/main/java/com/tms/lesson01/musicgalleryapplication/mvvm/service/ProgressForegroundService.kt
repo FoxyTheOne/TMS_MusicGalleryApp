@@ -41,7 +41,7 @@ class ProgressForegroundService: Service() {
 
         // FOREGROUND_SERVICE -> 4. Channel создан, теперь можно приступить непосредственно к созданию уведомления
         // 4.1. Создаём notification c помощью билдера, который первым будет показываться нашему пользователю
-        val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
+        notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle("Progress notification")
             .setContentText("Current progress")
@@ -52,7 +52,7 @@ class ProgressForegroundService: Service() {
             .setAutoCancel(true)
 
         // 4.2. Для того, чтобы Service из обычного перешел в Foreground, нам нужно вызвать метод startForeground() внутри этого сервиса
-        startForeground(0, notificationBuilder?.build())
+        startForeground(5, notificationBuilder?.build())
 
         // 4.3. И далее вызываем метод, который будет обновлять наш notification
         updateProgress()
@@ -107,7 +107,7 @@ class ProgressForegroundService: Service() {
                         .setContentText("Current progress: ${i}%")
                         .setProgress(100, i, false)
                     // 5.3. Передаём notificationManager наш билдер notification
-                    notificationManager.notify(0, builder.build())
+                    notificationManager.notify(5, builder.build())
                 }
             }
             // 5.4. Когда прогресс заканчивается, закрываем Foreground, удаляем уведомления, stop service

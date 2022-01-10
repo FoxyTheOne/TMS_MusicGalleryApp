@@ -78,8 +78,8 @@ class NotificationFragment: Fragment() {
         }
         createNotifications()
 
-//        // FOREGROUND_SERVICE -> 6. Запустим наш Foreground Service из NotificationFragment
-//        requireContext().startService(Intent(requireContext(), ProgressForegroundService::class.java))
+        // !!! FOREGROUND_SERVICE -> 6. Запустим наш Foreground Service из NotificationFragment
+        requireContext().startService(Intent(requireContext(), ProgressForegroundService::class.java))
     }
 
     // BOUND_SERVICE -> 7. Подпишемся на сервис в нашем фрагменте NotificationFragment
