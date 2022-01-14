@@ -53,4 +53,14 @@ Homework 09.
 Homework 10.
 1. Make an Alarm fragment with Time picker
 
+Homework 11.
+1. Add notifications to the app
+2. Try Foreground service
+3. Try Bound service
+
+Homework 12.
+1. Try Broadcast receiver
+2. Try Content provider
+3. Add a home widget
+
 Created by Alina Piatrova
