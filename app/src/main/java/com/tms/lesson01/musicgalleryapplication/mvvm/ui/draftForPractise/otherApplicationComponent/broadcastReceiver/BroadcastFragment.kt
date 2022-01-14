@@ -1,4 +1,4 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.broadcastReceiver
+package com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.otherApplicationComponent.broadcastReceiver
 
 import android.content.BroadcastReceiver
 import android.content.Context

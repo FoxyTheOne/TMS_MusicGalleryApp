@@ -1,4 +1,4 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.serviceNotification
+package com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.otherApplicationComponent.serviceAndNotification
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -22,8 +22,6 @@ import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.MainActivity
 import com.tms.lesson01.musicgalleryapplication.mvvm.service.AppBoundService
 import com.tms.lesson01.musicgalleryapplication.mvvm.service.IAppBinder
-import com.tms.lesson01.musicgalleryapplication.mvvm.service.ProgressForegroundService
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.success.fragment.SuccessFragment
 
 class NotificationFragment: Fragment() {
     companion object {

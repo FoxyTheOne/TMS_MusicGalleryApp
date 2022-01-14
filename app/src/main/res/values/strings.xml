@@ -24,6 +24,7 @@
     <string name="playlists_titleYourFavorites">Your favorites</string>
     <string name="playlists_titleRecommendedPlaylists">Recommended playlists</string>
     <string name="playlists_titleTopArtists">Top artists</string>
+    <string name="playlists_titleDrafts">Drafts:</string>
     <string name="countries_buttonFinish">Finish</string>
     <string name="playlists_buttonGoToSuccess">Success</string>
     <string name="playlists_buttonGoToBrowserFragment">Open URL</string>
@@ -31,11 +32,16 @@
     <string name="playlists_buttonGoToTimePickerFragment">Open TimePicker</string>
     <string name="playlists_buttonGoToNotificationFragment">See notifications</string>
     <string name="playlists_buttonGoToBroadcastFragment">Open broadcast receiver</string>
+    <string name="playlists_buttonGoToContactsFragment">Open contacts</string>
     <string name="playlists_LogOut">Log out</string>
+
+    <string name="success_success">Success!</string>
 
     <string name="browser_buttonViewUrl">View URL</string>
 
     <string name="filePicker_buttonFilePickerViewFiles">View files</string>
+
+    <string name="alarm_openTimePicker">Open time picker</string>
 
     <string name="notification_buttonViewNotifications">View notifications</string>
     <string name="notification_name">Notification title</string>
@@ -45,8 +51,5 @@
     <string name="foregroundNotification_name">Foreground notification title</string>
     <string name="foregroundNotification_description">Foreground description for test notification</string>
 
-
-    <string name="success_success">Success!</string>
-
-    <string name="alarm_openTimePicker">Open time picker</string>
+    <string name="contacts_buttonSeeContacts">Open contacts</string>
 </resources>

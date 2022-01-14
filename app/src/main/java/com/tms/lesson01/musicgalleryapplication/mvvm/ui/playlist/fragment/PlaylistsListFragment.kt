@@ -19,10 +19,12 @@ import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.p
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.playlistLastFM.lastFM.LastFMNetwork
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.browser.BrowserFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.alarm.AlarmFragment
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.broadcastReceiver.BroadcastFragment
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.otherApplicationComponent.broadcastReceiver.BroadcastFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.PlaylistsListViewModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.filepicker.FilePickerFragment
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.serviceNotification.NotificationFragment
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.otherApplicationComponent.contenctProvider.ContactsFragment
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.otherApplicationComponent.contenctProvider.ContactsOpeningFragment
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.otherApplicationComponent.serviceAndNotification.NotificationFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.fragment.LoginFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.success.fragment.SuccessFragment
 
@@ -39,6 +41,7 @@ class PlaylistsListFragment : Fragment() {
     private lateinit var openTimePickerButton: AppCompatButton
     private lateinit var openNotificationFragment: AppCompatButton
     private lateinit var openBroadcastFragment: AppCompatButton
+    private lateinit var openContactsFragment: AppCompatButton
     private lateinit var buttonLogOut: AppCompatButton
     private lateinit var viewModel: PlaylistsListViewModel
     private lateinit var yourFavoritesRecyclerView: RecyclerView // 1. Создадим RecyclerView для наших горизонтальных списков
@@ -81,6 +84,7 @@ class PlaylistsListFragment : Fragment() {
         openTimePickerButton = view.findViewById(R.id.button_openTimePickerFragment)
         openNotificationFragment = view.findViewById(R.id.button_openNotificationFragment)
         openBroadcastFragment = view.findViewById(R.id.button_openBroadcastFragment)
+        openContactsFragment = view.findViewById(R.id.button_openContactsFragment)
         buttonLogOut = view.findViewById(R.id.button_logOut)
         yourFavoritesRecyclerView = view.findViewById(R.id.list_yourFavorites) // 2. Первый RecyclerView. Далее создаём адаптер (YourFavouritesPlaylistRecyclerAdapter)
         recommendedPlaylistsRecyclerView = view.findViewById(R.id.list_recommendedPlaylists) // 2. Второй RecyclerView. Далее создаём адаптер (RecommendedPlaylistRecyclerAdapter)
@@ -128,6 +132,10 @@ class PlaylistsListFragment : Fragment() {
         // Кнопка перехода на BroadcastFragment
         openBroadcastFragment.setOnClickListener {
             (activity as MainActivity).openFragment(BroadcastFragment())
+        }
+        // Кнопка перехода на ContactsFragment
+        openContactsFragment.setOnClickListener {
+            (activity as MainActivity).openFragment(ContactsOpeningFragment())
         }
         buttonLogOut.setOnClickListener {
             viewModel.logOut()

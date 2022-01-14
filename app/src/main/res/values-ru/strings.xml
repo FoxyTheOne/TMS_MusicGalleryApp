@@ -24,6 +24,7 @@
     <string name="playlists_titleYourFavorites">Избранное</string>
     <string name="playlists_titleRecommendedPlaylists">Рекомендуемые плейлисты</string>
     <string name="playlists_titleTopArtists">Топ исполнителей</string>
+    <string name="playlists_titleDrafts">Черновики:</string>
     <string name="countries_buttonFinish">Завершить</string>
     <string name="playlists_buttonGoToSuccess">Успех</string>
     <string name="playlists_buttonGoToBrowserFragment">Открыть URL</string>
@@ -31,11 +32,16 @@
     <string name="playlists_buttonGoToTimePickerFragment">Открыть TimePicker</string>
     <string name="playlists_buttonGoToNotificationFragment">Посмотреть уведомления</string>
     <string name="playlists_buttonGoToBroadcastFragment">Открыть broadcast receiver</string>
+    <string name="playlists_buttonGoToContactsFragment">Открыть список контактов</string>
     <string name="playlists_LogOut">Выйти</string>
+
+    <string name="success_success">Поздравляем!</string>
 
     <string name="browser_buttonViewUrl">Посмотреть URL</string>
 
     <string name="filePicker_buttonFilePickerViewFiles">Посмотреть файлы</string>
+
+    <string name="alarm_openTimePicker">Выбрать время</string>
 
     <string name="notification_buttonViewNotifications">Посмотреть уведомления</string>
     <string name="notification_name">Название уведомления</string>
@@ -45,7 +51,5 @@
     <string name="foregroundNotification_name">Название foreground уведомления</string>
     <string name="foregroundNotification_description">Описание тестового foreground уведомления</string>
 
-    <string name="success_success">Поздравляем!</string>
-
-    <string name="alarm_openTimePicker">Выбрать время</string>
+    <string name="contacts_buttonSeeContacts">Посмотреть контакты</string>
 </resources>

@@ -98,6 +98,22 @@
             app:layout_constraintTop_toBottomOf="@+id/title_topArtists"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/title_drafts"
+
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title_drafts"
+            style="@style/playlists_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="@dimen/space_underElement"
+            android:text="@string/playlists_titleDrafts"
+
+            app:layout_constraintTop_toBottomOf="@+id/list_topArtists"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/button_openSuccess"
 
             app:layout_constraintVertical_chainStyle="packed" />
@@ -177,6 +193,19 @@
             app:layout_constraintTop_toBottomOf="@+id/button_openNotificationFragment"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/button_openContactsFragment"
+
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_openContactsFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/playlists_buttonGoToContactsFragment"
+
+            app:layout_constraintTop_toBottomOf="@+id/button_openBroadcastFragment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/button_logOut"
 
             app:layout_constraintVertical_chainStyle="packed" />
@@ -187,7 +216,7 @@
             android:layout_height="wrap_content"
             android:text="@string/playlists_LogOut"
 
-            app:layout_constraintTop_toBottomOf="@+id/button_openBroadcastFragment"
+            app:layout_constraintTop_toBottomOf="@+id/button_openContactsFragment"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
 
