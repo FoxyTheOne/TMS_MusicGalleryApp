@@ -4,12 +4,9 @@
 
     <!-- Разрешения для выхода в интернет -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- Разрешение для использования STORAGE -->
-    <permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!-- 1. Разрешение для Foreground Service -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <!-- Разрешение для чтения контактов -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Разрешение для использования STORAGE -->
+    <permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 1. Разрешение для Foreground Service -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- Разрешение для чтения контактов -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
@@ -18,7 +15,19 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MusicGaleryApplication">
+        android:theme="@style/Theme.MusicGalleryApplication">
+        <receiver
+            android:name=".mvvm.utility.WeatherWidget"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/weather_widget_info" />
+        </receiver>
+
         <activity
             android:name=".mvvm.MainActivity"
             android:exported="true">
@@ -30,19 +39,13 @@
         </activity>
         <activity
             android:name=".mvvm.ui.playlist.activityOld.CountriesActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
-            android:name="com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.success.activityOld.SuccessLoginActivity"
-            android:exported="true">
-        </activity>
-
-        <!-- Декларируем Broadcast -->
-        <receiver android:name=".mvvm.ui.draftForPractise.alarm.AlarmBroadcast" />
-        <!-- 2. Декларируем Foreground Service -->
-        <service android:name=".mvvm.service.ProgressForegroundService" />
-        <!-- 2. Декларируем Bound Service -->
-        <service android:name=".mvvm.service.AppBoundService" />
+            android:name=".mvvm.ui.draftForPractise.success.activityOld.SuccessLoginActivity"
+            android:exported="true"></activity> <!-- Декларируем Broadcast -->
+        <receiver android:name=".mvvm.ui.draftForPractise.alarm.AlarmBroadcast" /> <!-- 2. Декларируем Foreground Service -->
+        <service android:name="com.tms.lesson01.musicgalleryapplication.mvvm.utility.service.ProgressForegroundService" /> <!-- 2. Декларируем Bound Service -->
+        <service android:name="com.tms.lesson01.musicgalleryapplication.mvvm.utility.service.AppBoundService" />
     </application>
 
 </manifest>

@@ -1,3 +1,5 @@
+package com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.modelData.artist
+
 import com.google.gson.annotations.SerializedName
 
 /*

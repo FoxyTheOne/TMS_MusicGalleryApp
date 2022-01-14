@@ -1,4 +1,4 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm.service
+package com.tms.lesson01.musicgalleryapplication.mvvm.utility.service
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

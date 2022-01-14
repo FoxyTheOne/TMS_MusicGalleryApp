@@ -1,3 +1,5 @@
+package com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.modelData.artist
+
 import com.google.gson.annotations.SerializedName
 
 /*
@@ -13,6 +15,6 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 
 
 data class Artists (
-	@SerializedName("artist") val artist : List<Artist>,
-	@SerializedName("@attr") val attr : Attr
+    @SerializedName("artist") val artist : List<Artist>,
+    @SerializedName("@attr") val attr : Attr
 )

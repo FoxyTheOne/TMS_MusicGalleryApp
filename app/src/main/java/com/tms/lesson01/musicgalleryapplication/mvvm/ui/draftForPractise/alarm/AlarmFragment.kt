@@ -42,7 +42,7 @@ class AlarmFragment: Fragment() {
         // Регистрируем наш Broadcast. Он будет работать только с теми интентами, у которых такой фильтр
         requireContext().registerReceiver(AlarmBroadcast(), IntentFilter(FILTER_VALUE))
 
-        buttonOpenTimePicker = view.findViewById(R.id.button_openTimePicker)
+        buttonOpenTimePicker = view.findViewById(R.id.button_openApp)
 
         initListeners()
         subscribeToLiveData()

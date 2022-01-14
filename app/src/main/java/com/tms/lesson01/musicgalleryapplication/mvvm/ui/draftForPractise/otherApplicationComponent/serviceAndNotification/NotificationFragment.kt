@@ -20,8 +20,8 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.MainActivity
-import com.tms.lesson01.musicgalleryapplication.mvvm.service.AppBoundService
-import com.tms.lesson01.musicgalleryapplication.mvvm.service.IAppBinder
+import com.tms.lesson01.musicgalleryapplication.mvvm.utility.service.AppBoundService
+import com.tms.lesson01.musicgalleryapplication.mvvm.utility.service.IAppBinder
 
 class NotificationFragment: Fragment() {
     companion object {

@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_openTimePicker"
+        android:id="@+id/button_openApp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/alarm_openTimePicker"

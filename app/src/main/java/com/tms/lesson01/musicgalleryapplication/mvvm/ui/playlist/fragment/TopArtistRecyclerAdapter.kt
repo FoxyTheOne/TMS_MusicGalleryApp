@@ -1,6 +1,6 @@
 package com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.fragment
 
-import Artist
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.modelData.artist.Artist
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

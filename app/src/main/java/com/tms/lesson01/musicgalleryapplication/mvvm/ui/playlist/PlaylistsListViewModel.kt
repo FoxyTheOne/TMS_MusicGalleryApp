@@ -1,6 +1,6 @@
 package com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist
 
-import Artist
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.modelData.artist.Artist
 import android.util.Log
 import androidx.lifecycle.*
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.music.INetworkMusicService

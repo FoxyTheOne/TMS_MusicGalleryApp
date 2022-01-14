@@ -1,6 +1,6 @@
 package com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.playlistLastFM.artistAPIService
 
-import ArtistAPIResponce
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.modelData.artist.ArtistAPIResponce
 import retrofit2.http.GET
 import retrofit2.http.Query
 

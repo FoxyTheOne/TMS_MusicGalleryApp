@@ -11,9 +11,14 @@
     <color name="black_transparent">#39000000</color>
 
     <color name="background">#1A222F</color>
+    <color name="widget_background">#BFFF5722</color>
     <color name="white_transparent_20">#33FFFFFF</color>
     <color name="black_transparent_50">#80000000</color>
     <color name="white_transparent_60">#99FFFFFF</color>
     <color name="white_transparent_80">#CCFFFFFF</color>
     <color name="gray_startIcon_TextInputLayout">#393A3C</color>
+    <color name="light_blue_50">#FFE1F5FE</color>
+    <color name="light_blue_200">#FF81D4FA</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
 </resources>

@@ -1,3 +1,5 @@
+package com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.modelData.artist
+
 import com.google.gson.annotations.SerializedName
 
 /*
@@ -12,12 +14,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
 
-data class Artist (
-	@SerializedName("name") val name : String,
-	@SerializedName("playcount") val playcount : Int,
-	@SerializedName("listeners") val listeners : Int,
-	@SerializedName("mbid") val mbid : String,
-	@SerializedName("url") val url : String,
-	@SerializedName("streamable") val streamable : Int,
-	@SerializedName("image") val image : List<Image>
+data class ArtistAPIResponce (
+	@SerializedName("artists") val artists : Artists
 )
