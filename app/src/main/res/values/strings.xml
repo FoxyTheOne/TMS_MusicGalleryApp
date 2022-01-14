@@ -30,6 +30,7 @@
     <string name="playlists_buttonGoToFilePickerFragment">Open FilePicker</string>
     <string name="playlists_buttonGoToTimePickerFragment">Open TimePicker</string>
     <string name="playlists_buttonGoToNotificationFragment">See notifications</string>
+    <string name="playlists_buttonGoToBroadcastFragment">Open broadcast receiver</string>
     <string name="playlists_LogOut">Log out</string>
 
     <string name="browser_buttonViewUrl">View URL</string>
