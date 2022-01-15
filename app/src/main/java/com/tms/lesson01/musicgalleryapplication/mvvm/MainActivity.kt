@@ -1,8 +1,13 @@
 package com.tms.lesson01.musicgalleryapplication.mvvm
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -10,10 +15,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.appSharedPreference.AppSharedPreferences
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.alarm.AlarmFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.fragment.LoginFragment
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainSignUp.fragment.SignUpFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.fragment.PlaylistsListFragment
+import com.tms.lesson01.musicgalleryapplication.mvvm.utility.WeatherWidget
 
 /**
  * hw03. Переводим наше приложение на фрагменты. Создаём общий Activity и его layout (activity_main)
@@ -54,6 +58,9 @@ class MainActivity: AppCompatActivity() {
                 openFragment(PlaylistsListFragment())
             }
         }
+
+        // WIDGET -> Обновление виджета программно
+        updateProgrammaticallyHomeWidget()
     }
 
     override fun onBackPressed() {
@@ -86,6 +93,22 @@ class MainActivity: AppCompatActivity() {
             .commit()
         // 5. Показываем ActionBar для остальных фрагментов:
         actionBar?.show()
+    }
+
+    private fun updateProgrammaticallyHomeWidget() {
+        // Чтобы обновить наш виджет, нам нужно кинуть бродкаст с интент фильтром APPWIDGET_UPDATE
+        // Сделаем задержку (postDelayed)
+        Handler(Looper.myLooper()!!).postDelayed({
+            // Говорим, что будем обращаться к WeatherWidget
+            val intentWidgetUpdate = Intent(this, WeatherWidget::class.java).apply {
+                // Передаём id
+                val ids: IntArray = AppWidgetManager.getInstance(application)
+                    .getAppWidgetIds(ComponentName(application, WeatherWidget::class.java))
+                action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+                putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, ids)
+            }
+            sendBroadcast(intentWidgetUpdate)
+        }, 5000)
     }
 
     private fun clearBackStack() = supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)

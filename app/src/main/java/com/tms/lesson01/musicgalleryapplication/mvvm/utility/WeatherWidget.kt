@@ -20,6 +20,8 @@ import kotlinx.coroutines.*
 /**
  * Implementation of App Widget functionality.
  * Код из проекта преподавателя
+ *
+ * Обновление виджета программно настраивается в MainActivity
  */
 class WeatherWidget : AppWidgetProvider() {
     companion object {
