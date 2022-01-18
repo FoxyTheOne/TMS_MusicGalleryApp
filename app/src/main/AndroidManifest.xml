@@ -75,6 +75,13 @@
         2. Декларируем Bound Service:
          -->
         <service android:name="com.tms.lesson01.musicgalleryapplication.mvvm.utility.service.AppBoundService" />
+
+        <!--
+        Google maps:
+         -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
     </application>
 
 </manifest>

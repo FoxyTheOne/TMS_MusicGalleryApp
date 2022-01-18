@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id ("kotlin-parcelize")
+    // Google maps
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
@@ -90,4 +92,6 @@ dependencies {
 
     // Location
     implementation 'com.google.android.gms:play-services-location:19.0.1'
+    // Google maps
+    implementation 'com.google.android.gms:play-services-maps:18.0.0'
 }

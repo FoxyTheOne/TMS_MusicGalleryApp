@@ -1,6 +1,8 @@
 package com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.location
 
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
@@ -10,8 +12,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import com.google.android.gms.location.*
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.*
 import com.google.android.gms.tasks.CancellationToken
 import com.google.android.gms.tasks.OnTokenCanceledListener
 import com.tms.lesson01.musicgalleryapplication.R
@@ -23,8 +32,10 @@ import com.tms.lesson01.musicgalleryapplication.R
  * LOCATION -> 1.3. Для доступа к местоположению, нужно разрешение. Логика запроса разрешения - в предыдущем фрагменте
  * LOCATION -> 1.4. Получим наш FusedLocationProviderClient. Именно он имеет в себе методы, с помощью которых мы можем определить локацию
  * TRACK DISTANCE -> 2. Добавим функцию - на экран будем выводить дистанцию, которую мы прошли
+ * GOOGLE MAPS -> 3. В инструкции от гугла всё делается в activity, а у нас - фрагмент. Следовательно, будут небольшие изменения
+ * POLYLINE -> 4. Будем рисовать линию маршрута, по которому мы прошли + изменим вид нашего маркера
  */
-class LocationFragment: Fragment() {
+class LocationFragment: Fragment(), OnMapReadyCallback {
     companion object {
         private const val TAG = "LocationFragment"
     }
@@ -38,6 +49,16 @@ class LocationFragment: Fragment() {
     private var previousLocation: Location? = null
     private var passedDistance: Double = 0.0
     private var trackDistance = false
+    // GOOGLE MAPS -> 3.1. Объявляем переменную, в соответствии с инструкцией от гугла
+    private lateinit var mMap: GoogleMap
+    // GOOGLE MAPS -> 3.6. Объявляем переменные для маркера (старого и нового)
+    private var marker: Marker? = null
+    private var customMarker: Bitmap? = null
+    // POLYLINE -> 4.1. Чтобы построить polyline, нам нужно передавать список точек. Значит, нам нужен список. Создадим необходимые переменные
+    private var locationList = mutableListOf<LatLng>()
+    private var polyline: Polyline? = null
+    private var previousPolyline: Polyline? = null
+    private lateinit var buttonClearPolyline: AppCompatButton
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,9 +75,27 @@ class LocationFragment: Fragment() {
         buttonTrackDistance = view.findViewById(R.id.button_trackDistance)
         // Для динамического изменения строки необходимо оформить её должным образом: "Passed distance: %1$s"
         textPassedDistance.text = getString(R.string.location_passedDistance, passedDistance.toString())
+        buttonClearPolyline = view.findViewById(R.id.button_clearPolyline)
 
         // LOCATION -> 1.4. Получим наш FusedLocationProviderClient. Именно он имеет в себе методы, с помощью которых мы можем определить локацию
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
+
+        // GOOGLE MAPS -> 3.2. Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        // Необходимо найти supportFragmentManager в списке всех фрагментов
+        // val mapFragment = requireActivity().supportFragmentManager.findFragmentById(R.id.map) не сработает,т.к. этот метод ищет внутри активити.
+        // А наш supportFragmentManager находится не в активити: у нас есть LocationFragment, а он - внутри этого LocationFragment (т.е. фрагмент, внутри фрагмента)
+        // Если мы открываем фрагмент внутри фрагмента, мы можем искать их с помощью childFragmentManager (заменяем, вместо supportFragmentManager)
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        // Т.обр. мы говорим, что слушателем инициализации SupportMapFragment будет именно наш фрагмент (LocationFragment)
+        mapFragment.getMapAsync(this)
+
+        // POLYLINE -> 4.2. Настраиваем наш customMarker
+        customMarker = Bitmap.createScaledBitmap(
+            (ContextCompat.getDrawable(requireContext(), R.drawable.marker) as BitmapDrawable).bitmap,
+            100,
+            100,
+            false
+        )
 
         // LOCATION -> 1.5. Создадим метод для получения Current location либо Last location
         getCurrentOrLastLocation()
@@ -65,6 +104,13 @@ class LocationFragment: Fragment() {
 
         // Всех наших слушателей будем выносить в отдельный метод
         setClickListeners()
+    }
+
+    // GOOGLE MAPS -> 3.3. Сюда прилетит карта, когда она будет готова к работе
+    // когда она сюда залетит, мы сможем к ней обратиться и сказать, что она будет равна нашей переменной класса
+    override fun onMapReady(map: GoogleMap) {
+        this.mMap = map
+        // Далее по документации здесь делают некоторые действия, однако мы сделаем их в отдельном методе
     }
 
     private fun setClickListeners() {
@@ -76,6 +122,11 @@ class LocationFragment: Fragment() {
             } else {
                 buttonTrackDistance.text = getString(R.string.location_calculateDistance)
             }
+        }
+        // POLYLINE -> 4.4. Будем очищать полилайн по клику
+        buttonClearPolyline.setOnClickListener {
+            locationList.clear()
+            polyline?.remove()
         }
     }
 
@@ -113,6 +164,9 @@ class LocationFragment: Fragment() {
             location ?: return@addOnSuccessListener
             // Проверяем получение ширины и долготы в логе
             Log.d( TAG, "LastLocation: latitude = ${location.latitude}, longitude = ${location.longitude}")
+
+            // GOOGLE MAPS -> 3.4. Покажем на карте, где мы находимся (один раз). Создадим метод showMyLocation() и передадим туда текущее местоположение
+            showMyLocation(LatLng(location.latitude, location.longitude))
         }
     }
 
@@ -148,10 +202,47 @@ class LocationFragment: Fragment() {
                 }
                 // И заменяем старое значение новым
                 previousLocation = updatedLocation
+
+                // GOOGLE MAPS, POLYLINE -> Для обновления местоположения и отрисовки полилайн, вызываем наш метод
+                showMyLocation(LatLng(updatedLocation.latitude, updatedLocation.longitude))
             }
         }
 
         // Непосредственно настройка получения обновлений (ключевой метод):
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
+    }
+
+    // GOOGLE MAPS -> 3.5. Покажем на карте, где мы находимся. Создадим метод showMyLocation() и передадим туда текущее местоположение
+    // В этой функции мы будем каждый раз обновлять позицию для нашего маркера
+    private fun showMyLocation(latLng: LatLng) {
+        // POLYLINE -> 4.2. Для того, чтобы нарисовать линию, нужен список точек. Наполнять его будем перед удалением старого маркера
+        locationList.add(latLng)
+
+        // Удаляем старый маркер, если он не null
+        marker?.remove()
+        // И настраиваем новый, если он не null
+        customMarker?.let { customBitmapMarker ->
+            // Перед добавлением, удаляем старый маркер, иначе их будет два
+            marker = mMap?.addMarker(
+                MarkerOptions()
+                    .icon(BitmapDescriptorFactory.fromBitmap(customBitmapMarker))
+                    .position(latLng)
+                    .title("You are here")
+            )
+        }
+        // И передвинем камеру
+        mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+
+        // POLYLINE -> 4.3. Нарисуем линию. Настраиваем наш полилайн после перемещения маркера
+        polyline = mMap.addPolyline(
+            PolylineOptions()
+                .color(ContextCompat.getColor(requireContext(), R.color.teal_700))
+                .clickable(true)
+                .addAll(locationList)
+        )
+
+        // POLYLINE -> 4.5. Чтобы очистка полилайн по клику сработала, каждый раз будем рисовать его заново (удалять старый, рисовать новый)
+        previousPolyline?.remove()
+        previousPolyline = polyline
     }
 }
