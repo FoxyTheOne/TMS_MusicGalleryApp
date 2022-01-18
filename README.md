@@ -1,5 +1,5 @@
 # TMS_MusicGalleryApp
-It is a repository for homework - making a login screen of an application. My tasks:
+It is a repository for homework - making an application. My tasks:
 
 Homework 01.
 1. Use software architectural patten - MVVM
@@ -62,5 +62,10 @@ Homework 12.
 1. Try Broadcast receiver
 2. Try Content provider
 3. Add a home widget
+
+Homework 13.
+1. Add Location fragment with distance calculation (requires foreground location permission)
+2. Add Google map in your fragment
+3. Add polyline drawing
 
 Created by Alina Piatrova
