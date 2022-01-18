@@ -33,6 +33,7 @@
     <string name="playlists_buttonGoToTimePickerFragment">Open TimePicker</string>
     <string name="playlists_buttonGoToNotificationFragment">See notifications</string>
     <string name="playlists_buttonGoToBroadcastFragment">Open broadcast receiver</string>
+    <string name="playlists_buttonGoToLocationFragment">Open location</string>
     <string name="playlists_buttonGoToContactsFragment">Open contacts</string>
     <string name="playlists_LogOut">Log out</string>
 
@@ -42,7 +43,7 @@
 
     <string name="filePicker_buttonFilePickerViewFiles">View files</string>
 
-    <string name="alarm_openTimePicker">Open time picker</string>
+    <string name="alarm_openTimePicker">See time picker</string>
 
     <string name="notification_buttonViewNotifications">View notifications</string>
     <string name="notification_name">Notification title</string>
@@ -52,7 +53,7 @@
     <string name="foregroundNotification_name">Foreground notification title</string>
     <string name="foregroundNotification_description">Foreground description for test notification</string>
 
-    <string name="contacts_buttonSeeContacts">Open contacts</string>
+    <string name="contacts_buttonSeeContacts">See contacts</string>
 
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
@@ -61,4 +62,10 @@
     <string name="widget_text_city">City: %1$s</string>
     <string name="widget_text_temperature">Temperature: %1$s °C</string>
     <string name="widget_text_humidity">Humidity: %1$s %%</string>
+
+    <string name="location_buttonSeeMap">See map</string>
+    <string name="location_passedDistance">Passed distance: %1$s</string>
+    <string name="location_calculateDistance">Calculate distance</string>
+    <string name="location_stopCalculateDistance">Stop calculating</string>
+    <string name="location_clearPolyline">Clear polyline</string>
 </resources>

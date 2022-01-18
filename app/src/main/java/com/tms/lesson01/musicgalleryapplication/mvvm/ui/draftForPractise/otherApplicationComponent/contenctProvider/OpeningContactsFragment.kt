@@ -18,7 +18,7 @@ import com.tms.lesson01.musicgalleryapplication.mvvm.MainActivity
 /**
  * 1. Декларируем в Manifest PERMISSION для чтения контактов
  */
-class ContactsOpeningFragment: Fragment() {
+class OpeningContactsFragment: Fragment() {
 
     // Переменные класса
     private lateinit var buttonSeeContacts: AppCompatButton
@@ -64,8 +64,7 @@ class ContactsOpeningFragment: Fragment() {
         }
     }
 
-    // private функции - только для ContactsOpeningFragment:
-    // 2. Для доступа к контактам, нам нужно разрешение. Первым делом нужно его запросить. Создадим метод readContacts() и вызовем его в onViewCreated()
+    // private функции - только для OpeningContactsFragment:
     private fun openContactsFragment() {
         (activity as MainActivity).openFragment(ContactsFragment())
     }
@@ -76,7 +75,7 @@ class ContactsOpeningFragment: Fragment() {
             // Буду отправлять на слушателя с ключом NAVIGATION_EVENT (т.е. это ключ, по которому мы регистрировали слушателя ранее)
             MainActivity.NAVIGATION_EVENT,
             // В bundle указываемключ-значение данных, которые хотим передать
-            bundleOf(MainActivity.NAVIGATION_EVENT_DATA_KEY to "ContactsOpeningFragment created")
+            bundleOf(MainActivity.NAVIGATION_EVENT_DATA_KEY to "OpeningContactsFragment created")
         )
     }
 }

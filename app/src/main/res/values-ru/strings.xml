@@ -33,6 +33,7 @@
     <string name="playlists_buttonGoToTimePickerFragment">Открыть TimePicker</string>
     <string name="playlists_buttonGoToNotificationFragment">Посмотреть уведомления</string>
     <string name="playlists_buttonGoToBroadcastFragment">Открыть broadcast receiver</string>
+    <string name="playlists_buttonGoToLocationFragment">Открыть карты</string>
     <string name="playlists_buttonGoToContactsFragment">Открыть список контактов</string>
     <string name="playlists_LogOut">Выйти</string>
 
@@ -61,4 +62,10 @@
     <string name="widget_text_city">Город: %1$s</string>
     <string name="widget_text_temperature">Температура: %1$s °C</string>
     <string name="widget_text_humidity">Влажность: %1$s %%</string>
+
+    <string name="location_buttonSeeMap">Посмотреть карту</string>
+    <string name="location_passedDistance">Пройденая дистанция: %1$s</string>
+    <string name="location_calculateDistance">Рассчитать дистанцию</string>
+    <string name="location_stopCalculateDistance">Остановить расчёт</string>
+    <string name="location_clearPolyline">Очистить линию маршрута</string>
 </resources>
