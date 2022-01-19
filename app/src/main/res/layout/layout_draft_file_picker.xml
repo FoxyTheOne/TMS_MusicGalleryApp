@@ -7,9 +7,17 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_filePickerViewFiles"
+        style="@style/Widget.AppCompat.ActionButton"
+        app:backgroundTint="@null"
+        android:background="@drawable/button_rounded_corners"
+        android:text="@string/filePicker_buttonFilePickerViewFiles"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_text"
+        android:textStyle="bold"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/filePicker_buttonFilePickerViewFiles"
+        android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
 
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -5,6 +5,8 @@
     <dimen name="space_beforeOrAfterElement">16dp</dimen>
     <dimen name="space_32">32dp</dimen>
 
+    <dimen name="button_text">18sp</dimen>
+
     <dimen name="login_title">24sp</dimen>
     <dimen name="login_text">16sp</dimen>
     <dimen name="playlists_titleSize">18sp</dimen>

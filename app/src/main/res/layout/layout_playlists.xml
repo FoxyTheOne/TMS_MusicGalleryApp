@@ -120,10 +120,19 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_openSuccess"
+            style="@style/Widget.AppCompat.ActionButton"
+            app:backgroundTint="@null"
+            android:background="@drawable/button_rounded_corners"
+            android:text="@string/playlists_buttonGoToSuccess"
+            android:textColor="@color/white"
+            android:textSize="@dimen/button_text"
+            android:textStyle="bold"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="@string/playlists_buttonGoToSuccess"
+            android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
+            android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
 
             app:layout_constraintTop_toBottomOf="@+id/list_topArtists"
             app:layout_constraintStart_toStartOf="parent"
@@ -134,9 +143,18 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_openBrowserFragment"
+            style="@style/Widget.AppCompat.ActionButton"
+            app:backgroundTint="@null"
+            android:background="@drawable/button_rounded_corners"
+            android:text="@string/playlists_buttonGoToBrowserFragment"
+            android:textColor="@color/white"
+            android:textSize="@dimen/button_text"
+            android:textStyle="bold"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/playlists_buttonGoToBrowserFragment"
+            android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
+            android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
 
             app:layout_constraintTop_toBottomOf="@+id/button_openSuccess"
             app:layout_constraintStart_toStartOf="parent"
@@ -147,9 +165,18 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_openFilePickerFragment"
+            style="@style/Widget.AppCompat.ActionButton"
+            app:backgroundTint="@null"
+            android:background="@drawable/button_rounded_corners"
+            android:text="@string/playlists_buttonGoToFilePickerFragment"
+            android:textColor="@color/white"
+            android:textSize="@dimen/button_text"
+            android:textStyle="bold"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/playlists_buttonGoToFilePickerFragment"
+            android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
+            android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
 
             app:layout_constraintTop_toBottomOf="@+id/button_openBrowserFragment"
             app:layout_constraintStart_toStartOf="parent"
@@ -160,9 +187,18 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_openTimePickerFragment"
+            style="@style/Widget.AppCompat.ActionButton"
+            app:backgroundTint="@null"
+            android:background="@drawable/button_rounded_corners"
+            android:text="@string/playlists_buttonGoToTimePickerFragment"
+            android:textColor="@color/white"
+            android:textSize="@dimen/button_text"
+            android:textStyle="bold"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/playlists_buttonGoToTimePickerFragment"
+            android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
+            android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
 
             app:layout_constraintTop_toBottomOf="@+id/button_openFilePickerFragment"
             app:layout_constraintStart_toStartOf="parent"
@@ -173,9 +209,18 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_openNotificationFragment"
+            style="@style/Widget.AppCompat.ActionButton"
+            app:backgroundTint="@null"
+            android:background="@drawable/button_rounded_corners"
+            android:text="@string/playlists_buttonGoToNotificationFragment"
+            android:textColor="@color/white"
+            android:textSize="@dimen/button_text"
+            android:textStyle="bold"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/playlists_buttonGoToNotificationFragment"
+            android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
+            android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
 
             app:layout_constraintTop_toBottomOf="@+id/button_openTimePickerFragment"
             app:layout_constraintStart_toStartOf="parent"
@@ -186,9 +231,18 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_openBroadcastFragment"
+            style="@style/Widget.AppCompat.ActionButton"
+            app:backgroundTint="@null"
+            android:background="@drawable/button_rounded_corners"
+            android:text="@string/playlists_buttonGoToBroadcastFragment"
+            android:textColor="@color/white"
+            android:textSize="@dimen/button_text"
+            android:textStyle="bold"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/playlists_buttonGoToBroadcastFragment"
+            android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
+            android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
 
             app:layout_constraintTop_toBottomOf="@+id/button_openNotificationFragment"
             app:layout_constraintStart_toStartOf="parent"
@@ -199,9 +253,18 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_openContactsFragment"
+            style="@style/Widget.AppCompat.ActionButton"
+            app:backgroundTint="@null"
+            android:background="@drawable/button_rounded_corners"
+            android:text="@string/playlists_buttonGoToContactsFragment"
+            android:textColor="@color/white"
+            android:textSize="@dimen/button_text"
+            android:textStyle="bold"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/playlists_buttonGoToContactsFragment"
+            android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
+            android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
 
             app:layout_constraintTop_toBottomOf="@+id/button_openBroadcastFragment"
             app:layout_constraintStart_toStartOf="parent"
@@ -212,9 +275,18 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_openLocationFragment"
+            style="@style/Widget.AppCompat.ActionButton"
+            app:backgroundTint="@null"
+            android:background="@drawable/button_rounded_corners"
+            android:text="@string/playlists_buttonGoToLocationFragment"
+            android:textColor="@color/white"
+            android:textSize="@dimen/button_text"
+            android:textStyle="bold"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/playlists_buttonGoToLocationFragment"
+            android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
+            android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
 
             app:layout_constraintTop_toBottomOf="@+id/button_openContactsFragment"
             app:layout_constraintStart_toStartOf="parent"
@@ -225,9 +297,18 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_logOut"
+            style="@style/Widget.AppCompat.ActionButton"
+            app:backgroundTint="@null"
+            android:background="@drawable/button_rounded_corners"
+            android:text="@string/playlists_LogOut"
+            android:textColor="@color/white"
+            android:textSize="@dimen/button_text"
+            android:textStyle="bold"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/playlists_LogOut"
+            android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
+            android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
 
             app:layout_constraintTop_toBottomOf="@+id/button_openLocationFragment"
             app:layout_constraintStart_toStartOf="parent"

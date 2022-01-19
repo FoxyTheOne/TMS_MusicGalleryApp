@@ -1,6 +1,8 @@
 package com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.fragment
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +30,7 @@ import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.otherAp
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.otherApplicationComponent.serviceAndNotification.NotificationFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.fragment.LoginFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.success.fragment.SuccessFragment
+import kotlinx.coroutines.GlobalScope
 
 class PlaylistsListFragment : Fragment() {
     // Константы
@@ -51,6 +54,7 @@ class PlaylistsListFragment : Fragment() {
     private lateinit var artistRecyclerView: RecyclerView
     private var adapterYourFavouritesPlaylist: YourFavouritesPlaylistRecyclerAdapter? = null // 4. Определим для нашего RecyclerView созданный адаптер
     private var adapterRecommendedPlaylist: RecommendedPlaylistRecyclerAdapter? = null // 4. Определим для нашего RecyclerView созданный адаптер
+    private var adapterArtists: TopArtistRecyclerAdapter? = null // 4. Определим для нашего RecyclerView созданный адаптер
 
     // определяем вид экрана (layout)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -160,13 +164,14 @@ class PlaylistsListFragment : Fragment() {
             adapterRecommendedPlaylist = RecommendedPlaylistRecyclerAdapter(playlists) { playlist -> Log.d(TAG, playlist.toString())}
             recommendedPlaylistsRecyclerView.adapter = adapterRecommendedPlaylist
         })
+        viewModel.artistsLiveData.observe(viewLifecycleOwner, { artists ->
+            adapterArtists = TopArtistRecyclerAdapter(artists) { artist -> Log.d(TAG, artist.toString()) }
+            artistRecyclerView.adapter = adapterArtists
+        })
         // Если услышим logOutLiveData, значит надо выйти из приложения (открыть логин экран и почистить стек)
         viewModel.logOutLiveData.observe(viewLifecycleOwner,{
             (activity as MainActivity).openFragment(LoginFragment(), true)
             (activity as MainActivity).actionBar?.hide()
-        })
-        viewModel.artistsLiveData.observe(viewLifecycleOwner, { artists ->
-            artistRecyclerView.adapter = TopArtistRecyclerAdapter(artists) { artist -> Log.d(TAG, artist.toString()) }
         })
     }
 

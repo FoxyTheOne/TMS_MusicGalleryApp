@@ -7,9 +7,17 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_openApp"
+        style="@style/Widget.AppCompat.ActionButton"
+        app:backgroundTint="@null"
+        android:background="@drawable/button_rounded_corners"
+        android:text="@string/alarm_openTimePicker"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_text"
+        android:textStyle="bold"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/alarm_openTimePicker"
+        android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
 
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

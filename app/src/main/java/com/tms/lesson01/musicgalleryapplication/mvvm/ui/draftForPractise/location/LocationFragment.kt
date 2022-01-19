@@ -73,7 +73,7 @@ class LocationFragment: Fragment(), OnMapReadyCallback {
         textPassedDistance = view.findViewById(R.id.text_passedDistance)
         buttonTrackDistance = view.findViewById(R.id.button_trackDistance)
         // Для динамического изменения строки необходимо оформить её должным образом: "Passed distance: %1$s"
-        textPassedDistance.text = getString(R.string.location_passedDistance, passedDistance.toString())
+        textPassedDistance.text = requireActivity().getString(R.string.location_passedDistance, passedDistance.toString())
         buttonClearPolyline = view.findViewById(R.id.button_clearPolyline)
 
         // LOCATION -> 1.4. Получим наш FusedLocationProviderClient. Именно он имеет в себе методы, с помощью которых мы можем определить локацию
@@ -117,9 +117,9 @@ class LocationFragment: Fragment(), OnMapReadyCallback {
         buttonTrackDistance.setOnClickListener {
             trackDistance = !trackDistance
             if (trackDistance) {
-                buttonTrackDistance.text = getString(R.string.location_stopCalculateDistance)
+                buttonTrackDistance.text = requireActivity().getString(R.string.location_stopCalculateDistance)
             } else {
-                buttonTrackDistance.text = getString(R.string.location_calculateDistance)
+                buttonTrackDistance.text = requireActivity().getString(R.string.location_calculateDistance)
             }
         }
         // POLYLINE -> 4.4. Будем очищать полилайн по клику
@@ -196,7 +196,7 @@ class LocationFragment: Fragment(), OnMapReadyCallback {
                             passedDistance + updatedLocation.distanceTo(previousLocation)
                         // И меняем текст на экране после подсчёта. Для того, чтобы это сработало, строку необходимо оформить должным образом: "Passed distance: %1$s"
                         textPassedDistance.text =
-                            getString(R.string.location_passedDistance, passedDistance.toString())
+                            requireActivity().getString(R.string.location_passedDistance, passedDistance.toString())
                     }
                 }
                 // И заменяем старое значение новым

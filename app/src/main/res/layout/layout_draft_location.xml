@@ -14,12 +14,13 @@
 
     <TextView
         android:id="@+id/text_passedDistance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/playlists_title"
         android:text="@string/location_passedDistance"
         android:gravity="center_horizontal"
-        style="@style/playlists_title"
         android:textColor="@color/black"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/space_underElement"
 
         app:layout_constraintStart_toStartOf="parent"
@@ -28,9 +29,10 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_trackDistance"
+        android:text="@string/location_calculateDistance"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/location_calculateDistance"
         android:layout_marginBottom="@dimen/space_underElement"
 
         app:layout_constraintStart_toStartOf="parent"
@@ -39,9 +41,10 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_clearPolyline"
+        android:text="@string/location_clearPolyline"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/location_clearPolyline"
         android:layout_marginBottom="@dimen/space_32"
 
         app:layout_constraintStart_toStartOf="parent"

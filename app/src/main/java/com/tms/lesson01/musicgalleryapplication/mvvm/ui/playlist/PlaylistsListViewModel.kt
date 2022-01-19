@@ -11,7 +11,9 @@ import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.room
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.IYourFavouritesPlaylistDao
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.customObject.RecommendedPlaylist
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.playlistLastFM.artistAPIService.IArtistAPIService
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
@@ -138,11 +140,14 @@ class PlaylistsListViewModel: ViewModel(), LifecycleEventObserver {
 
                 // TODO Здесь закешируем наши плейлисты
 
+                Log.i(TAG, "ArtistList: $artistsList")
                 artistsLiveData.postValue(artistsList) // Передаём список в LiveData, чтобы передать в activity
+                Log.i(TAG, "Список передан в LiveData")
             } catch (e: Exception) {
                 Log.e(TAG, e.message ?: "")
             }
         }
-        println("ON_CREATE getArtists")
+        println("ON_CREATE getArtists вызвана")
     }
+
 }
