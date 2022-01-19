@@ -3,6 +3,7 @@
     <dimen name="space_small">8dp</dimen>
     <dimen name="space_underElement">16dp</dimen>
     <dimen name="space_beforeOrAfterElement">16dp</dimen>
+    <dimen name="space_32">32dp</dimen>
 
     <dimen name="login_title">24sp</dimen>
     <dimen name="login_text">16sp</dimen>

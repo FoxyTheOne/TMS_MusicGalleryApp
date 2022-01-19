@@ -18,6 +18,11 @@ import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.appS
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.fragment.LoginFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.fragment.PlaylistsListFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.utility.WeatherWidget
+import android.view.WindowManager
+
+import android.os.Build
+import android.view.Window
+
 
 /**
  * hw03. Переводим наше приложение на фрагменты. Создаём общий Activity и его layout (activity_main)
@@ -38,6 +43,15 @@ class MainActivity: AppCompatActivity() {
 
         // сразу осуществляем подписку на получение данных из фрагмента по ключу NAVIGATION_EVENT
         listenNavigationEvents()
+
+        // Прозрачный Status Bar -> In Activity's onCreate() for instance
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            val w: Window = window
+            w.setFlags(
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+            )
+        }
 
         // Изменяем цвет ActionBar:
         // 1.2 Define ActionBar object
