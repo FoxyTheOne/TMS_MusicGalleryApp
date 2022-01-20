@@ -11,11 +11,9 @@ import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.room
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.IYourFavouritesPlaylistDao
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.customObject.RecommendedPlaylist
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.playlistLastFM.artistAPIService.IArtistAPIService
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.lang.Exception
+import java.util.concurrent.atomic.AtomicReferenceArray
 
 class PlaylistsListViewModel: ViewModel(), LifecycleEventObserver {
     // Константы
@@ -41,6 +39,7 @@ class PlaylistsListViewModel: ViewModel(), LifecycleEventObserver {
     // 4. Создаём LiveData, которое будет слушать наш Activity, чтобы подтягивать к себе список плейлистов (List<>):
     val yourFavoritesLiveData = MutableLiveData<List<YourFavouritesPlaylist>>()
     val recommendedPlaylistsLiveData = MutableLiveData<List<RecommendedPlaylist>>()
+
     val artistsLiveData = MutableLiveData<List<Artist>>()
     // LiveData для выхода из приложения
     val logOutLiveData = MutableLiveData<Unit>()
@@ -133,16 +132,38 @@ class PlaylistsListViewModel: ViewModel(), LifecycleEventObserver {
         println("ON_CREATE getRecommendedPlaylists")
     }
 
+//    private fun getArtists() {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            try {
+//                val artistsList = artistService?.getTopArtists()?.artists?.artist ?: listOf()// Получаем список плейлистов2. Если он null - вернуть пустой список
+//
+//                // TODO Здесь закешируем наши плейлисты
+//
+//                Log.i(TAG, "ArtistList: $artistsList")
+//                artistsLiveData.postValue(artistsList) // Передаём список в LiveData, чтобы передать в activity
+//                Log.i(TAG, "Список передан в LiveData")
+//            } catch (e: Exception) {
+//                Log.e(TAG, e.message ?: "")
+//            }
+//        }
+//        println("ON_CREATE getArtists вызвана")
+//    }
+
     private fun getArtists() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val artistsList = artistService?.getTopArtists()?.artists?.artist ?: listOf()// Получаем список плейлистов2. Если он null - вернуть пустой список
 
-                // TODO Здесь закешируем наши плейлисты
+                while (artistsList.isEmpty()){
+                    val artistsList = artistService?.getTopArtists()?.artists?.artist
+                    Log.i(TAG, "ArtistList: $artistsList")
+                    if (artistsList != null) {
+                        artistsLiveData.postValue(artistsList!!)
+                        Log.i(TAG, "Список передан в LiveData")
+                        break
+                    }
+                }
 
-                Log.i(TAG, "ArtistList: $artistsList")
-                artistsLiveData.postValue(artistsList) // Передаём список в LiveData, чтобы передать в activity
-                Log.i(TAG, "Список передан в LiveData")
             } catch (e: Exception) {
                 Log.e(TAG, e.message ?: "")
             }
