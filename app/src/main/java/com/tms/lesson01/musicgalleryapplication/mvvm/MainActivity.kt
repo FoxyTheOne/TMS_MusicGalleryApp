@@ -17,12 +17,11 @@ import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.appSharedPreference.AppSharedPreferences
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.fragment.LoginFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.fragment.PlaylistsListFragment
-import com.tms.lesson01.musicgalleryapplication.mvvm.utility.WeatherWidget
+import com.tms.lesson01.musicgalleryapplication.mvvm.utils.WeatherWidget
 import android.view.WindowManager
 
 import android.os.Build
 import android.view.Window
-
 
 /**
  * hw03. Переводим наше приложение на фрагменты. Создаём общий Activity и его layout (activity_main)
@@ -77,6 +76,8 @@ class MainActivity: AppCompatActivity() {
         updateProgrammaticallyHomeWidget()
     }
 
+
+
     override fun onBackPressed() {
         val fragmentCount = supportFragmentManager.backStackEntryCount
 
@@ -91,6 +92,7 @@ class MainActivity: AppCompatActivity() {
         if (doClearBackStack){ // Если передали true, чистим стек
             clearBackStack()
         }
+
         // Открываем фрагмент из Activity:
         supportFragmentManager.beginTransaction()
             .setCustomAnimations( // Анимации по умолчанию для всех фрагментов

@@ -37,7 +37,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MusicGalleryApplication">
         <receiver
-            android:name=".mvvm.utility.WeatherWidget"
+            android:name=".mvvm.utils.WeatherWidget"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -70,11 +70,11 @@
         <!--
          2. Декларируем Foreground Service:
           -->
-        <service android:name="com.tms.lesson01.musicgalleryapplication.mvvm.utility.service.ProgressForegroundService" />
+        <service android:name="com.tms.lesson01.musicgalleryapplication.mvvm.utils.service.ProgressForegroundService" />
         <!--
         2. Декларируем Bound Service:
          -->
-        <service android:name="com.tms.lesson01.musicgalleryapplication.mvvm.utility.service.AppBoundService" />
+        <service android:name="com.tms.lesson01.musicgalleryapplication.mvvm.utils.service.AppBoundService" />
 
         <!--
         Google maps:

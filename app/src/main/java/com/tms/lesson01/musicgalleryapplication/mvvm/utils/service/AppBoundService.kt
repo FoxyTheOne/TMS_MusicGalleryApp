@@ -1,4 +1,4 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm.utility.service
+package com.tms.lesson01.musicgalleryapplication.mvvm.utils.service
 
 import android.app.Service
 import android.content.Intent

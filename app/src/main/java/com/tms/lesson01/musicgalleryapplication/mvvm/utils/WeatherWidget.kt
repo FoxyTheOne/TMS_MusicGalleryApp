@@ -1,4 +1,4 @@
-package com.tms.lesson01.musicgalleryapplication.mvvm.utility
+package com.tms.lesson01.musicgalleryapplication.mvvm.utils
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
