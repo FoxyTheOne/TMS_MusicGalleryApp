@@ -15,21 +15,35 @@ import kotlinx.coroutines.*
 import java.lang.Exception
 import java.util.concurrent.atomic.AtomicReferenceArray
 
-class PlaylistsListViewModel: ViewModel(), LifecycleEventObserver {
+/**
+ * 1.1. Настройка View Model в соответствии с принципом обеспечения зависимостей:
+ * Если внутри View Model используются объекты, то их нужно передавать через конструктор.
+ * Переделаем наш код, учитывая этот факт
+ */
+class PlaylistsListViewModel(
+    // PlaylistsListViewModel зависим от следующих инициализируемых сущностей. Всё, что он делает, делает благодаря им
+    // Объявляем их в конструкторе View Model (т.е. здесь), инициализируем - в конструкторе фрагмента (PlaylistsListFragment)
+    private val musicModel: INetworkMusicService, // Наш экземпляр класса Model для обращения к ней. Тип переменной - наш интерфейс. NetworkMusicServiceModel() будет возвращать нам альбомы
+    private var preferences: IAppSharedPreferences, // Объект preferences для обращения к SharedPreferences
+    private var yourFavouritesPlaylistDao: IYourFavouritesPlaylistDao, // Объекты для обращения к Dao
+    private var recommendedPlaylistDao: IRecommendedPlaylistDao,
+    private var artistService: IArtistAPIService // Объекты для обращения к сервисам
+): ViewModel(), LifecycleEventObserver {
     // Константы
     companion object {
         private const val TAG = "PlaylistsListViewModel"
     }
 
-    // Наш экземпляр класса Model для обращения к ней. Тип переменной - наш интерфейс. NetworkMusicServiceModel() будет возвращать нам альбомы
-    private val musicModel: INetworkMusicService = NetworkMusicServiceModel()
-    // Объект preferences для обращения к SharedPreferences
-    private var preferences: IAppSharedPreferences? = null
-    // Объекты для обращения к Dao
-    private var yourFavouritesPlaylistDao: IYourFavouritesPlaylistDao? = null
-    private var recommendedPlaylistDao: IRecommendedPlaylistDao? = null
-    // Объекты для обращения к сервисам
-    private var artistService: IArtistAPIService? = null
+//    !!! Этот код (инициализация сущностей, создание объектов) переносим в конструктор View Model:
+//    // Наш экземпляр класса Model для обращения к ней. Тип переменной - наш интерфейс. NetworkMusicServiceModel() будет возвращать нам альбомы
+//    private val musicModel: INetworkMusicService = NetworkMusicServiceModel()
+//    // Объект preferences для обращения к SharedPreferences
+//    private var preferences: IAppSharedPreferences? = null
+//    // Объекты для обращения к Dao
+//    private var yourFavouritesPlaylistDao: IYourFavouritesPlaylistDao? = null
+//    private var recommendedPlaylistDao: IRecommendedPlaylistDao? = null
+//    // Объекты для обращения к сервисам
+//    private var artistService: IArtistAPIService? = null
 
 //    // Создаём LiveData, которое слушает Activity:
 //    val countriesLiveData = MutableLiveData<List<String>>()

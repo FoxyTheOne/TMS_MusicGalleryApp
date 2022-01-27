@@ -2,6 +2,7 @@ package com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin
 
 import android.os.Handler
 import android.os.Looper
+import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.IUserStorage
@@ -10,7 +11,18 @@ import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.appS
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.login.INetworkLoginService
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.login.NetworkLoginServiceModel
 
-class LoginViewModel: ViewModel() {
+/**
+ * 1.1. Настройка View Model в соответствии с принципом обеспечения зависимостей:
+ * Если внутри View Model используются объекты, то их нужно передавать через конструктор.
+ * Переделаем наш код, учитывая этот факт
+ */
+class LoginViewModel(
+    // LoginViewModel зависим от следующих инициализируемых сущностей. Всё, что он делает, делает благодаря им
+    // Объявляем их в конструкторе View Model (т.е. здесь), инициализируем - в конструкторе фрагмента (LoginFragment)
+    private val networkLoginServiceModel: INetworkLoginService,
+    private val localStorageModel: IUserStorage, // Для кэширования в случае успешного входа
+    private val preferences: IAppSharedPreferences
+): ViewModel() {
 
     // Переменные для передачи сообщения
     val isLoginSuccessLiveData = MutableLiveData<Unit>()
@@ -23,20 +35,21 @@ class LoginViewModel: ViewModel() {
     val passwordLiveData = MutableLiveData<String>()
     val checkBoxRememberLoginAndPasswordLiveData = MutableLiveData<Boolean>()
 
-    // LoginViewModel зависим от следующих инициализируемых сущностей. Всё, что он делает, делает благодаря им
-    private val networkLoginServiceModel: INetworkLoginService = NetworkLoginServiceModel() // Инициализируем networkLoginModel
-    private val localStorageModel: IUserStorage = LocalStorageModel() // Инициализируем localStorageModel для кэширования в случае успешного входа
+//    !!! Этот код (инициализация сущностей, создание объектов) переносим в конструктор View Model:
+//    // LoginViewModel зависим от следующих инициализируемых сущностей. Всё, что он делает, делает благодаря им
+//    private val networkLoginServiceModel: INetworkLoginService = NetworkLoginServiceModel() // Инициализируем networkLoginModel
+//    private val localStorageModel: IUserStorage = LocalStorageModel() // Инициализируем localStorageModel для кэширования в случае успешного входа
 
-    //    private val preferences = AppSharedPreferences.getInstance()
-    private var preferences: IAppSharedPreferences? = null
-    //    Здесь нам не хватает Dependency injection, который будем изучать позже. Пока что создадим метод, к-рый будет отправлять нам SharedPreferences из фрагмента
-    fun setSharedPreferences(preferences: IAppSharedPreferences) {
-        this.preferences = preferences
-    }
+//    //    private val preferences = AppSharedPreferences.getInstance()
+//    private var preferences: IAppSharedPreferences? = null
+//    //    Здесь нам не хватает Dependency injection, который будем изучать позже. Пока что создадим метод, к-рый будет отправлять нам SharedPreferences из фрагмента
+//    fun setSharedPreferences(preferences: IAppSharedPreferences) {
+//        this.preferences = preferences
+//    }
 
     // Каждый раз, когда мы кликаеи, будет исполняться этот метод. Здесь мы сохраняем статус check box
     fun setRememberLoginAndPasswordSelectedOrNot(isSelected: Boolean) {
-        preferences?.setRememberLoginAndPasswordSelectedOrNot(isSelected)
+        preferences.setRememberLoginAndPasswordSelectedOrNot(isSelected)
     }
 
     // Ф-ция, вызываемая по клику на кнопку в MainActivityView
@@ -51,7 +64,7 @@ class LoginViewModel: ViewModel() {
             if (successToken != null) {
 //                localStorageModel.saveTokenToLocalStorage(token = successToken) // кэшируем токен, чтобы можно было использовать его по всему приложению в дальнейшем
 //                Пока уберем эту строку
-                saveToken(successToken)
+                saveToken(successToken = successToken)
                 saveLoginData(emailText, passwordText)
                 isLoginSuccessLiveData.postValue(Unit) // Если у нас есть токен, значит вход успешный
             } else {
@@ -61,7 +74,7 @@ class LoginViewModel: ViewModel() {
     }
 
     fun getStoredData() {
-        preferences?.let {
+        preferences.let {
             if (it.isRememberLoginAndPasswordSelected()) {
                 emailLiveData.postValue(it.getEmail())
                 passwordLiveData.postValue(it.getPassword())
@@ -85,12 +98,12 @@ class LoginViewModel: ViewModel() {
 
     private fun saveToken(successToken: String) {
         // Токен сохраняем в любом случае, при успешном входе
-        preferences?.saveToken(successToken)
+        preferences.saveToken(successToken)
     }
 
     private fun saveLoginData(emailText: String, passwordText: String) {
         // Если выбрано сохранить, то при успешном входе, сохраняем
-        preferences?.let {
+        preferences.let {
             if (it.isRememberLoginAndPasswordSelected()) {
                 it.saveEmail(emailText)
                 it.savePassword(passwordText)

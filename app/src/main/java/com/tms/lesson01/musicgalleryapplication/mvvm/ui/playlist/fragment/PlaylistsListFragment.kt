@@ -1,8 +1,6 @@
 package com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.fragment
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,13 +8,15 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.MainActivity
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.appSharedPreference.AppSharedPreferences
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.roomDatabase.AppDatabase
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.music.INetworkMusicService
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.music.NetworkMusicServiceModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.playlistLastFM.lastFM.ILastFMNetwork
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.playlistLastFM.lastFM.LastFMNetwork
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.browser.BrowserFragment
@@ -24,14 +24,17 @@ import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.alarm.A
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.otherApplicationComponent.broadcastReceiver.BroadcastFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.PlaylistsListViewModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.filepicker.FilePickerFragment
-import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.location.LocationFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.location.OpeningLocationFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.otherApplicationComponent.contenctProvider.OpeningContactsFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.otherApplicationComponent.serviceAndNotification.NotificationFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.fragment.LoginFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.success.fragment.SuccessFragment
-import kotlinx.coroutines.GlobalScope
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.PlaylistsListViewModelFactory
 
+/**
+ * 1.3. Настройка View Model в соответствии с принципом обеспечения зависимостей:
+ * Создаём объект View Model с помощью своей фабрики
+ */
 class PlaylistsListFragment : Fragment() {
     // Константы
     companion object {
@@ -48,13 +51,32 @@ class PlaylistsListFragment : Fragment() {
     private lateinit var openContactsFragment: AppCompatButton
     private lateinit var openLocationFragment: AppCompatButton
     private lateinit var buttonLogOut: AppCompatButton
-    private lateinit var viewModel: PlaylistsListViewModel
+//    private lateinit var viewModel: PlaylistsListViewModel
     private lateinit var yourFavoritesRecyclerView: RecyclerView // 1. Создадим RecyclerView для наших горизонтальных списков
     private lateinit var recommendedPlaylistsRecyclerView: RecyclerView
     private lateinit var artistRecyclerView: RecyclerView
     private var adapterYourFavouritesPlaylist: YourFavouritesPlaylistRecyclerAdapter? = null // 4. Определим для нашего RecyclerView созданный адаптер
     private var adapterRecommendedPlaylist: RecommendedPlaylistRecyclerAdapter? = null // 4. Определим для нашего RecyclerView созданный адаптер
     private var adapterArtists: TopArtistRecyclerAdapter? = null // 4. Определим для нашего RecyclerView созданный адаптер
+    private val lastFMNetwork = LastFMNetwork.getInstance() as ILastFMNetwork
+
+    // Инициализируем View Model с помощью своей фабрики
+    private val viewModel by viewModels<PlaylistsListViewModel> {
+        PlaylistsListViewModelFactory(
+            // Инициализируем объекты в конструкторе
+            NetworkMusicServiceModel() as INetworkMusicService, // Наш экземпляр класса Model для обращения к ней. Тип переменной - наш интерфейс. NetworkMusicServiceModel() будет возвращать нам альбомы
+            // Объект preferences для обращения к SharedPreferences
+            AppSharedPreferences.getInstance(requireContext()),  // Вызываем наш статический метод для экземпляра класса AppSharedPreferences
+
+            // Объекты для обращения к Dao
+            AppDatabase.getInstance(requireContext()).getYourFavouritesPlaylistDao(), // Вызываем наш статический метод для экземпляра класса AppDatabase и затем обращаемся к Dao
+            AppDatabase.getInstance(requireContext()).getRecommendedPlaylistDao(), // Вызываем наш статический метод для экземпляра класса AppDatabase и затем обращаемся к Dao
+
+            // Объекты для обращения к сервисам
+            // lastFM
+            lastFMNetwork.getArtistService()
+        )
+    }
 
     // определяем вид экрана (layout)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -72,16 +94,19 @@ class PlaylistsListFragment : Fragment() {
         // Сразу начинаем отправлять данные по ключу NAVIGATION_EVENT
         sendNavigationEvents()
 
-        // Инициализируем viewModel, чтобы работать с ViewModel (согласно примеру с сайта)
-        viewModel = ViewModelProvider(this)[PlaylistsListViewModel::class.java]
+//        !!! Этот код (инициализация сущностей, создание объектов) переносим в конструктор View Model:
+//        // Инициализируем viewModel, чтобы работать с ViewModel (согласно примеру с сайта)
+//        viewModel = ViewModelProvider(this)[PlaylistsListViewModel::class.java]
+//        viewModel.setSharedPreferences(AppSharedPreferences.getInstance(requireContext())) // Вызываем наш статический метод для экземпляра класса AppSharedPreferences
+//        viewModel.setYourFavouritesPlaylistDao(AppDatabase.getInstance(requireContext()).getYourFavouritesPlaylistDao()) // Вызываем наш статический метод для экземпляра класса AppDatabase и затем обращаемся к Dao
+//        viewModel.setRecommendedPlaylistDao(AppDatabase.getInstance(requireContext()).getRecommendedPlaylistDao()) // Вызываем наш статический метод для экземпляра класса AppDatabase и затем обращаемся к Dao
+//        // lastFM
+//        val lastFMNetwork = LastFMNetwork.getInstance() as ILastFMNetwork
+//        viewModel.setArtistService(lastFMNetwork.getArtistService())
+
         // Этот активити будет слушать наша view model, поэтому регистрируем слушателя здесь:
         lifecycle.addObserver(viewModel)
-        viewModel.setSharedPreferences(AppSharedPreferences.getInstance(requireContext())) // Вызываем наш статический метод для экземпляра класса AppSharedPreferences
-        viewModel.setYourFavouritesPlaylistDao(AppDatabase.getInstance(requireContext()).getYourFavouritesPlaylistDao()) // Вызываем наш статический метод для экземпляра класса AppDatabase и затем обращаемся к Dao
-        viewModel.setRecommendedPlaylistDao(AppDatabase.getInstance(requireContext()).getRecommendedPlaylistDao()) // Вызываем наш статический метод для экземпляра класса AppDatabase и затем обращаемся к Dao
-        // lastFM
-        val lastFMNetwork = LastFMNetwork.getInstance() as ILastFMNetwork
-        viewModel.setArtistService(lastFMNetwork.getArtistService())
+
 
         // Оглашаем наши локальные переменные
         openSuccessButton = view.findViewById(R.id.button_openSuccess)
