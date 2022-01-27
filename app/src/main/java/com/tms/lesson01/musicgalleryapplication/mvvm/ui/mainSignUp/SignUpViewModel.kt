@@ -27,11 +27,11 @@ class SignUpViewModel(
 ): ViewModel() {
 
     // Переменные для передачи сообщения
-    val isSignUpSuccessLiveData = MutableLiveData<Unit>()
-    val isSignUpFailureLiveData = MutableLiveData<Unit>()
+    val isSignUpSuccessLiveData = MutableLiveData<Boolean>()
+    val isSignUpFailureLiveData = MutableLiveData<Boolean>()
     // Переменные, которые будут отвечать за отображение прогресса (кружок). Т.е. события, на которые можно подписаться и слушать
-    val showProgressLiveData = MutableLiveData<Unit>()
-    val hideProgressLiveData = MutableLiveData<Unit>()
+    val showProgressLiveData = MutableLiveData<Boolean>()
+    val hideProgressLiveData = MutableLiveData<Boolean>()
     // Перемнные для сохранения информации во время пересоздания Activity из-за поворота экрана:
     val nameLiveData = MutableLiveData<String>()
     val emailLiveData = MutableLiveData<String>()
@@ -58,21 +58,21 @@ class SignUpViewModel(
 
     // Ф-ция, вызываемая по клику на кнопку в MainActivityView
     fun onSignUpClicked(nameText: String, emailText: String, passwordText: String, confirmPasswordText: String) {
-        showProgressLiveData.postValue(Unit) // Сообщаем нашему view (LoginActivityView), что нужно показать прогресс
+        showProgressLiveData.postValue(true) // Сообщаем нашему view (LoginActivityView), что нужно показать прогресс
 
         // Функция с задержкой, для тестового проекта. В реальном проекте задержка (Handler) не нужна
         Handler(Looper.getMainLooper()).postDelayed({
             val successToken = networkLoginServiceModel.onSignUpClicked(nameText, emailText, passwordText, confirmPasswordText)
 
-            hideProgressLiveData.postValue(Unit) // Сообщаем нашему view (LoginActivityView), что нужно спрятать прогресс
+            hideProgressLiveData.postValue(true) // Сообщаем нашему view (LoginActivityView), что нужно спрятать прогресс
             if (successToken != null) {
 //                localStorageModel.saveTokenToLocalStorage(token = successToken) // кэшируем токен, чтобы можно было использовать его по всему приложению в дальнейшем
 //                Пока уберем эту строку
                 saveToken(successToken = successToken)
                 saveLoginData(emailText, passwordText)
-                isSignUpSuccessLiveData.postValue(Unit) // Если у нас есть токен, значит вход успешный
+                isSignUpSuccessLiveData.postValue(true) // Если у нас есть токен, значит вход успешный
             } else {
-                isSignUpFailureLiveData.postValue(Unit)
+                isSignUpFailureLiveData.postValue(true)
             }
         }, 3000)
     }

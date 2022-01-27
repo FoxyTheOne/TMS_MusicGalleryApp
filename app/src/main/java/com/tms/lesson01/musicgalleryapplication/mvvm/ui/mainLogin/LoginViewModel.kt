@@ -25,11 +25,11 @@ class LoginViewModel(
 ): ViewModel() {
 
     // Переменные для передачи сообщения
-    val isLoginSuccessLiveData = MutableLiveData<Unit>()
-    val isLoginFailureLiveData = MutableLiveData<Unit>()
+    val isLoginSuccessLiveData = MutableLiveData<Boolean>()
+    val isLoginFailureLiveData = MutableLiveData<Boolean>()
     // Переменные, которые будут отвечать за отображение прогресса (кружок). Т.е. события, на которые можно подписаться и слушать
-    val showProgressLiveData = MutableLiveData<Unit>()
-    val hideProgressLiveData = MutableLiveData<Unit>()
+    val showProgressLiveData = MutableLiveData<Boolean>()
+    val hideProgressLiveData = MutableLiveData<Boolean>()
     // Перемнные для сохранения информации во время пересоздания Activity из-за поворота экрана:
     val emailLiveData = MutableLiveData<String>()
     val passwordLiveData = MutableLiveData<String>()
@@ -54,23 +54,23 @@ class LoginViewModel(
 
     // Ф-ция, вызываемая по клику на кнопку в MainActivityView
     fun onLoginClicked(emailText: String, passwordText: String) {
-        showProgressLiveData.postValue(Unit) // Сообщаем нашему view (LoginActivityView), что нужно показать прогресс
+        showProgressLiveData.postValue(true) // Сообщаем нашему view (LoginActivityView), что нужно показать прогресс
 
-        // Функция с задержкой, для тестового проекта. В реальном проекте задержка (Handler) не нужна
-        Handler(Looper.getMainLooper()).postDelayed({
+//        // Функция с задержкой, для тестового проекта. В реальном проекте задержка (Handler) не нужна
+//        Handler(Looper.getMainLooper()).postDelayed({
             val successToken = networkLoginServiceModel.onLoginClicked(emailText, passwordText)
 
-            hideProgressLiveData.postValue(Unit) // Сообщаем нашему view (LoginActivityView), что нужно спрятать прогресс
+            hideProgressLiveData.postValue(true) // Сообщаем нашему view (LoginActivityView), что нужно спрятать прогресс
             if (successToken != null) {
 //                localStorageModel.saveTokenToLocalStorage(token = successToken) // кэшируем токен, чтобы можно было использовать его по всему приложению в дальнейшем
 //                Пока уберем эту строку
                 saveToken(successToken = successToken)
                 saveLoginData(emailText, passwordText)
-                isLoginSuccessLiveData.postValue(Unit) // Если у нас есть токен, значит вход успешный
+                isLoginSuccessLiveData.postValue(true) // Если у нас есть токен, значит вход успешный
             } else {
-                isLoginFailureLiveData.postValue(Unit)
+                isLoginFailureLiveData.postValue(true)
             }
-        }, 3000)
+//        }, 3000)
     }
 
     fun getStoredData() {

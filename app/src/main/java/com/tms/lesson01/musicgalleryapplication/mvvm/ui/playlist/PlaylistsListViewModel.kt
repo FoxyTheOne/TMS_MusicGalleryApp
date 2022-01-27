@@ -103,7 +103,7 @@ class PlaylistsListViewModel(
     }
 
     fun logOut() {
-        preferences?.saveToken("")
+        preferences.saveToken("")
         logOutLiveData.value = Unit // поставили флажок
     }
 
@@ -119,7 +119,7 @@ class PlaylistsListViewModel(
                 val yourFavouritesPlaylistsList = musicModel.getYourFavorites() // Получаем список плейлистов1
 
                 // Здесь закешируем наши плейлисты
-                yourFavouritesPlaylistDao?.insertYourFavouritesPlaylists(*yourFavouritesPlaylistsList.toTypedArray())
+                yourFavouritesPlaylistDao.insertYourFavouritesPlaylists(*yourFavouritesPlaylistsList.toTypedArray())
 
                 yourFavoritesLiveData.postValue(yourFavouritesPlaylistsList) // Передаём список в LiveData, чтобы передать в activity
             } catch (e: Exception) {
@@ -136,7 +136,7 @@ class PlaylistsListViewModel(
                 val recommendedPlaylistsList = musicModel.getRecommendedPlaylists() // Получаем список плейлистов2
 
                 // Здесь закешируем наши плейлисты
-                recommendedPlaylistDao?.insertRecommendedPlaylists(*recommendedPlaylistsList.toTypedArray())
+                recommendedPlaylistDao.insertRecommendedPlaylists(*recommendedPlaylistsList.toTypedArray())
 
                 recommendedPlaylistsLiveData.postValue(recommendedPlaylistsList) // Передаём список в LiveData, чтобы передать в activity
             } catch (e: Exception) {

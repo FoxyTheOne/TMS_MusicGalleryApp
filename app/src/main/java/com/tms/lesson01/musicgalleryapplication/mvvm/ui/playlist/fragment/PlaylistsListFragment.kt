@@ -97,16 +97,16 @@ class PlaylistsListFragment : Fragment() {
 //        !!! Этот код (инициализация сущностей, создание объектов) переносим в конструктор View Model:
 //        // Инициализируем viewModel, чтобы работать с ViewModel (согласно примеру с сайта)
 //        viewModel = ViewModelProvider(this)[PlaylistsListViewModel::class.java]
+
+        // Этот активити будет слушать наша view model, поэтому регистрируем слушателя здесь:
+        lifecycle.addObserver(viewModel)
+
 //        viewModel.setSharedPreferences(AppSharedPreferences.getInstance(requireContext())) // Вызываем наш статический метод для экземпляра класса AppSharedPreferences
 //        viewModel.setYourFavouritesPlaylistDao(AppDatabase.getInstance(requireContext()).getYourFavouritesPlaylistDao()) // Вызываем наш статический метод для экземпляра класса AppDatabase и затем обращаемся к Dao
 //        viewModel.setRecommendedPlaylistDao(AppDatabase.getInstance(requireContext()).getRecommendedPlaylistDao()) // Вызываем наш статический метод для экземпляра класса AppDatabase и затем обращаемся к Dao
 //        // lastFM
 //        val lastFMNetwork = LastFMNetwork.getInstance() as ILastFMNetwork
 //        viewModel.setArtistService(lastFMNetwork.getArtistService())
-
-        // Этот активити будет слушать наша view model, поэтому регистрируем слушателя здесь:
-        lifecycle.addObserver(viewModel)
-
 
         // Оглашаем наши локальные переменные
         openSuccessButton = view.findViewById(R.id.button_openSuccess)
