@@ -260,6 +260,10 @@ class LocationFragment : Fragment(), OnMapReadyCallback {
                     .addAll(locationList)
             )
         }
+        // В начале настройки polyline пишем mContext?.let {...}, иначе будет креш при нажатии кнопки back, потому что возникнет такая ситуация:
+        // Фрагмент уже был закрыт и отсоединен, но прилетел еще один апдейт локации
+        // и при обработке этой локации использовался Context который уже был не актуален для этого фрагмента (поскольку эго уже закрыли)
+        // Итог -> java.lang.IllegalStateException: Fragment LocationFragment not attached to context
 
         // POLYLINE -> 4.5. Чтобы очистка полилайн по клику сработала, каждый раз будем рисовать его заново (удалять старый, рисовать новый)
         previousPolyline?.remove()

@@ -1,5 +1,8 @@
 package com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.login
 
+import com.tms.lesson01.musicgalleryapplication.mvvm.utils.extencion.isEmailValid
+import com.tms.lesson01.musicgalleryapplication.mvvm.utils.extencion.isPasswordValid
+
 /**
  * hw01. В Модели написать метод для проверки name: просто проверить что он не пустой
  * В Модели написать метод для проверки email: проверить что это действительно email (это мы уже делали)
@@ -12,13 +15,13 @@ package com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.
  */
 class NetworkLoginServiceModel : INetworkLoginService {
     override fun onSignUpClicked(name: String, email: String, password: String, confirmPassword: String): String? {
-        val nameValid = name.isNotBlank()
-        val emailValid = email.isNotBlank() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-        val passwordValid = password.isNotBlank() && password.length > 5
-        val confirmPasswordValid = password == confirmPassword // В Kotlin сравнение строк через ==, а не equals. Если нужно сравнить адрес - ===
+        val isNameValid = name.isNotBlank()
+        val isEmailValid = email.isEmailValid()
+        val isPasswordValid = password.isPasswordValid()
+        val isConfirmPasswordValid = password == confirmPassword // В Kotlin сравнение строк через ==, а не equals. Если нужно сравнить адрес - ===
 
         // Если всё верно, логинимся и возвращается токен. Если не верно - не возвращается
-        return if (nameValid && emailValid && passwordValid && confirmPasswordValid) {
+        return if (isNameValid && isEmailValid && isPasswordValid && isConfirmPasswordValid) {
             doSignUp(name, email, password, confirmPassword)
         } else {
             null
@@ -26,11 +29,11 @@ class NetworkLoginServiceModel : INetworkLoginService {
     }
 
     override fun onLoginClicked(email: String, password: String): String? {
-        val emailValid = email.isNotBlank() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-        val passwordValid = password.isNotBlank() && password.length > 5
+        val isEmailValid = email.isEmailValid()
+        val isPasswordValid = password.isPasswordValid()
 
         // Если всё верно, логинимся и возвращается токен. Если не верно - не возвращается
-        return if (emailValid && passwordValid) {
+        return if (isEmailValid && isPasswordValid) {
             doLogin(email, password)
         } else {
             null
