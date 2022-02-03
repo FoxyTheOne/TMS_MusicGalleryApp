@@ -16,6 +16,17 @@ buildscript {
     }
 }
 
+allprojects {
+    repositories {
+        //  Removed from settings.gradle
+        google()
+        mavenCentral()
+        jcenter() // Warning: this repository is going to shut down soon
+        //  RxJava3
+        maven { url "https://oss.jfrog.org/libs-snapshot" }
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

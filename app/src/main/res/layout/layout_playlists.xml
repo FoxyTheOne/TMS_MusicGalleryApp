@@ -291,6 +291,28 @@
             app:layout_constraintTop_toBottomOf="@+id/button_openContactsFragment"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/button_openWeatherFragment"
+
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_openWeatherFragment"
+            style="@style/Widget.AppCompat.ActionButton"
+            app:backgroundTint="@null"
+            android:background="@drawable/button_rounded_corners"
+            android:text="@string/playlists_buttonGoToWeatherFragment"
+            android:textColor="@color/white"
+            android:textSize="@dimen/button_text"
+            android:textStyle="bold"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
+            android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
+
+            app:layout_constraintTop_toBottomOf="@+id/button_openLocationFragment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/button_logOut"
 
             app:layout_constraintVertical_chainStyle="packed" />
@@ -310,7 +332,7 @@
             android:paddingHorizontal="@dimen/space_beforeOrAfterElement"
             android:layout_marginBottom="@dimen/space_beforeOrAfterElement"
 
-            app:layout_constraintTop_toBottomOf="@+id/button_openLocationFragment"
+            app:layout_constraintTop_toBottomOf="@+id/button_openWeatherFragment"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

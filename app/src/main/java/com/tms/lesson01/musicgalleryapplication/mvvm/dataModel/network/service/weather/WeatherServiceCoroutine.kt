@@ -9,7 +9,7 @@ import retrofit2.http.Query
  * Код из проекта преподавателя (для виджета погоды)
  * 1. Интерфейс, в котором описываем запросы, которые планируем делать
  */
-interface WeatherService {
+interface WeatherServiceCoroutine {
     companion object {
         private const val BASE_PATH = "data/2.5"
         private const val WEATHER_PATH = "weather"

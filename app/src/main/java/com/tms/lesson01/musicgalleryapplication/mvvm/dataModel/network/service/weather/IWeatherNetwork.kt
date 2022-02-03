@@ -5,5 +5,7 @@ package com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.
  * 3. Интерфейс, чтобы давать доступ к сервисам
  */
 interface IWeatherNetwork {
-    fun getWeatherService(): WeatherService
+    // Ф-ция, которая возвращает нам сервис
+    fun getWeatherServiceCoroutine(): WeatherServiceCoroutine
+    fun getWeatherServiceRx(): WeatherServiceRx
 }

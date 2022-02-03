@@ -29,6 +29,7 @@ import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.otherAp
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.otherApplicationComponent.serviceAndNotification.NotificationFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.fragment.LoginFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.success.fragment.SuccessFragment
+import com.tms.lesson01.musicgalleryapplication.mvvm.ui.draftForPractise.weather.OpeningWeatherFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.PlaylistsListViewModelFactory
 
 /**
@@ -50,8 +51,9 @@ class PlaylistsListFragment : Fragment() {
     private lateinit var openBroadcastFragment: AppCompatButton
     private lateinit var openContactsFragment: AppCompatButton
     private lateinit var openLocationFragment: AppCompatButton
+    private lateinit var openWeatherFragment: AppCompatButton
     private lateinit var buttonLogOut: AppCompatButton
-//    private lateinit var viewModel: PlaylistsListViewModel
+    //    private lateinit var viewModel: PlaylistsListViewModel
     private lateinit var yourFavoritesRecyclerView: RecyclerView // 1. Создадим RecyclerView для наших горизонтальных списков
     private lateinit var recommendedPlaylistsRecyclerView: RecyclerView
     private lateinit var artistRecyclerView: RecyclerView
@@ -117,6 +119,7 @@ class PlaylistsListFragment : Fragment() {
         openBroadcastFragment = view.findViewById(R.id.button_openBroadcastFragment)
         openContactsFragment = view.findViewById(R.id.button_openContactsFragment)
         openLocationFragment = view.findViewById(R.id.button_openLocationFragment)
+        openWeatherFragment = view.findViewById(R.id.button_openWeatherFragment)
         buttonLogOut = view.findViewById(R.id.button_logOut)
         yourFavoritesRecyclerView = view.findViewById(R.id.list_yourFavorites) // 2. Первый RecyclerView. Далее создаём адаптер (YourFavouritesPlaylistRecyclerAdapter)
         recommendedPlaylistsRecyclerView = view.findViewById(R.id.list_recommendedPlaylists) // 2. Второй RecyclerView. Далее создаём адаптер (RecommendedPlaylistRecyclerAdapter)
@@ -172,6 +175,10 @@ class PlaylistsListFragment : Fragment() {
         // Кнопка перехода на LocationFragment
         openLocationFragment.setOnClickListener {
             (activity as MainActivity).openFragment(OpeningLocationFragment())
+        }
+        // Кнопка перехода на WeatherFragment
+        openWeatherFragment.setOnClickListener {
+            (activity as MainActivity).openFragment(OpeningWeatherFragment())
         }
         buttonLogOut.setOnClickListener {
             viewModel.logOut()

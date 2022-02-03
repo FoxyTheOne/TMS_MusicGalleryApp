@@ -1,0 +1,70 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/text_weatherCity"
+        style="@style/playlists_title"
+        tools:text="Test"
+        android:layout_gravity="center"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_beforeOrAfterElement"
+        android:padding="@dimen/space_beforeOrAfterElement" />
+
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/text_weatherTemperature"
+            style="@style/playlists_title"
+            tools:text="Test"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_beforeOrAfterElement"/>
+
+        <ImageView
+            android:id="@+id/image_weather"
+            android:scaleType="fitXY"
+            tools:ignore="ContentDescription"
+
+            android:layout_width="36dp"
+            android:layout_height="36dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_weatherHumidity"
+        style="@style/playlists_title"
+        tools:text="Test"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_beforeOrAfterElement" />
+
+    <TextView
+        android:id="@+id/title_counter"
+        style="@style/playlists_title"
+        android:text="For test RxObservables:"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_beforeOrAfterElement" />
+
+    <TextView
+        android:id="@+id/text_counter"
+        style="@style/playlists_title"
+        tools:text="Test"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_beforeOrAfterElement" />
+</LinearLayout>

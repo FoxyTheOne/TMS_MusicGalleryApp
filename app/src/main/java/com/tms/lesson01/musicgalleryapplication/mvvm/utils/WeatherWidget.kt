@@ -47,7 +47,7 @@ class WeatherWidget : AppWidgetProvider() {
             // и получаем интерфейс для взаимодействия
             val weather = WeatherNetwork.getInstance()
             // onUpdate -> 2.2. И затем вызываем нужные методы, обращаясь к сервису через интерфейс
-            val response = weather.getWeatherService().getWeather()
+            val response = weather.getWeatherServiceCoroutine().getWeather()
 
             serviceScope.launch(Dispatchers.Main) {
                 // There may be multiple widgets active, so update all of them
@@ -120,7 +120,7 @@ class WeatherWidget : AppWidgetProvider() {
         views.setTextViewText(R.id.text_temperature, textTemperature)
         views.setTextViewText(R.id.text_humidity, textHumidity)
 
-        // На сколько я поняла, здесь реализована загрузка картинки для виджета (в корутине)
+        // Загрузка картинки для виджета (в корутине)
         serviceScope.launch(Dispatchers.IO) {
             try {
                 val appWidgetTarget =

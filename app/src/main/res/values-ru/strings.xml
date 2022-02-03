@@ -35,6 +35,7 @@
     <string name="playlists_buttonGoToBroadcastFragment">Открыть broadcast receiver</string>
     <string name="playlists_buttonGoToLocationFragment">Открыть карты</string>
     <string name="playlists_buttonGoToContactsFragment">Открыть список контактов</string>
+    <string name="playlists_buttonGoToWeatherFragment">Открыть погоду</string>
     <string name="playlists_LogOut">Выйти</string>
 
     <string name="success_success">Поздравляем!</string>
@@ -68,4 +69,6 @@
     <string name="location_calculateDistance">Рассчитать дистанцию</string>
     <string name="location_stopCalculateDistance">Остановить расчёт</string>
     <string name="location_clearPolyline">Очистить линию маршрута</string>
+
+    <string name="weather_buttonSeeWeather">Посмотреть погоду</string>
 </resources>
