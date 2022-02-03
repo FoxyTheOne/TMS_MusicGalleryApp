@@ -1,15 +1,10 @@
 package com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin
 
-import android.os.Handler
-import android.os.Looper
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.IUserStorage
-import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.LocalStorageModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.appSharedPreference.IAppSharedPreferences
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.login.INetworkLoginService
-import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.login.NetworkLoginServiceModel
 
 /**
  * 1.1. Настройка View Model в соответствии с принципом обеспечения зависимостей:
@@ -18,7 +13,7 @@ import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.l
  */
 class LoginViewModel(
     // LoginViewModel зависим от следующих инициализируемых сущностей. Всё, что он делает, делает благодаря им
-    // Объявляем их в конструкторе View Model (т.е. здесь), инициализируем - в конструкторе фрагмента (LoginFragment)
+    // Объявляем их в конструкторе View Model (т.е. здесь), инициализируем - с помощью Koin (di -> modules, viewModelModule)
     private val networkLoginServiceModel: INetworkLoginService,
     private val localStorageModel: IUserStorage, // Для кэширования в случае успешного входа
     private val preferences: IAppSharedPreferences
@@ -34,18 +29,6 @@ class LoginViewModel(
     val emailLiveData = MutableLiveData<String>()
     val passwordLiveData = MutableLiveData<String>()
     val checkBoxRememberLoginAndPasswordLiveData = MutableLiveData<Boolean>()
-
-//    !!! Этот код (инициализация сущностей, создание объектов) переносим в конструктор View Model:
-//    // LoginViewModel зависим от следующих инициализируемых сущностей. Всё, что он делает, делает благодаря им
-//    private val networkLoginServiceModel: INetworkLoginService = NetworkLoginServiceModel() // Инициализируем networkLoginModel
-//    private val localStorageModel: IUserStorage = LocalStorageModel() // Инициализируем localStorageModel для кэширования в случае успешного входа
-
-//    //    private val preferences = AppSharedPreferences.getInstance()
-//    private var preferences: IAppSharedPreferences? = null
-//    //    Здесь нам не хватает Dependency injection, который будем изучать позже. Пока что создадим метод, к-рый будет отправлять нам SharedPreferences из фрагмента
-//    fun setSharedPreferences(preferences: IAppSharedPreferences) {
-//        this.preferences = preferences
-//    }
 
     // Каждый раз, когда мы кликаеи, будет исполняться этот метод. Здесь мы сохраняем статус check box
     fun setRememberLoginAndPasswordSelectedOrNot(isSelected: Boolean) {

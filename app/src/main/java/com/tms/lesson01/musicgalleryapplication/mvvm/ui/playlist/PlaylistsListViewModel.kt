@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicReferenceArray
  */
 class PlaylistsListViewModel(
     // PlaylistsListViewModel зависим от следующих инициализируемых сущностей. Всё, что он делает, делает благодаря им
-    // Объявляем их в конструкторе View Model (т.е. здесь), инициализируем - в конструкторе фрагмента (PlaylistsListFragment)
+    // Объявляем их в конструкторе View Model (т.е. здесь), инициализируем - с помощью Koin (di -> modules, viewModelModule)
     private val musicModel: INetworkMusicService, // Наш экземпляр класса Model для обращения к ней. Тип переменной - наш интерфейс. NetworkMusicServiceModel() будет возвращать нам альбомы
     private var preferences: IAppSharedPreferences, // Объект preferences для обращения к SharedPreferences
     private var yourFavouritesPlaylistDao: IYourFavouritesPlaylistDao, // Объекты для обращения к Dao

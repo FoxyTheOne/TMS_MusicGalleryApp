@@ -28,6 +28,7 @@ import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.fragment.Login
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.fragment.PlaylistsListFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainSignUp.SignUpViewModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainSignUp.SignUpViewModelFactory
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * hw02. 1. SRP - Принцип единственной ответственности. Для обновления UI имеем отдельный класс
@@ -39,7 +40,6 @@ import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainSignUp.SignUpViewMod
  */
 class SignUpFragment : Fragment() {
     // Переменные класса
-//    private lateinit var viewModel: SignUpViewModel
     private lateinit var frameLayout: FrameLayout
     private lateinit var progressCircular: ProgressBar
     private lateinit var nameField: TextInputLayout
@@ -50,15 +50,8 @@ class SignUpFragment : Fragment() {
     private lateinit var textGoToSignIn: TextView
     private lateinit var checkBoxRememberLoginAndPassword: AppCompatCheckBox
 
-    // Инициализируем View Model с помощью своей фабрики
-    private val viewModel by viewModels<SignUpViewModel> {
-        SignUpViewModelFactory(
-            // Инициализируем объекты в конструкторе
-            NetworkLoginServiceModel() as INetworkLoginService,
-            LocalStorageModel() as IUserStorage,
-            AppSharedPreferences.getInstance(requireContext())
-        )
-    }
+    // Инициализируем View Model с помощью Koin
+    private val viewModel by viewModel<SignUpViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.layout_sign_up, container, false)
@@ -74,11 +67,6 @@ class SignUpFragment : Fragment() {
 
         // Сразу начинаем отправлять данные по ключу NAVIGATION_EVENT
         sendNavigationEvents()
-
-//        // Инициализируем viewModel, чтобы работать с ViewModel (согласно примеру с сайта)
-//        viewModel = ViewModelProvider(this)[SignUpViewModel::class.java]
-//        // Вызовем наш метод, к-рый будет отправлять нам SharedPreferences из фрагмента
-//        viewModel.setSharedPreferences(AppSharedPreferences.getInstance(requireContext())) // Вызываем наш статический метод для экземпляра класса AppSharedPreferences
 
         viewModel.getStoredData()
 

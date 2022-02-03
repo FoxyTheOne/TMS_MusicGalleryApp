@@ -7,5 +7,5 @@ import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.p
  * Сейчас у нас только 1 сервис, в будущем будет несколько
  */
 interface ILastFMNetwork {
-    fun getArtistService(): IArtistAPIService
+//    fun getArtistService(): IArtistAPIService
 }

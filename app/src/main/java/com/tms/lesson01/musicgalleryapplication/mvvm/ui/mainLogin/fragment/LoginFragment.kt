@@ -15,7 +15,6 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.google.android.material.textfield.TextInputLayout
 import com.tms.lesson01.musicgalleryapplication.R
 import com.tms.lesson01.musicgalleryapplication.mvvm.MainActivity
@@ -28,6 +27,7 @@ import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.LoginViewModel
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainLogin.LoginViewModelFactory
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.mainSignUp.fragment.SignUpFragment
 import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.fragment.PlaylistsListFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * 1.3. Настройка View Model в соответствии с принципом обеспечения зависимостей:
@@ -35,7 +35,6 @@ import com.tms.lesson01.musicgalleryapplication.mvvm.ui.playlist.fragment.Playli
  */
 class LoginFragment: Fragment() {
     // Переменные класса
-//    private lateinit var viewModel: LoginViewModel
     private lateinit var frameLayout: FrameLayout
     private lateinit var progressCircular: ProgressBar
 
@@ -46,15 +45,8 @@ class LoginFragment: Fragment() {
     private lateinit var textGoToSignUp: TextView
     private lateinit var checkBoxRememberLoginAndPassword: AppCompatCheckBox
 
-    // Инициализируем View Model с помощью своей фабрики
-    private val viewModel by viewModels<LoginViewModel> {
-        LoginViewModelFactory(
-            // Инициализируем объекты в конструкторе
-            NetworkLoginServiceModel() as INetworkLoginService,
-            LocalStorageModel() as IUserStorage,
-            AppSharedPreferences.getInstance(requireContext())
-        )
-    }
+    // Инициализируем View Model с помощью Koin
+    private val viewModel by viewModel<LoginViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.layout_login, container, false)
@@ -65,11 +57,6 @@ class LoginFragment: Fragment() {
 
         // Сразу начинаем отправлять данные по ключу NAVIGATION_EVENT
         sendNavigationEvents()
-
-//        // Инициализируем viewModel, чтобы работать с ViewModel (согласно примеру с сайта)
-//        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-//        // Вызовем наш метод, к-рый будет отправлять нам SharedPreferences из фрагмента
-//        viewModel.setSharedPreferences(AppSharedPreferences.getInstance(requireContext())) // Вызываем наш статический метод для экземпляра класса AppSharedPreferences
 
         viewModel.getStoredData()
 

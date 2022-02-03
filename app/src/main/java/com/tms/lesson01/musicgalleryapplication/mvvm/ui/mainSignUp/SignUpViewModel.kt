@@ -20,7 +20,7 @@ import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.l
  */
 class SignUpViewModel(
     // SignUpViewModel зависим от следующих инициализируемых сущностей. Всё, что он делает, делает благодаря им
-    // Объявляем их в конструкторе View Model (т.е. здесь), инициализируем - в конструкторе фрагмента (SignUpFragment)
+    // Объявляем их в конструкторе View Model (т.е. здесь), инициализируем - с помощью Koin (di -> modules, viewModelModule)
     private val networkLoginServiceModel: INetworkLoginService,
     private val localStorageModel: IUserStorage, // Для кэширования в случае успешного входа
     private val preferences: IAppSharedPreferences
@@ -38,18 +38,6 @@ class SignUpViewModel(
     val passwordLiveData = MutableLiveData<String>()
     val confirmPasswordLiveData = MutableLiveData<String>()
     val checkBoxRememberLoginAndPasswordLiveData = MutableLiveData<Boolean>()
-
-//    !!! Этот код (инициализация сущностей, создание объектов) переносим в конструктор View Model:
-//    // SignUpViewModel зависим от следующих инициализируемых сущностей. Всё, что он делает, делает благодаря им
-//    private val networkLoginServiceModel: INetworkLoginService = NetworkLoginServiceModel() // Инициализируем networkLoginModel
-//    private val localStorageModel: IUserStorage = LocalStorageModel() // Инициализируем localStorageModel для кэширования в случае успешного входа
-
-//    //    private val preferences = AppSharedPreferences.getInstance()
-//    private var preferences: IAppSharedPreferences? = null
-//    //    Здесь нам не хватает Dependency injection, который будем изучать позже. Пока что создадим метод, к-рый будет отправлять нам SharedPreferences из фрагмента
-//    fun setSharedPreferences(preferences: IAppSharedPreferences) {
-//        this.preferences = preferences
-//    }
 
     // Каждый раз, когда мы кликаем, будет исполняться этот метод. Здесь мы сохраняем статус check box
     fun setRememberLoginAndPasswordSelectedOrNot(isSelected: Boolean) {
@@ -99,5 +87,4 @@ class SignUpViewModel(
             }
         }
     }
-
 }

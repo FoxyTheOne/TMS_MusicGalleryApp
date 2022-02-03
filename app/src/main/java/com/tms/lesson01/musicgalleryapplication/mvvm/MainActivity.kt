@@ -22,6 +22,8 @@ import android.view.WindowManager
 
 import android.os.Build
 import android.view.Window
+import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.localStorage.appSharedPreference.IAppSharedPreferences
+import org.koin.android.ext.android.inject
 
 /**
  * hw03. Переводим наше приложение на фрагменты. Создаём общий Activity и его layout (activity_main)
@@ -32,6 +34,8 @@ class MainActivity: AppCompatActivity() {
         const val NAVIGATION_EVENT = "navigation_event" // ключ, на который подпишется MainActivity
         const val NAVIGATION_EVENT_DATA_KEY = "navigation_event_data_key" // создали ключ, по которому будем класть данны в Map (в обертку данных bundle)
     }
+    // Инициализируем sharedPreferences с помощью Koin
+    private val sharedPreferences by inject<IAppSharedPreferences>()
 
     // 1.1 Define ActionBar object
     var actionBar: ActionBar? = null
@@ -63,7 +67,7 @@ class MainActivity: AppCompatActivity() {
 
         // Открываем первый фрагмент
         if (savedInstanceState == null) {
-            if (AppSharedPreferences.getInstance(this).getToken().isBlank()) {
+            if (sharedPreferences.getToken().isBlank()) {
                 openFragment(LoginFragment()) // Открываем первый фрагмент. Чистить стек не нужно, он ещё пустой
                 // 4. Скрываем ActionBar для первого фрагмента:
                 actionBar?.hide()
