@@ -2,9 +2,11 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id ("kotlin-parcelize")
+    id 'kotlin-parcelize'
     // Google maps
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    // Hilt
+    id 'dagger.hilt.android.plugin'
 }
 apply plugin: 'kotlin-android'
 
@@ -113,4 +115,12 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
     //  RxJava3 retrofit adapter
     implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0"
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:2.38.1"
+    kapt "com.google.dagger:hilt-android-compiler:2.38.1"
+}
+
+kapt {
+    correctErrorTypes = true // Дополнит. настройка, чтобы hilt показывал корректные сообщения об ошибке во время компиляции
 }
