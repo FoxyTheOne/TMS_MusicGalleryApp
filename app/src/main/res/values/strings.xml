@@ -71,4 +71,7 @@
     <string name="location_clearPolyline">Clear polyline</string>
 
     <string name="weather_buttonSeeWeather">See weather</string>
+
+    <string name="weather_titleWeatherCurrentLocation">Weather (current location):</string>
+    <string name="weather_titleWeatherFlowableLocation">Weather (locations from RxJava function):</string>
 </resources>

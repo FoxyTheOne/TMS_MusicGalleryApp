@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/black"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/space_small"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/textRecycler_weatherCity"
+        style="@style/playlists_title"
+        tools:text="Test"
+        android:gravity="center"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_beforeOrAfterElement" />
+
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textRecycler_weatherTemperature"
+            style="@style/playlists_title"
+            tools:text="Test"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_beforeOrAfterElement"/>
+
+        <ImageView
+            android:id="@+id/imageRecycler_weather"
+            android:scaleType="fitXY"
+            tools:ignore="ContentDescription"
+
+            android:layout_width="36dp"
+            android:layout_height="36dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textRecycler_weatherHumidity"
+        style="@style/playlists_title"
+        tools:text="Test"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_beforeOrAfterElement" />
+
+</LinearLayout>

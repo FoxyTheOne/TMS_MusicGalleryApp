@@ -49,6 +49,9 @@
         <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/layout/layout_widget_weather.xml" value="0.359375" />
         <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/layout/weather_widget.xml" value="0.359375" />
         <entry key="..\:/androidProjects/hw03MusicGaleryApplication/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.37552083333333336" />
+        <entry key="..\:/androidProjects/hw03MusicGalleryApplication/app/src/main/res/layout/layout_draft_weather.xml" value="0.25" />
+        <entry key="..\:/androidProjects/hw03MusicGalleryApplication/app/src/main/res/layout/layout_draft_weather_item.xml" value="0.2807971014492754" />
+        <entry key="..\:/androidProjects/hw03MusicGalleryApplication/app/src/main/res/layout/layout_widget_weather.xml" value="0.17477203647416414" />
       </map>
     </option>
   </component>

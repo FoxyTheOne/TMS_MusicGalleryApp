@@ -71,4 +71,7 @@
     <string name="location_clearPolyline">Очистить линию маршрута</string>
 
     <string name="weather_buttonSeeWeather">Посмотреть погоду</string>
+
+    <string name="weather_titleWeatherCurrentLocation">Погода (текущая локация):</string>
+    <string name="weather_titleWeatherFlowableLocation">Погода (локации из RxJava функции):</string>
 </resources>

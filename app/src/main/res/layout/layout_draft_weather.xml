@@ -1,70 +1,122 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    android:orientation="vertical" >
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/text_weatherCity"
-        style="@style/playlists_title"
-        tools:text="Test"
-        android:layout_gravity="center"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_beforeOrAfterElement"
-        android:padding="@dimen/space_beforeOrAfterElement" />
-
-    <LinearLayout
-        android:gravity="center"
-        android:orientation="horizontal"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/background"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/text_weatherTemperature"
+            android:id="@+id/text_titleWeatherCurrentLocation"
+            style="@style/playlists_title"
+            android:textColor="@color/bright_orange"
+            tools:text="Test"
+            android:text="@string/weather_titleWeatherCurrentLocation"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_beforeOrAfterElement"
+            android:padding="@dimen/space_beforeOrAfterElement" />
+
+        <TextView
+            android:id="@+id/text_weatherCity"
+            style="@style/playlists_title"
+            tools:text="Test"
+            android:gravity="center"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/space_beforeOrAfterElement"
+            android:paddingEnd="@dimen/space_beforeOrAfterElement"
+            android:paddingBottom="@dimen/space_beforeOrAfterElement" />
+
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/text_weatherTemperature"
+                style="@style/playlists_title"
+                tools:text="Test"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/space_beforeOrAfterElement"
+                android:paddingEnd="@dimen/space_beforeOrAfterElement"
+                android:paddingBottom="@dimen/space_beforeOrAfterElement" />
+
+            <ImageView
+                android:id="@+id/image_weather"
+                android:scaleType="fitXY"
+                tools:ignore="ContentDescription"
+
+                android:layout_width="36dp"
+                android:layout_height="36dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_weatherHumidity"
             style="@style/playlists_title"
             tools:text="Test"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/space_beforeOrAfterElement"/>
+            android:paddingStart="@dimen/space_beforeOrAfterElement"
+            android:paddingEnd="@dimen/space_beforeOrAfterElement"
+            android:paddingBottom="@dimen/space_beforeOrAfterElement" />
 
-        <ImageView
-            android:id="@+id/image_weather"
-            android:scaleType="fitXY"
-            tools:ignore="ContentDescription"
+        <TextView
+            android:id="@+id/title_counter"
+            style="@style/playlists_title"
+            android:textColor="@color/bright_orange"
+            android:text="For test RxObservables:"
 
-            android:layout_width="36dp"
-            android:layout_height="36dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_32"
+            android:paddingStart="@dimen/space_beforeOrAfterElement"
+            android:paddingEnd="@dimen/space_beforeOrAfterElement"
+            android:paddingBottom="@dimen/space_beforeOrAfterElement" />
+
+        <TextView
+            android:id="@+id/text_counter"
+            style="@style/playlists_title"
+            tools:text="Test"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/space_beforeOrAfterElement"
+            android:paddingEnd="@dimen/space_beforeOrAfterElement"
+            android:paddingBottom="@dimen/space_beforeOrAfterElement" />
+
+        <TextView
+            android:id="@+id/text_titleWeatherFlowableLocation"
+            style="@style/playlists_title"
+            android:textColor="@color/bright_orange"
+            tools:text="Test"
+            android:text="@string/weather_titleWeatherFlowableLocation"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_32"
+            android:paddingStart="@dimen/space_beforeOrAfterElement"
+            android:paddingEnd="@dimen/space_beforeOrAfterElement"
+            android:paddingBottom="@dimen/space_beforeOrAfterElement" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_weatherList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/text_weatherHumidity"
-        style="@style/playlists_title"
-        tools:text="Test"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/space_beforeOrAfterElement" />
-
-    <TextView
-        android:id="@+id/title_counter"
-        style="@style/playlists_title"
-        android:text="For test RxObservables:"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/space_beforeOrAfterElement" />
-
-    <TextView
-        android:id="@+id/text_counter"
-        style="@style/playlists_title"
-        tools:text="Test"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/space_beforeOrAfterElement" />
-</LinearLayout>
+</ScrollView>

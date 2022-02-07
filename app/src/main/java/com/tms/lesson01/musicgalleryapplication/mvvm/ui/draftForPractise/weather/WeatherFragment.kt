@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
@@ -42,7 +43,8 @@ class WeatherFragment: Fragment() {
     private lateinit var textWeatherHumidity: TextView
     private lateinit var imageWeather: ImageView
     private lateinit var textCounter: TextView
-
+    private lateinit var weatherRecyclerView: RecyclerView
+    private lateinit var weatherRecyclerAdapter: WeatherRecyclerAdapter
 
     // LOCATION -> 1.1. Переменная для нашего FusedLocationProviderClient. Именно он имеет в себе методы, с помощью которых мы можем определить локацию
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -63,6 +65,16 @@ class WeatherFragment: Fragment() {
         textWeatherHumidity = view.findViewById(R.id.text_weatherHumidity)
         imageWeather = view.findViewById(R.id.image_weather)
         textCounter = view.findViewById(R.id.text_counter)
+        weatherRecyclerView = view.findViewById(R.id.recyclerView_weatherList)
+        // Инициализируем адаптер в отдельной переменной, т.к. каждый раз будем к нему обращаться, чтобы обновить
+//        weatherRecyclerAdapter = WeatherRecyclerAdapter()
+        // 2.1. ОБРАБОТКА КЛИКА -> Получаем результат клика во фрагменте (описываем нашу анонимную функцию из RecyclerView)
+        weatherRecyclerAdapter = WeatherRecyclerAdapter { weatherResponseOnClick ->
+            // Если по клику нужно просто открыть другой фрагмент, пишем это здесь.
+            // если же по клику нужно сделать запрос на backend, чтобы что-то получить, передаём информацию во view model
+            viewModel.onItemClicked(weatherResponseOnClick)
+        }
+        weatherRecyclerView.adapter = weatherRecyclerAdapter
 
         // LOCATION -> 1.2. Получим наш FusedLocationProviderClient. Именно он имеет в себе методы, с помощью которых мы можем определить локацию
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
@@ -70,12 +82,15 @@ class WeatherFragment: Fragment() {
         // LOCATION -> 1.3. Создадим метод для получения Current location либо Last location
         getCurrentOrLastLocation()
 
-        subscribeOnLiveDala()
-        // For test RxObservables
-        viewModel.testFlowable()
+        subscribeOnLiveData()
+
+        // 1.3. FOR TEST RX OBSERVABLES -> Вызываем метод из view model, где мы подписываемся на источник данных RxObservables.getFlowable()
+        // и записываем результат в counterLiveData
+        viewModel.testSubscribeOnFlowable()
+        viewModel.testSubscribeOnLocationFlowable()
     }
 
-    private fun subscribeOnLiveDala() {
+    private fun subscribeOnLiveData() {
         viewModel.weatherLiveData.observe(viewLifecycleOwner){ weatherResponce ->
             // Возьмём тот де динамический текст, который мы писали для weather widget. И дополняем его позициями из полученного weatherResponce
             val cityText = requireContext().getString(R.string.widget_text_city, weatherResponce.name)
@@ -101,11 +116,17 @@ class WeatherFragment: Fragment() {
                 Log.e(WeatherWidget.TAG, e.message ?: "Error during loading weather icon by url")
             }
 
-            // For test RxObservables
+            // 1.4. FOR TEST RX OBSERVABLES -> подписываемся на LiveData, которая реагирует на источник данных RxObservables.getFlowable()
             viewModel.counterLiveData.observe(viewLifecycleOwner){ counter ->
-                textCounter.text = counter.toString()
+                val textCounterDefine = "operation count: ${counter.operationCount}, milliseconds: ${counter.date.time}"
+                textCounter.text = textCounterDefine
             }
         }
+
+        viewModel.weatherListLiveData.observe(viewLifecycleOwner, { listWeatherResponse ->
+            // Вызываем метод из адаптера для обновления списка погод при поступлении списка с новым элементом
+            weatherRecyclerAdapter.addAllWeathers(listWeatherResponse)
+        })
     }
 
     // LOCATION -> 1.4. Создадим метод для получения Current location либо Last location
