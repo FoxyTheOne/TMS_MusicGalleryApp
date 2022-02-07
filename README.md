@@ -68,4 +68,13 @@ Homework 13.
 2. Add Google map in your fragment
 3. Add polyline drawing
 
+Homework 14.
+1. Add StringExtensions and Unit tests for it 
+2. Create ViewModel with a custom factory
+3. Add Unit tests for a ViewModel
+
+Homework 15.
+1. Try Koin in another git branch
+2. RxJava observables and operators
+
 Created by Alina Piatrova
