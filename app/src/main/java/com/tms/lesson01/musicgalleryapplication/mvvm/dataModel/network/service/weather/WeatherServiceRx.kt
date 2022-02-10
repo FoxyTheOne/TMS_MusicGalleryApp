@@ -1,5 +1,6 @@
 package com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.service.weather
 
+import com.tms.lesson01.musicgalleryapplication.BuildConfig
 import com.tms.lesson01.musicgalleryapplication.mvvm.dataModel.network.modelData.weather.WeatherResponse
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
@@ -15,7 +16,7 @@ interface WeatherServiceRx {
         private const val BASE_PATH = "data/2.5" // base path
         private const val WEATHER_PATH = "weather" // path
         private const val KEY_UNITS = "metric"
-        private const val KEY_API_KEY = "f8f4c1eb92c75f7adf32de36015abf37"
+        private const val KEY_API_KEY = BuildConfig.OPEN_WEATHER_MAP_API_KEY
     }
 
     @GET("$BASE_PATH/{weather}") // base path
